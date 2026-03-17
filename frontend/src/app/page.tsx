@@ -92,13 +92,13 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <div ref={containerRef} style={{ background: "var(--white)", minHeight: "100vh", overflowX: "hidden" }}>
+    <div ref={containerRef} style={{ background: "#D2C4B4", minHeight: "100vh", overflowX: "hidden" }}>
 
       {/* Nav */}
       <nav style={{
         position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
-        background: "#FFFFFF",
-        borderBottom: "1px solid var(--surface-border)",
+        background: "#81A6C6",
+        borderBottom: "none",
         padding: "0 56px",
         height: 68,
         display: "flex", alignItems: "center", justifyContent: "space-between",
@@ -106,32 +106,32 @@ export default function LandingPage() {
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <div style={{
             width: 40, height: 40, borderRadius: 12,
-            background: "linear-gradient(135deg, #81A6C6 0%, #AACDDC 100%)", 
+            background: "#AACDDC", 
             display: "grid", placeItems: "center",
           }}>
-            <Zap size={20} color="#fff" strokeWidth={2.5} />
+            <Zap size={20} color="#81A6C6" strokeWidth={2.5} />
           </div>
-          <span className="font-display" style={{ fontSize: 24, fontWeight: 600, color: "var(--primary)", letterSpacing: "-0.02em" }}>Taskflow</span>
+          <span className="font-display" style={{ fontSize: 24, fontWeight: 600, color: "#FFFFFF", letterSpacing: "-0.02em" }}>Taskflow</span>
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 40, fontSize: 15, fontWeight: 600, color: "var(--text-secondary)" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 40, fontSize: 15, fontWeight: 600, color: "#FFFFFF" }}>
           <Link href="#features" style={{ textDecoration: "none", color: "inherit" }}>Features</Link>
           <Link href="#pricing" style={{ textDecoration: "none", color: "inherit" }}>Pricing</Link>
           <Link href="/login" style={{ textDecoration: "none", color: "inherit" }}>Demo</Link>
           <Link href="/login" style={{
             padding: "12px 32px", borderRadius: 8,
-            background: "linear-gradient(135deg, #81A6C6 0%, #AACDDC 100%)", 
-            color: "#fff",
+            background: "#AACDDC", 
+            color: "#81A6C6",
             textDecoration: "none", transition: "all 0.3s",
             fontWeight: 700,
             fontSize: 14,
-            boxShadow: "0 4px 16px rgba(129, 166, 198, 0.3)",
+            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
           }}
           onMouseEnter={(e) => {
-            (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 32px rgba(129, 166, 198, 0.4)";
+            (e.currentTarget as HTMLElement).style.background = "#F3E3D0";
             (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
           }}
           onMouseLeave={(e) => {
-            (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 16px rgba(129, 166, 198, 0.3)";
+            (e.currentTarget as HTMLElement).style.background = "#AACDDC";
             (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
           }}>Get Started</Link>
         </div>
@@ -142,15 +142,16 @@ export default function LandingPage() {
         paddingTop: 160, paddingBottom: 120,
         maxWidth: 1400, margin: "0 auto", padding: "160px 56px 120px",
         display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center",
-        position: "relative"
+        position: "relative",
+        background: "#D2C4B4"
       }}>
         <div className="fade-up" style={{
             display: "inline-flex", alignItems: "center", gap: 8,
-            background: "#FFFFFF", color: "#81A6C6",
+            background: "#FAFAF7", color: "#81A6C6",
             padding: "10px 24px", borderRadius: 8,
             fontSize: 13, fontWeight: 700, letterSpacing: "0.02em",
             marginBottom: 48,
-            border: "1px solid #AACDDC",
+            border: "1px solid #E5DFD8",
         }}>
           <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#81A6C6", display: "inline-block", flexShrink: 0 }} />
           Intelligent Automation at Scale
@@ -159,11 +160,11 @@ export default function LandingPage() {
         <h1 className="fade-up font-display" style={{
           fontSize: "clamp(52px, 8vw, 96px)",
           fontWeight: 700, lineHeight: 1.05,
-          color: "var(--primary)", marginBottom: 24,
+          color: "#1A1A1A", marginBottom: 24,
           letterSpacing: "-0.03em", maxWidth: 1000,
         }}>
           Process Tasks with <br/>
-          <span style={{ fontFamily: "var(--font-sans)", fontWeight: 800, background: "linear-gradient(135deg, #81A6C6 0%, #D2C4B4 100%)", backgroundClip: "text", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>AI-Powered Intelligence</span>
+          <span style={{ fontFamily: "var(--font-sans)", fontWeight: 800, color: "#81A6C6" }}>AI-Powered Intelligence</span>
         </h1>
 
         <p className="fade-up" style={{
@@ -181,34 +182,39 @@ export default function LandingPage() {
             padding: "16px 48px", borderRadius: 8,
             fontWeight: 700, fontSize: 16, textDecoration: "none",
             transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-            boxShadow: "0 8px 24px rgba(129, 166, 198, 0.25)",
+            boxShadow: "0 8px 24px rgba(129, 166, 198, 0.3)",
             letterSpacing: "-0.01em",
           }}
           onMouseEnter={(e) => {
             (e.currentTarget as HTMLElement).style.background = "#5A7A94";
+            (e.currentTarget as HTMLElement).style.boxShadow = "0 12px 32px rgba(129, 166, 198, 0.4)";
             (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
           }}
           onMouseLeave={(e) => {
             (e.currentTarget as HTMLElement).style.background = "#81A6C6";
+            (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 24px rgba(129, 166, 198, 0.3)";
             (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
           }}>
             Start Free
           </Link>
           <Link href="/login" style={{
-            background: "#FFFFFF", color: "#81A6C6",
+            background: "#FAFAF7", color: "#81A6C6",
             border: "2px solid #81A6C6",
             padding: "14px 44px", borderRadius: 8,
             fontWeight: 700, fontSize: 16, textDecoration: "none",
             transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
           }}
           onMouseEnter={(e) => {
             (e.currentTarget as HTMLElement).style.background = "#81A6C6";
             (e.currentTarget as HTMLElement).style.color = "#FFFFFF";
+            (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 24px rgba(129, 166, 198, 0.3)";
             (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
           }}
           onMouseLeave={(e) => {
-            (e.currentTarget as HTMLElement).style.background = "#FFFFFF";
+            (e.currentTarget as HTMLElement).style.background = "#FAFAF7";
             (e.currentTarget as HTMLElement).style.color = "#81A6C6";
+            (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.08)";
             (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
           }}>
             View Demo
@@ -218,14 +224,14 @@ export default function LandingPage() {
         {/* Dashboard Visual - Minimal approach */}
         <div style={{ position: "relative", width: "100%", maxWidth: 1100, margin: "0 auto", paddingBottom: 80 }}>
           <div className="hero-dashboard" style={{
-            background: "#FFFFFF",
+            background: "#FAFAF7",
             borderRadius: 20,
-            border: "2px solid #81A6C6",
+            border: "2px solid #E5DFD8",
             padding: "40px",
             width: "100%",
             minHeight: 480,
             display: "flex", flexDirection: "column", gap: 32,
-            boxShadow: "0 20px 60px rgba(129, 166, 198, 0.1)",
+            boxShadow: "0 20px 60px rgba(0, 0, 0, 0.08)",
           }}>
             {/* Header Section */}
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
@@ -233,7 +239,7 @@ export default function LandingPage() {
                 <div style={{ fontSize: 13, fontWeight: 700, color: "#81A6C6", marginBottom: 8, letterSpacing: "0.05em" }}>DASHBOARD</div>
                 <h3 style={{ fontSize: 28, fontWeight: 700, color: "#1A1A1A", marginBottom: 0 }}>Active Tasks</h3>
               </div>
-              <div style={{ padding: "8px 16px", background: "#81A6C6", borderRadius: 6, color: "#fff", fontWeight: 700, fontSize: 12 }}>LIVE</div>
+              <div style={{ padding: "8px 16px", background: "#81A6C6", borderRadius: 6, color: "#FFFFFF", fontWeight: 700, fontSize: 12 }}>LIVE</div>
             </div>
 
             {/* Stats Row */}
@@ -243,9 +249,9 @@ export default function LandingPage() {
                 { label: "Success Rate", value: "98.9%" },
                 { label: "Avg Speed", value: "2.3s" }
               ].map((stat, i) => (
-                <div key={i} style={{ borderLeft: "2px solid #F3E3D0", paddingLeft: 16 }}>
-                  <div style={{ fontSize: 12, color: "#F3E3D0", fontWeight: 700, marginBottom: 4 }}>{stat.label}</div>
-                  <div style={{ fontSize: 32, fontWeight: 800, color: "#fff" }}>{stat.value}</div>
+                <div key={i} style={{ borderLeft: "2px solid #81A6C6", paddingLeft: 16 }}>
+                  <div style={{ fontSize: 12, color: "#81A6C6", fontWeight: 700, marginBottom: 4 }}>{stat.label}</div>
+                  <div style={{ fontSize: 32, fontWeight: 800, color: "#1A1A1A" }}>{stat.value}</div>
                 </div>
               ))}
             </div>
@@ -255,14 +261,14 @@ export default function LandingPage() {
               {[1, 2, 3].map(i => (
                 <div key={i} style={{ 
                   display: "flex", alignItems: "center", justifyContent: "space-between",
-                  padding: "16px 20px", background: "rgba(243, 227, 208, 0.15)", borderRadius: 10,
-                  border: "1px solid rgba(243, 227, 208, 0.3)"
+                  padding: "16px 20px", background: "#F7F5F2", borderRadius: 10,
+                  border: "1px solid #E5DFD8"
                 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 14, flex: 1 }}>
                     <div style={{ width: 12, height: 12, borderRadius: "50%", background: "#6BA587" }} />
                     <div>
-                      <div style={{ fontSize: 14, fontWeight: 700, color: "#fff", marginBottom: 2 }}>Task {i}</div>
-                      <div style={{ fontSize: 12, color: "#F3E3D0" }}>Processing data batch</div>
+                      <div style={{ fontSize: 14, fontWeight: 700, color: "#1A1A1A", marginBottom: 2 }}>Task {i}</div>
+                      <div style={{ fontSize: 12, color: "#5A5450" }}>Processing data batch</div>
                     </div>
                   </div>
                   <div style={{ fontSize: 12, fontWeight: 700, color: "#6BA587" }}>Complete</div>
@@ -274,14 +280,14 @@ export default function LandingPage() {
       </section>
 
       {/* Features Section - No Cards */}
-      <section id="features" style={{ background: "#fff", padding: "160px 56px" }}>
+      <section id="features" style={{ background: "#AACDDC", padding: "160px 56px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           
           <div style={{ textAlign: "center", marginBottom: 100 }}>
-             <h2 className="font-display scroll-fade" style={{ fontSize: "clamp(42px, 5vw, 56px)", color: "var(--primary)", marginBottom: 24, fontWeight: 700, letterSpacing: "-0.02em" }}>
+             <h2 className="font-display scroll-fade" style={{ fontSize: "clamp(42px, 5vw, 56px)", color: "#1A1A1A", marginBottom: 24, fontWeight: 700, letterSpacing: "-0.02em" }}>
                Powerful Features
              </h2>
-             <p className="scroll-fade" style={{ fontSize: 18, color: "var(--text-secondary)", fontWeight: 500, maxWidth: 700, margin: "0 auto" }}>Everything you need to automate and scale your task management operations.</p>
+             <p className="scroll-fade" style={{ fontSize: 18, color: "#5A5450", fontWeight: 500, maxWidth: 700, margin: "0 auto" }}>Everything you need to automate and scale your task management operations.</p>
           </div>
 
           {/* Feature List - Minimal Design */}
@@ -296,13 +302,14 @@ export default function LandingPage() {
             ].map((f, i) => (
               <div key={i} className="feature-card" style={{
                 padding: "28px 32px",
-                borderBottom: "1px solid var(--surface-border)",
+                borderBottom: "1px solid rgba(0, 0, 0, 0.1)",
                 display: "flex", alignItems: "center", gap: 28,
                 transition: "all 0.3s",
                 cursor: "pointer",
+                background: "transparent",
               }}
               onMouseEnter={e => { 
-                (e.currentTarget as HTMLElement).style.background = "#FDFBF9";
+                (e.currentTarget as HTMLElement).style.background = "rgba(255, 255, 255, 0.4)";
                 (e.currentTarget as HTMLElement).style.paddingLeft = "40px";
               }}
               onMouseLeave={e => { 
@@ -311,17 +318,17 @@ export default function LandingPage() {
               }}>
                 <div style={{
                   width: 60, height: 60, borderRadius: 12,
-                  background: "linear-gradient(135deg, #81A6C6 0%, #D2C4B4 100%)",
+                  background: "#81A6C6",
                   display: "flex", alignItems: "center", justifyContent: "center",
                   color: "#fff", flexShrink: 0,
                 }}>
                   {f.icon}
                 </div>
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontSize: 18, fontWeight: 800, color: "var(--primary)", marginBottom: 6 }}>{f.title}</div>
-                  <div style={{ fontSize: 15, color: "var(--text-secondary)", fontWeight: 500 }}>{f.desc}</div>
+                  <div style={{ fontSize: 18, fontWeight: 800, color: "#1A1A1A", marginBottom: 6 }}>{f.title}</div>
+                  <div style={{ fontSize: 15, color: "#5A5450", fontWeight: 500 }}>{f.desc}</div>
                 </div>
-                <div style={{ fontSize: 20, color: "#D2C4B4", fontWeight: 700 }}>→</div>
+                <div style={{ fontSize: 20, color: "#1A1A1A", fontWeight: 700 }}>→</div>
               </div>
             ))}
           </div>
@@ -330,9 +337,9 @@ export default function LandingPage() {
 
       {/* Footer */}
       <footer style={{
-        borderTop: "1px solid var(--surface-border)",
+        borderTop: "1px solid rgba(0, 0, 0, 0.1)",
         padding: "56px 56px",
-        background: "#fff"
+        background: "#FAFAF7"
       }}>
         <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
@@ -341,7 +348,7 @@ export default function LandingPage() {
             </div>
             <span className="font-display" style={{ fontSize: 22, color: "var(--primary)", fontWeight: 600, letterSpacing: "-0.02em" }}>Taskflow</span>
           </div>
-          <p style={{ fontSize: 14, color: "var(--text-secondary)", fontWeight: 600 }}>© 2026 Taskflow Inc. All rights reserved.</p>
+          <p style={{ fontSize: 14, color: "#5A5450", fontWeight: 600 }}>© 2026 Taskflow Inc. All rights reserved.</p>
         </div>
       </footer>
     </div>
