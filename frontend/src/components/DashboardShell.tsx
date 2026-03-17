@@ -71,14 +71,14 @@ export const DashboardShell = ({
           fontWeight: active ? 700 : 500,
           transition: "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)",
           border: active ? "1px solid var(--primary)" : "1px solid transparent",
-          boxShadow: active ? "0 4px 12px rgba(31, 27, 24, 0.12)" : "none",
+          boxShadow: active ? "0 4px 12px rgba(10, 74, 142, 0.2)" : "none",
           position: "relative",
           overflow: "hidden",
           whiteSpace: "nowrap",
         }}
         onMouseEnter={(e) => {
           if (!active) {
-            (e.currentTarget as HTMLElement).style.background = "rgba(31, 27, 24, 0.06)";
+            (e.currentTarget as HTMLElement).style.background = "rgba(10, 74, 142, 0.08)";
             (e.currentTarget as HTMLElement).style.color = "var(--primary)";
           }
         }}
@@ -102,8 +102,8 @@ export const DashboardShell = ({
         style={{
           width: sidebarW,
           flexShrink: 0,
-          background: "linear-gradient(180deg, #FAFAFA 0%, #F5F3F1 100%)",
-          borderRight: "1px solid var(--border)",
+          background: "#FFFFFF",
+          borderRight: "1px solid var(--surface-border)",
           display: "flex",
           flexDirection: "column",
           position: "fixed",
@@ -118,8 +118,8 @@ export const DashboardShell = ({
       
         <div
           style={{
-            height: 68,
-            borderBottom: "1px solid var(--border)",
+            height: 70,
+            borderBottom: "1px solid var(--surface-border)",
             display: "flex",
             alignItems: "center",
             justifyContent: collapsed ? "center" : "space-between",
@@ -141,26 +141,25 @@ export const DashboardShell = ({
           >
             <div
               style={{
-                width: 32,
-                height: 32,
-                borderRadius: 8,
-                background: "var(--primary)",
+                width: 36,
+                height: 36,
+                borderRadius: 10,
+                background: "linear-gradient(135deg, #0A4A8E 0%, #00D9FF 100%)",
                 display: "grid",
                 placeItems: "center",
                 flexShrink: 0,
-                boxShadow: "0 4px 12px rgba(31, 27, 24, 0.15)",
               }}
             >
-              <Zap size={16} color="#fff" strokeWidth={2.5} />
+              <Zap size={18} color="#fff" strokeWidth={2.5} />
             </div>
             {!collapsed && (
               <span
                 style={{
                   fontFamily: "var(--font-display)",
-                  fontSize: 18,
+                  fontSize: 20,
                   color: "var(--primary)",
                   whiteSpace: "nowrap",
-                  fontWeight: 400,
+                  fontWeight: 600,
                   letterSpacing: "-0.01em",
                 }}
               >
@@ -177,27 +176,27 @@ export const DashboardShell = ({
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              width: 28,
-              height: 28,
+              width: 32,
+              height: 32,
               borderRadius: 8,
-              border: "1.5px solid var(--border)",
+              border: "1.5px solid var(--surface-border)",
               background: "#fff",
               color: "var(--text-secondary)",
               cursor: "pointer",
               transition: "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)",
               flexShrink: 0,
               padding: 0,
-              boxShadow: "0 2px 6px rgba(31, 27, 24, 0.06)",
+              boxShadow: "0 2px 8px rgba(0, 0, 0, 0.04)",
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.background = "#fff";
               e.currentTarget.style.color = "var(--primary)";
-              e.currentTarget.style.borderColor = "var(--accent)";
+              e.currentTarget.style.borderColor = "#00D9FF";
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.background = "#fff";
               e.currentTarget.style.color = "var(--text-secondary)";
-              e.currentTarget.style.borderColor = "var(--border)";
+              e.currentTarget.style.borderColor = "var(--surface-border)";
             }}
           >
             {collapsed ? <ChevronRight size={14} /> : <ChevronLeft size={14} />}
@@ -238,7 +237,7 @@ export const DashboardShell = ({
         <div
           style={{
             padding: collapsed ? "12px 8px" : "12px",
-            borderTop: "1px solid var(--warm-100)",
+            borderTop: "1px solid var(--surface-border)",
             display: "flex",
             flexDirection: "column",
             gap: 2,
@@ -286,7 +285,7 @@ export const DashboardShell = ({
         style={{
           flex: 1,
           marginLeft: sidebarW,
-          background: "linear-gradient(180deg, #FFFFFF 0%, #F5F3F1 100%)",
+          background: "#FFFFFF",
           minHeight: "100vh",
           display: "flex",
           flexDirection: "column",

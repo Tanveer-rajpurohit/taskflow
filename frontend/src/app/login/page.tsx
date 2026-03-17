@@ -24,7 +24,7 @@ export default function LoginPage() {
         className="absolute inset-0 z-0 lg:relative lg:inset-auto lg:z-auto lg:w-[45%] lg:order-2 flex flex-col justify-between"
         style={{
           background:
-            "linear-gradient(145deg, #C8A882 0%, #7d5a45 50%, #3A2F2D 100%)",
+            "linear-gradient(135deg, #0A4A8E 0%, #052E5C 100%)",
           padding: "56px 48px",
           overflow: "hidden",
         }}
@@ -69,20 +69,17 @@ export default function LoginPage() {
 
         {/* Top headline */}
         <div style={{ position: "relative", zIndex: 1 }}>
-          <h2
+          <p
             style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(28px, 3vw, 38px)",
-              fontWeight: 400,
-              color: "#fff",
-              lineHeight: 1.35,
+              color: "#7DD3FC",
+              fontSize: "clamp(15px, 1.6vw, 18px)",
+              lineHeight: 1.6,
               maxWidth: 360,
-              opacity: 0.98,
-              letterSpacing: "-0.01em",
+              fontWeight: 500,
             }}
           >
-            Intelligent task automation for modern teams.
-          </h2>
+            Process millions of tasks seamlessly with intelligent routing and real-time insights.
+          </p>
         </div>
 
         {/* Mid: geometric art */}
@@ -152,11 +149,11 @@ export default function LoginPage() {
           style={{
             position: "relative",
             zIndex: 1,
-            background: "rgba(255,255,255,0.12)",
+            background: "rgba(0, 217, 255, 0.1)",
             backdropFilter: "blur(16px)",
-            borderRadius: 20,
-            border: "1px solid rgba(255,255,255,0.22)",
-            padding: "20px 24px",
+            borderRadius: 16,
+            border: "1px solid rgba(0, 217, 255, 0.3)",
+            padding: "24px 28px",
           }}
         >
           <div
@@ -164,10 +161,10 @@ export default function LoginPage() {
               display: "inline-flex",
               alignItems: "center",
               gap: 8,
-              background: "rgba(255,255,255,0.15)",
+              background: "rgba(0, 217, 255, 0.15)",
               borderRadius: 99,
-              padding: "5px 14px",
-              marginBottom: 12,
+              padding: "6px 16px",
+              marginBottom: 14,
             }}
           >
             <div
@@ -175,23 +172,23 @@ export default function LoginPage() {
                 width: 8,
                 height: 8,
                 borderRadius: "50%",
-                background: "#C8A882",
+                background: "#00D9FF",
               }}
             />
-            <span style={{ fontSize: 12, color: "#fff", fontWeight: 600 }}>
-              Active
+            <span style={{ fontSize: 12, color: "#00D9FF", fontWeight: 700 }}>
+              ACTIVE
             </span>
           </div>
           <p
             style={{
-              fontSize: 14,
-              color: "rgba(255,255,255,0.88)",
-              lineHeight: 1.65,
-              marginBottom: 16,
+              fontSize: 15,
+              color: "#E0F2FE",
+              lineHeight: 1.6,
+              marginBottom: 18,
+              fontWeight: 500,
             }}
           >
-            Manage thousands of async background tasks seamlessly with live
-            analytics and AI-powered insights.
+            Real-time automation with intelligent routing and predictive analytics across your entire task pipeline.
           </p>
           <div style={{ display: "flex", justifyContent: "flex-end", gap: 8 }}>
             {["←", "→"].map((arrow, i) => (
@@ -254,23 +251,22 @@ export default function LoginPage() {
             >
               <div
                 style={{
-                  width: 32,
-                  height: 32,
-                  borderRadius: 8,
-                  background: "var(--primary)",
+                  width: 40,
+                  height: 40,
+                  borderRadius: 10,
+                  background: "linear-gradient(135deg, #0A4A8E 0%, #00D9FF 100%)",
                   display: "grid",
                   placeItems: "center",
-                  boxShadow: "0 4px 12px rgba(31, 27, 24, 0.15)",
                 }}
               >
-                <Zap size={16} color="#fff" strokeWidth={2.5} />
+                <Zap size={20} color="#fff" strokeWidth={2.5} />
               </div>
               <span
                 style={{
                   fontFamily: "var(--font-display)",
-                  fontSize: 19,
+                  fontSize: 22,
                   color: "var(--primary)",
-                  fontWeight: 400,
+                  fontWeight: 600,
                   letterSpacing: "-0.01em",
                 }}
               >
@@ -282,23 +278,23 @@ export default function LoginPage() {
             <h1
               style={{
                 fontFamily: "var(--font-display)",
-                fontSize: "clamp(28px, 4.5vw, 38px)",
-                fontWeight: 400,
+                fontSize: "clamp(32px, 4.5vw, 40px)",
+                fontWeight: 700,
                 color: "var(--primary)",
-                lineHeight: 1.2,
-                marginBottom: 8,
-                letterSpacing: "-0.01em",
+                lineHeight: 1.15,
+                marginBottom: 10,
+                letterSpacing: "-0.02em",
               }}
             >
               Welcome back
             </h1>
             <p
               style={{
-                fontSize: 15,
+                fontSize: 16,
                 color: "var(--text-secondary)",
-                marginBottom: 28,
+                marginBottom: 32,
                 lineHeight: 1.6,
-                fontWeight: 400,
+                fontWeight: 500,
               }}
             >
               Sign in to your Taskflow workspace
@@ -314,13 +310,13 @@ export default function LoginPage() {
               {/* Email */}
               <div style={{ position: "relative" }}>
                 <Mail
-                  size={15}
+                  size={16}
                   style={{
                     position: "absolute",
                     left: 16,
                     top: "50%",
                     transform: "translateY(-50%)",
-                    color: "var(--warm-400)",
+                    color: "#9CA3AF",
                     pointerEvents: "none",
                   }}
                 />
@@ -330,23 +326,24 @@ export default function LoginPage() {
                   style={{
                     width: "100%",
                     boxSizing: "border-box",
-                    padding: "13px 16px 13px 44px",
-                    borderRadius: 99,
-                    border: "1.5px solid var(--warm-100)",
-                    background: "var(--surface)",
-                    fontSize: 14,
-                    color: "var(--warm-800)",
+                    padding: "14px 16px 14px 48px",
+                    borderRadius: 10,
+                    border: "1.5px solid var(--surface-border)",
+                    background: "#F9FAFB",
+                    fontSize: 15,
+                    color: "var(--text-primary)",
                     outline: "none",
                     fontFamily: "inherit",
+                    fontWeight: 500,
                     transition: "border-color 0.2s, background 0.2s",
                   }}
                   onFocus={(e: React.FocusEvent<HTMLInputElement>) => {
-                    e.target.style.borderColor = "var(--accent)";
+                    e.target.style.borderColor = "#00D9FF";
                     e.target.style.background = "#fff";
                   }}
                   onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
-                    e.target.style.borderColor = "var(--warm-100)";
-                    e.target.style.background = "var(--surface)";
+                    e.target.style.borderColor = "var(--surface-border)";
+                    e.target.style.background = "#F9FAFB";
                   }}
                 />
               </div>
@@ -354,13 +351,13 @@ export default function LoginPage() {
               {/* Password */}
               <div style={{ position: "relative" }}>
                 <Lock
-                  size={15}
+                  size={16}
                   style={{
                     position: "absolute",
                     left: 16,
                     top: "50%",
                     transform: "translateY(-50%)",
-                    color: "var(--warm-400)",
+                    color: "#9CA3AF",
                     pointerEvents: "none",
                   }}
                 />
@@ -370,23 +367,24 @@ export default function LoginPage() {
                   style={{
                     width: "100%",
                     boxSizing: "border-box",
-                    padding: "13px 44px 13px 44px",
-                    borderRadius: 99,
-                    border: "1.5px solid var(--warm-100)",
-                    background: "var(--surface)",
-                    fontSize: 14,
-                    color: "var(--warm-800)",
+                    padding: "14px 48px 14px 48px",
+                    borderRadius: 10,
+                    border: "1.5px solid var(--surface-border)",
+                    background: "#F9FAFB",
+                    fontSize: 15,
+                    color: "var(--text-primary)",
                     outline: "none",
                     fontFamily: "inherit",
+                    fontWeight: 500,
                     transition: "border-color 0.2s, background 0.2s",
                   }}
                   onFocus={(e: React.FocusEvent<HTMLInputElement>) => {
-                    e.target.style.borderColor = "var(--accent)";
+                    e.target.style.borderColor = "#00D9FF";
                     e.target.style.background = "#fff";
                   }}
                   onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
-                    e.target.style.borderColor = "var(--warm-100)";
-                    e.target.style.background = "var(--surface)";
+                    e.target.style.borderColor = "var(--surface-border)";
+                    e.target.style.background = "#F9FAFB";
                   }}
                 />
                 <button
@@ -400,25 +398,26 @@ export default function LoginPage() {
                     background: "none",
                     border: "none",
                     cursor: "pointer",
-                    color: "var(--warm-400)",
+                    color: "#9CA3AF",
                     display: "flex",
                     alignItems: "center",
                     padding: 0,
                   }}
                 >
-                  {showPassword ? <EyeOff size={15} /> : <Eye size={15} />}
+                  {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
               </div>
 
               {/* Forgot password */}
-              <div style={{ textAlign: "right", marginTop: -4 }}>
+              <div style={{ textAlign: "right", marginTop: -2 }}>
                 <Link
                   href="#"
                   style={{
-                    fontSize: 13,
-                    color: "var(--warm-400)",
+                    fontSize: 14,
+                    color: "#0A4A8E",
                     textDecoration: "none",
                     transition: "color 0.2s",
+                    fontWeight: 600,
                   }}
                 >
                   Forgot password?
@@ -429,30 +428,29 @@ export default function LoginPage() {
               <button
                 type="submit"
                 style={{
-                  marginTop: 4,
-                  padding: "14px",
-                  borderRadius: 99,
-                  background: "var(--warm-800)",
+                  marginTop: 8,
+                  padding: "15px",
+                  borderRadius: 10,
+                  background: "linear-gradient(135deg, #0A4A8E 0%, #0F5FA8 100%)",
                   color: "#fff",
                   border: "none",
-                  fontSize: 15,
-                  fontWeight: 600,
+                  fontSize: 16,
+                  fontWeight: 700,
                   cursor: "pointer",
                   fontFamily: "inherit",
-                  transition: "opacity 0.2s, transform 0.1s",
-                  letterSpacing: "0.01em",
+                  transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                  letterSpacing: "-0.01em",
+                  boxShadow: "0 4px 16px rgba(10, 74, 142, 0.3)",
                 }}
-                onMouseEnter={(e: React.MouseEvent<HTMLButtonElement>) =>
-                  (e.currentTarget.style.opacity = "0.88")
+                onMouseEnter={(e: React.MouseEvent<HTMLButtonElement>) => {
+                  e.currentTarget.style.boxShadow = "0 8px 32px rgba(10, 74, 142, 0.4)";
+                  e.currentTarget.style.transform = "translateY(-2px)";
                 }
-                onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) =>
-                  (e.currentTarget.style.opacity = "1")
                 }
-                onMouseDown={(e: React.MouseEvent<HTMLButtonElement>) =>
-                  (e.currentTarget.style.transform = "scale(0.98)")
+                onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) => {
+                  e.currentTarget.style.boxShadow = "0 4px 16px rgba(10, 74, 142, 0.3)";
+                  e.currentTarget.style.transform = "translateY(0)";
                 }
-                onMouseUp={(e: React.MouseEvent<HTMLButtonElement>) =>
-                  (e.currentTarget.style.transform = "scale(1)")
                 }
               >
                 Sign In
@@ -462,18 +460,19 @@ export default function LoginPage() {
             {/* Footer link */}
             <p
               style={{
-                marginTop: 20,
-                fontSize: 14,
-                color: "var(--warm-400)",
+                marginTop: 24,
+                fontSize: 15,
+                color: "var(--text-secondary)",
                 textAlign: "center",
+                fontWeight: 500,
               }}
             >
               Don&apos;t have an account?{" "}
               <Link
                 href="/register"
                 style={{
-                  color: "var(--warm-800)",
-                  fontWeight: 600,
+                  color: "#0A4A8E",
+                  fontWeight: 700,
                   textDecoration: "none",
                 }}
               >

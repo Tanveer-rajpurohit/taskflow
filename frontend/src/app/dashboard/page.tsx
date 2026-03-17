@@ -41,19 +41,19 @@ type StatItem = {
 };
 
 const STATS: StatItem[] = [
-  { label: "Total", value: MOCK_TASKS.length, color: "var(--warm-800)" },
-  { label: "Running", value: MOCK_TASKS.filter((t) => t.status === "running").length, color: "#1565C0" },
-  { label: "Completed", value: MOCK_TASKS.filter((t) => t.status === "completed").length, color: "#2E7D32" },
-  { label: "Failed", value: MOCK_TASKS.filter((t) => t.status === "failed").length, color: "#C62828" },
+  { label: "Total", value: MOCK_TASKS.length, color: "#0A4A8E" },
+  { label: "Running", value: MOCK_TASKS.filter((t) => t.status === "running").length, color: "#00D9FF" },
+  { label: "Completed", value: MOCK_TASKS.filter((t) => t.status === "completed").length, color: "#10B981" },
+  { label: "Failed", value: MOCK_TASKS.filter((t) => t.status === "failed").length, color: "#EF4444" },
 ];
 
 type OperationStyle = { bg: string; text: string };
 
 const OPERATION_STYLE: Record<OperationType, OperationStyle> = {
-  Uppercase: { bg: "var(--warm-800)", text: "#fff" },
-  Lowercase: { bg: "var(--warm-100)", text: "var(--warm-800)" },
-  Reverse: { bg: "#F0EBE8", text: "var(--warm-600)" },
-  "Word Count": { bg: "#EAF2FF", text: "#1565C0" },
+  Uppercase: { bg: "linear-gradient(135deg, #0A4A8E, #0F5FA8)", text: "#fff" },
+  Lowercase: { bg: "#E0F2FE", text: "#0A4A8E" },
+  Reverse: { bg: "#F0FDF4", text: "#10B981" },
+  "Word Count": { bg: "#FEF2F2", text: "#EF4444" },
 };
 
 type StatusMeta = { cls: string; label: string; icon: React.ElementType };
@@ -80,18 +80,18 @@ export default function DashboardPage(): React.JSX.Element {
       {/* ── TOP BAR ───────────────────────────────────────────── */}
       <header
         style={{
-          borderBottom: "1px solid var(--border)",
+          borderBottom: "1px solid var(--surface-border)",
           padding: "0 40px",
-          height: 68,
+          height: 70,
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
           flexShrink: 0,
-          background: "linear-gradient(180deg, #FFFFFF 0%, #FAFAFA 100%)",
+          background: "#FFFFFF",
         }}
       >
         <div>
-          <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "0.05em" }}>
+          <span style={{ fontSize: 13, fontWeight: 800, color: "var(--primary)", textTransform: "uppercase", letterSpacing: "0.06em" }}>
             Dashboard
           </span>
         </div>
@@ -101,51 +101,51 @@ export default function DashboardPage(): React.JSX.Element {
             display: "inline-flex",
             alignItems: "center",
             gap: 8,
-            padding: "10px 20px",
-            borderRadius: 99,
-            background: "var(--primary)",
+            padding: "11px 22px",
+            borderRadius: 8,
+            background: "linear-gradient(135deg, #0A4A8E 0%, #0F5FA8 100%)",
             color: "#fff",
             textDecoration: "none",
-            fontSize: 13,
+            fontSize: 14,
             fontWeight: 700,
             transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-            boxShadow: "0 8px 20px rgba(31, 27, 24, 0.15)",
+            boxShadow: "0 4px 16px rgba(10, 74, 142, 0.3)",
             letterSpacing: "-0.01em",
           }}
           onMouseEnter={(e) => {
-            (e.currentTarget as HTMLElement).style.boxShadow = "0 12px 32px rgba(31, 27, 24, 0.25)";
+            (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 32px rgba(10, 74, 142, 0.4)";
             (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
           }}
           onMouseLeave={(e) => {
-            (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 20px rgba(31, 27, 24, 0.15)";
+            (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 16px rgba(10, 74, 142, 0.3)";
             (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
           }}
         >
-          <Plus size={15} strokeWidth={2.5} />
+          <Plus size={16} strokeWidth={2.5} />
           New Task
         </Link>
       </header>
 
       {/* ── CONTENT ───────────────────────────────────────────── */}
-      <main style={{ flex: 1, padding: "56px 40px 40px", background: "linear-gradient(180deg, #FFFFFF 0%, #F5F3F1 100%)" }}>
+      <main style={{ flex: 1, padding: "56px 40px 40px", background: "#FFFFFF" }}>
 
         {/* ── Greeting ──────────────────────────────────────────── */}
         <div style={{ marginBottom: 48 }}>
           <h1
             style={{
               fontFamily: "var(--font-display)",
-              fontSize: "clamp(32px, 3.5vw, 42px)",
-              fontWeight: 400,
+              fontSize: "clamp(36px, 4vw, 48px)",
+              fontWeight: 700,
               color: "var(--primary)",
               lineHeight: 1.1,
               marginBottom: 8,
-              letterSpacing: "-0.01em",
+              letterSpacing: "-0.02em",
             }}
           >
             Good afternoon!
           </h1>
-          <p style={{ fontSize: 16, color: "var(--text-secondary)", fontWeight: 400 }}>
-            Ready to process your tasks?
+          <p style={{ fontSize: 16, color: "var(--text-secondary)", fontWeight: 500 }}>
+            Process and monitor your automated tasks
           </p>
         </div>
 
@@ -199,14 +199,23 @@ export default function DashboardPage(): React.JSX.Element {
         {/* ── Tasks section ─────────────────────────────────────── */}
         <div>
           {/* Section header */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              marginBottom: 20,
-            }}
-          >
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        padding: "14px 20px",
+                        borderBottom: isLast ? "none" : "1px solid var(--surface-border)",
+                        textDecoration: "none",
+                        gap: 14,
+                        transition: "background 0.2s",
+                      }}
+                      onMouseEnter={(e) =>
+                        ((e.currentTarget as HTMLElement).style.background = "#F9FAFB")
+                      }
+                      onMouseLeave={(e) =>
+                        ((e.currentTarget as HTMLElement).style.background = "transparent")
+                      }
+                    >
             <span
               style={{
                 fontSize: 13,
@@ -276,9 +285,9 @@ export default function DashboardPage(): React.JSX.Element {
             <div
               style={{
                 background: "#fff",
-                borderRadius: 16,
+                borderRadius: 12,
                 overflow: "hidden",
-                border: "1px solid var(--warm-100)",
+                border: "1px solid var(--surface-border)",
               }}
             >
               {MOCK_TASKS.map((task, idx) => {
@@ -333,7 +342,7 @@ export default function DashboardPage(): React.JSX.Element {
                         minWidth: 0,
                         fontSize: 14,
                         fontWeight: 600,
-                        color: "var(--warm-800)",
+                        color: "var(--text-primary)",
                         whiteSpace: "nowrap",
                         overflow: "hidden",
                         textOverflow: "ellipsis",
@@ -378,7 +387,7 @@ export default function DashboardPage(): React.JSX.Element {
                     <span
                       style={{
                         fontSize: 12,
-                        color: "var(--warm-400)",
+                        color: "var(--text-muted)",
                         flexShrink: 0,
                         minWidth: 76,
                         textAlign: "right",
@@ -442,9 +451,24 @@ export default function DashboardPage(): React.JSX.Element {
                     <div
                       style={{
                         display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                        marginBottom: 16,
+                        flexDirection: "column",
+                        padding: "20px",
+                        borderRadius: 12,
+                        border: "1px solid var(--surface-border)",
+                        background: "#fff",
+                        textDecoration: "none",
+                        transition: "border-color 0.2s, box-shadow 0.2s",
+                        gap: 0,
+                      }}
+                      onMouseEnter={(e) => {
+                        const el = e.currentTarget as HTMLElement;
+                        el.style.borderColor = "#00D9FF";
+                        el.style.boxShadow = "0 4px 20px rgba(0, 217, 255, 0.15)";
+                      }}
+                      onMouseLeave={(e) => {
+                        const el = e.currentTarget as HTMLElement;
+                        el.style.borderColor = "var(--surface-border)";
+                        el.style.boxShadow = "none";
                       }}
                     >
                       <div
@@ -478,7 +502,7 @@ export default function DashboardPage(): React.JSX.Element {
                       style={{
                         fontSize: 14,
                         fontWeight: 600,
-                        color: "var(--warm-800)",
+                        color: "var(--text-primary)",
                         lineHeight: 1.4,
                         marginBottom: 14,
                         flex: 1,
