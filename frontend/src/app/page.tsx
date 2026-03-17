@@ -146,12 +146,13 @@ export default function LandingPage() {
       }}>
         <div className="fade-up" style={{
             display: "inline-flex", alignItems: "center", gap: 8,
-            background: "#AACDDC", color: "#fff",
+            background: "#FFFFFF", color: "#81A6C6",
             padding: "10px 24px", borderRadius: 8,
             fontSize: 13, fontWeight: 700, letterSpacing: "0.02em",
             marginBottom: 48,
+            border: "1px solid #AACDDC",
         }}>
-          <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#F3E3D0", display: "inline-block", flexShrink: 0 }} />
+          <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#81A6C6", display: "inline-block", flexShrink: 0 }} />
           Intelligent Automation at Scale
         </div>
 
@@ -175,8 +176,8 @@ export default function LandingPage() {
 
         <div className="fade-up" style={{ display: "flex", gap: 16, alignItems: "center", marginBottom: 140, justifyContent: "center" }}>
           <Link href="/login" style={{
-            background: "linear-gradient(135deg, #81A6C6 0%, #AACDDC 100%)", 
-            color: "#fff",
+            background: "#81A6C6", 
+            color: "#FFFFFF",
             padding: "16px 48px", borderRadius: 8,
             fontWeight: 700, fontSize: 16, textDecoration: "none",
             transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
@@ -184,32 +185,31 @@ export default function LandingPage() {
             letterSpacing: "-0.01em",
           }}
           onMouseEnter={(e) => {
-            (e.currentTarget as HTMLElement).style.boxShadow = "0 12px 40px rgba(129, 166, 198, 0.35)";
-            (e.currentTarget as HTMLElement).style.transform = "translateY(-3px)";
+            (e.currentTarget as HTMLElement).style.background = "#5A7A94";
+            (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
           }}
           onMouseLeave={(e) => {
-            (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 24px rgba(129, 166, 198, 0.25)";
+            (e.currentTarget as HTMLElement).style.background = "#81A6C6";
             (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
           }}>
             Start Free
           </Link>
           <Link href="/login" style={{
-            background: "#F3E3D0", color: "var(--primary)",
-            border: "2px solid #F3E3D0",
+            background: "#FFFFFF", color: "#81A6C6",
+            border: "2px solid #81A6C6",
             padding: "14px 44px", borderRadius: 8,
             fontWeight: 700, fontSize: 16, textDecoration: "none",
             transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-            boxShadow: "0 4px 12px rgba(243, 227, 208, 0.2)",
           }}
           onMouseEnter={(e) => {
-            (e.currentTarget as HTMLElement).style.background = "var(--primary)";
-            (e.currentTarget as HTMLElement).style.color = "#fff";
-            (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 24px rgba(129, 166, 198, 0.25)";
+            (e.currentTarget as HTMLElement).style.background = "#81A6C6";
+            (e.currentTarget as HTMLElement).style.color = "#FFFFFF";
+            (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
           }}
           onMouseLeave={(e) => {
-            (e.currentTarget as HTMLElement).style.background = "#F3E3D0";
-            (e.currentTarget as HTMLElement).style.color = "var(--primary)";
-            (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 12px rgba(243, 227, 208, 0.2)";
+            (e.currentTarget as HTMLElement).style.background = "#FFFFFF";
+            (e.currentTarget as HTMLElement).style.color = "#81A6C6";
+            (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
           }}>
             View Demo
           </Link>
@@ -218,22 +218,22 @@ export default function LandingPage() {
         {/* Dashboard Visual - Minimal approach */}
         <div style={{ position: "relative", width: "100%", maxWidth: 1100, margin: "0 auto", paddingBottom: 80 }}>
           <div className="hero-dashboard" style={{
-            background: "linear-gradient(135deg, #81A6C6 0%, #AACDDC 100%)",
+            background: "#FFFFFF",
             borderRadius: 20,
-            border: "1px solid rgba(243, 227, 208, 0.4)",
+            border: "2px solid #81A6C6",
             padding: "40px",
             width: "100%",
             minHeight: 480,
             display: "flex", flexDirection: "column", gap: 32,
-            boxShadow: "0 20px 60px rgba(129, 166, 198, 0.15)",
+            boxShadow: "0 20px 60px rgba(129, 166, 198, 0.1)",
           }}>
             {/* Header Section */}
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <div>
-                <div style={{ fontSize: 13, fontWeight: 700, color: "#F3E3D0", marginBottom: 8, letterSpacing: "0.05em" }}>DASHBOARD</div>
-                <h3 style={{ fontSize: 28, fontWeight: 700, color: "#fff", marginBottom: 0 }}>Active Tasks</h3>
+                <div style={{ fontSize: 13, fontWeight: 700, color: "#81A6C6", marginBottom: 8, letterSpacing: "0.05em" }}>DASHBOARD</div>
+                <h3 style={{ fontSize: 28, fontWeight: 700, color: "#1A1A1A", marginBottom: 0 }}>Active Tasks</h3>
               </div>
-              <div style={{ padding: "8px 16px", background: "#6BA587", borderRadius: 6, color: "#fff", fontWeight: 700, fontSize: 12 }}>LIVE</div>
+              <div style={{ padding: "8px 16px", background: "#81A6C6", borderRadius: 6, color: "#fff", fontWeight: 700, fontSize: 12 }}>LIVE</div>
             </div>
 
             {/* Stats Row */}

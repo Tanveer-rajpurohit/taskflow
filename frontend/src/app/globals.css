@@ -2,41 +2,41 @@
 @import "tailwindcss";
 
 :root {
-  /* Sophisticated Warm Palette */
+  /* Core Palette - Strategic Color Usage */
   --white:     #FFFFFF;
   --black:     #1A1A1A;
   
-  /* Primary: Soft Blue */
+  /* Primary Brand Color: Blue */
   --primary:   #81A6C6;
   --primary-light: #AACDDC;
   --primary-dark: #5A7A94;
   
-  /* Accent: Warm Cream */
+  /* Accents */
   --accent:    #F3E3D0;
   --accent-dark: #E8D5BC;
   
-  /* Secondary: Warm Taupe */
-  --secondary: #D2C4B4;
-  --secondary-light: #DED3C5;
+  /* Background & Secondary: Gray/Taupe */
+  --bg-primary: #D2C4B4;
+  --bg-light:   #AACDDC;
   
-  /* Status colors */
+  /* Status colors - muted */
   --success:   #6BA587;
   --warning:   #C9A86B;
   --danger:    #B85C5C;
   --info:      #81A6C6;
   
-  /* Surface tones */
-  --surface-light: #FDFBF9;
-  --surface-border: #E8E3DE;
+  /* Surfaces - clean whites and subtle grays */
+  --surface-white: #FFFFFF;
+  --surface-light: #F7F5F2;
+  --surface-border: #E5DFD8;
   
   /* Semantic tokens */
-  --bg:            var(--white);
+  --bg:            var(--surface-white);
   --bg-subtle:     var(--surface-light);
   --bg-dark:       var(--primary);
   --border:        var(--surface-border);
-  --border-dark:   #D2C4B4;
-  --text-primary:   #2D2D2D;
-  --text-secondary: #5F5A57;
+  --text-primary:   #1A1A1A;
+  --text-secondary: #5A5450;
   --text-muted:     #9B9591;
   --text-invert:    var(--white);
 
@@ -113,9 +113,9 @@ body {
   transition: all 0.2s ease;
 }
 .badge-pending  { background: #F3E3D0; color: #5A7A94; }
-.badge-running  { background: #AACDDC; color: #2D2D2D; }
-.badge-success  { background: #E8F0E6; color: #4A6D59; }
-.badge-failed   { background: #F5E0E0; color: #8B4040; }
+.badge-running  { background: #AACDDC; color: #1A1A1A; }
+.badge-success  { background: #D2C4B4; color: #5A7A94; }
+.badge-failed   { background: #E5DFD8; color: #B85C5C; }
 
 /* Smooth page fade-in */
 @keyframes pageFade {
