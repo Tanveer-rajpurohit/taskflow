@@ -117,10 +117,11 @@ export default function LandingPage() {
           <Link href="#features" style={{ textDecoration: "none", color: "inherit" }}>Features</Link>
           <Link href="#pricing" style={{ textDecoration: "none", color: "inherit" }}>Pricing</Link>
           <Link href="/login" style={{ textDecoration: "none", color: "inherit" }}>Book A Demo</Link>
-          <Link href="/register" style={{
+          <Link href="/login" style={{
             padding: "10px 24px", borderRadius: 99,
             background: "var(--warm-800)", color: "#fff",
             textDecoration: "none", transition: "opacity 0.2s",
+            boxShadow: "0 2px 10px rgba(58,47,45,0.22)",
           }}>Get Started</Link>
         </div>
       </nav>
@@ -133,14 +134,15 @@ export default function LandingPage() {
         position: "relative"
       }}>
         <div className="fade-up" style={{
-            display: "inline-flex", alignItems: "center", gap: 8,
+            display: "inline-flex", alignItems: "center", gap: 10,
             background: "var(--surface)", color: "var(--warm-800)",
             padding: "8px 20px", borderRadius: 99,
             fontSize: 14, fontWeight: 500,
             border: "1px solid var(--warm-100)",
             marginBottom: 32,
         }}>
-          🚀 Intelligent execution, fully managed.
+          <span style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--accent)", display: "inline-block", flexShrink: 0 }} />
+          Intelligent execution, fully managed.
         </div>
 
         <h1 className="fade-up font-display" style={{
@@ -150,7 +152,7 @@ export default function LandingPage() {
           letterSpacing: "-0.01em", maxWidth: 850
         }}>
           AI-Driven Task Management <br/>
-          <span style={{ fontFamily: "var(--font-sans)", fontWeight: 400, fontStyle: "italic", color: "var(--warm-600)" }}>Right Away</span>
+          <span style={{ fontFamily: "var(--font-sans)", fontWeight: 400, fontStyle: "italic", color: "var(--accent)" }}>Right Away</span>
         </h1>
 
         <p className="fade-up" style={{
@@ -161,23 +163,23 @@ export default function LandingPage() {
         </p>
 
         <div className="fade-up" style={{ display: "flex", gap: 16, alignItems: "center", marginBottom: 100 }}>
-          <Link href="/register" style={{
+          <Link href="/login" style={{
             background: "var(--warm-800)", color: "#fff",
             padding: "18px 40px", borderRadius: 99,
             fontWeight: 500, fontSize: 16, textDecoration: "none",
-            transition: "transform 0.2s",
-            boxShadow: "0 4px 14px rgba(0,0,0,0.15)",
+            transition: "opacity 0.2s, transform 0.15s",
+            boxShadow: "0 4px 14px rgba(58,47,45,0.25)",
           }}>
-            Download Free App
+            Start for Free
           </Link>
           <Link href="/login" style={{
             background: "var(--white)", color: "var(--warm-800)",
-            border: "1px solid var(--warm-200)",
+            border: "1.5px solid var(--warm-200)",
             padding: "18px 40px", borderRadius: 99,
             fontWeight: 500, fontSize: 16, textDecoration: "none",
-            transition: "background 0.2s",
+            transition: "border-color 0.2s, background 0.2s",
           }}>
-            Get Started Free
+            See a Demo
           </Link>
         </div>
 
@@ -211,18 +213,18 @@ export default function LandingPage() {
                   <div style={{ flex: 1 }}>
                      <div style={{ width: 140, height: 20, background: "var(--warm-200)", borderRadius: 4, marginBottom: 12 }} />
                      <div style={{ width: 280, height: 36, background: "var(--warm-800)", borderRadius: 6, marginBottom: 32 }} />
-                     
+
                      <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
                         {[1, 2, 3].map(i => (
                            <div key={i} style={{ height: 64, background: "#fff", borderRadius: 12, border: "1px solid var(--warm-100)", display: "flex", alignItems: "center", padding: "0 24px", justifyContent: "space-between" }}>
                               <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
-                                 <div style={{ width: 32, height: 32, borderRadius: "50%", background: "var(--warm-100)" }} />
+                                 <div style={{ width: 32, height: 32, borderRadius: "50%", background: "var(--accent-light)" }} />
                                  <div>
                                    <div style={{ width: 120, height: 12, background: "var(--warm-800)", borderRadius: 4, marginBottom: 6 }} />
                                    <div style={{ width: 80, height: 10, background: "var(--warm-200)", borderRadius: 4 }} />
                                  </div>
                               </div>
-                              <div style={{ width: 60, height: 24, background: "var(--success)", opacity: 0.15, borderRadius: 12 }} />
+                              <div style={{ width: 60, height: 24, background: "var(--accent)", opacity: 0.25, borderRadius: 12 }} />
                            </div>
                         ))}
                      </div>
@@ -321,11 +323,11 @@ export default function LandingPage() {
                       border: "1px solid var(--warm-100)",
                       boxShadow: "var(--shadow-xs)"
                     }}>
-                       <div style={{ 
-                         width: 56, height: 56, borderRadius: "50%", 
-                         background: "var(--warm-800)", color: "#fff", 
+                       <div style={{
+                         width: 56, height: 56, borderRadius: "50%",
+                         background: "var(--warm-800)", color: "#fff",
                          display: "grid", placeItems: "center",
-                         boxShadow: "0 8px 16px rgba(0,0,0,0.15)"
+                         boxShadow: "0 8px 20px rgba(58,47,45,0.2)"
                        }}>
                           {f.icon}
                        </div>

@@ -1,195 +1,580 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import { Mail, Lock, Eye, EyeOff, Zap, ArrowLeft, User } from "lucide-react";
-import { gsap } from "gsap";
+import { Mail, Lock, Eye, EyeOff, User, Zap } from "lucide-react";
+
+const AVATAR_COLORS = [
+  { bg: "#EAD5C0", text: "#7A5A40", label: "A" },
+  { bg: "#C4D4E8", text: "#3A5A80", label: "B" },
+  { bg: "#C8E8C4", text: "#2E6A2E", label: "C" },
+];
 
 export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    let ctx = gsap.context(() => {
-      // Setup timeline for staggering elements on the left panel
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-      
-      tl.fromTo(".animate-item", 
-        { opacity: 0, x: -20 }, 
-        { opacity: 1, x: 0, duration: 0.8, stagger: 0.1 }
-      );
-
-      // Fade up and scale the right side glass card
-      tl.fromTo(".glass-panel",
-        { opacity: 0, scale: 0.95, filter: "blur(10px)" },
-        { opacity: 1, scale: 1, filter: "blur(0px)", duration: 1.2, ease: "expo.out" },
-        "-=0.6"
-      );
-
-      // Subtle float for the decorative elements
-      gsap.to(".bg-shape-1", { x: -30, y: 20, duration: 6, yoyo: true, repeat: -1, ease: "sine.inOut" });
-      gsap.to(".bg-shape-2", { x: 40, y: -30, duration: 7, yoyo: true, repeat: -1, ease: "sine.inOut" });
-
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
 
   return (
-    <div ref={containerRef} className="min-h-screen flex w-full bg-white font-sans overflow-hidden">
-      
-      {/* LEFT PANEL : Form */}
-      <div className="w-full lg:w-[45%] xl:w-[40%] flex flex-col justify-center px-8 sm:px-16 lg:px-24 relative z-10 h-full">
-        
-        {/* Navigation / Back */}
-        <Link href="/" className="absolute top-10 left-8 sm:left-16 lg:left-24 flex items-center gap-2 group animate-item">
-          <ArrowLeft size={16} className="text-[var(--warm-400)] group-hover:-translate-x-1 transition-transform" />
-          <span className="text-sm font-medium text-[var(--warm-600)]">Back to home</span>
-        </Link>
+    <div
+      className="flex min-h-screen relative"
+      style={{ fontFamily: "var(--font-sans)" }}
+    >
+      {/* ── RIGHT VISUAL PANEL ─────────────────────────────────────────
+          Mobile : absolute full-screen background (z-0)
+          Desktop: flex item, 45% width                                */}
+      <div
+        className="absolute inset-0 z-0 lg:relative lg:inset-auto lg:z-auto lg:w-[45%] lg:order-2 flex flex-col justify-between"
+        style={{
+          background:
+            "linear-gradient(145deg, #C8A882 0%, #7d5a45 50%, #3A2F2D 100%)",
+          padding: "56px 48px",
+          overflow: "hidden",
+        }}
+      >
+        {/* BG decoration circles */}
+        <div
+          style={{
+            position: "absolute",
+            top: -100,
+            right: -100,
+            width: 400,
+            height: 400,
+            borderRadius: "50%",
+            background: "rgba(255,255,255,0.06)",
+            pointerEvents: "none",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            bottom: -120,
+            left: -80,
+            width: 500,
+            height: 500,
+            borderRadius: "50%",
+            background: "rgba(255,255,255,0.04)",
+            pointerEvents: "none",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            top: "35%",
+            right: "8%",
+            width: 180,
+            height: 180,
+            borderRadius: "50%",
+            background: "rgba(200,168,130,0.18)",
+            pointerEvents: "none",
+          }}
+        />
 
-        <div className="max-w-sm w-full mx-auto mt-12">
-          {/* Logo */}
-          <div className="animate-item flex items-center gap-2 mb-10">
-            <div className="w-8 h-8 rounded-lg bg-[var(--warm-800)] flex items-center justify-center">
-              <Zap size={16} className="text-white" />
+        {/* Top headline */}
+        <div style={{ position: "relative", zIndex: 1 }}>
+          <h2
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(26px, 2.8vw, 34px)",
+              fontWeight: 400,
+              color: "#fff",
+              lineHeight: 1.35,
+              maxWidth: 340,
+              opacity: 0.95,
+            }}
+          >
+            AI-driven task management for modern teams.
+          </h2>
+        </div>
+
+        {/* Mid: geometric art */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            pointerEvents: "none",
+            zIndex: 0,
+          }}
+        >
+          <div style={{ position: "relative", width: 280, height: 280 }}>
+            <div
+              style={{
+                position: "absolute",
+                top: "10%",
+                left: "5%",
+                width: 155,
+                height: 155,
+                background: "rgba(255,255,255,0.1)",
+                borderRadius: 28,
+                border: "1.5px solid rgba(255,255,255,0.25)",
+                backdropFilter: "blur(8px)",
+                transform: "rotate(-12deg)",
+              }}
+            >
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 18,
+                  border: "1.5px solid rgba(255,255,255,0.35)",
+                  borderRadius: 12,
+                }}
+              />
             </div>
-            <span className="font-display text-xl font-bold text-[var(--warm-800)]">Taskflow</span>
+            <div
+              style={{
+                position: "absolute",
+                top: "40%",
+                left: "38%",
+                width: 120,
+                height: 120,
+                background: "rgba(255,255,255,0.07)",
+                borderRadius: 20,
+                border: "1.5px solid rgba(255,255,255,0.2)",
+                backdropFilter: "blur(6px)",
+                transform: "rotate(14deg)",
+              }}
+            >
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 15,
+                  border: "1.5px solid rgba(255,255,255,0.25)",
+                  borderRadius: 8,
+                }}
+              />
+            </div>
           </div>
+        </div>
 
-          <h1 className="animate-item font-display text-[2.5rem] leading-tight mb-3 text-[var(--warm-800)]">
-            Create an account
-          </h1>
-          <p className="animate-item text-[var(--warm-400)] text-[15px] mb-8">
-            Enter your details below to get started securely.
+        {/* Bottom glass card */}
+        <div
+          style={{
+            position: "relative",
+            zIndex: 1,
+            background: "rgba(255,255,255,0.12)",
+            backdropFilter: "blur(16px)",
+            borderRadius: 20,
+            border: "1px solid rgba(255,255,255,0.22)",
+            padding: "20px 24px",
+          }}
+        >
+          <div
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 8,
+              background: "rgba(255,255,255,0.15)",
+              borderRadius: 99,
+              padding: "5px 14px",
+              marginBottom: 12,
+            }}
+          >
+            <div
+              style={{
+                width: 8,
+                height: 8,
+                borderRadius: "50%",
+                background: "#C8A882",
+              }}
+            />
+            <span style={{ fontSize: 12, color: "#fff", fontWeight: 600 }}>
+              Active
+            </span>
+          </div>
+          <p
+            style={{
+              fontSize: 14,
+              color: "rgba(255,255,255,0.88)",
+              lineHeight: 1.65,
+              marginBottom: 16,
+            }}
+          >
+            Manage thousands of async background tasks seamlessly with live
+            analytics and AI-powered insights.
           </p>
-
-          <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-            
-            {/* Name Input */}
-            <div className="animate-item relative">
-              <label className="sr-only">Full Name</label>
-              <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
-                <User size={18} className="text-[var(--warm-400)]" />
-              </div>
-              <input 
-                type="text" 
-                placeholder="Full Name" 
-                className="w-full pl-12 pr-5 py-4 bg-[var(--surface)] text-[var(--warm-800)] rounded-full border border-transparent focus:bg-white focus:border-[var(--warm-200)] focus:shadow-sm focus:outline-none transition-all placeholder:text-[var(--warm-400)] text-[15px] font-medium"
-              />
-            </div>
-
-            {/* Email Input */}
-            <div className="animate-item relative">
-              <label className="sr-only">Email address</label>
-              <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
-                <Mail size={18} className="text-[var(--warm-400)]" />
-              </div>
-              <input 
-                type="email" 
-                placeholder="hello@company.com" 
-                className="w-full pl-12 pr-5 py-4 bg-[var(--surface)] text-[var(--warm-800)] rounded-full border border-transparent focus:bg-white focus:border-[var(--warm-200)] focus:shadow-sm focus:outline-none transition-all placeholder:text-[var(--warm-400)] text-[15px] font-medium"
-              />
-            </div>
-
-            {/* Password Input */}
-            <div className="animate-item relative">
-              <label className="sr-only">Password</label>
-              <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
-                <Lock size={18} className="text-[var(--warm-400)]" />
-              </div>
-              <input 
-                type={showPassword ? "text" : "password"} 
-                placeholder="Password (min 8 characters)" 
-                className="w-full pl-12 pr-12 py-4 bg-[var(--surface)] text-[var(--warm-800)] rounded-full border border-transparent focus:bg-white focus:border-[var(--warm-200)] focus:shadow-sm focus:outline-none transition-all placeholder:text-[var(--warm-400)] text-[15px] font-medium"
-              />
-              <button 
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute inset-y-0 right-0 pr-5 flex items-center text-[var(--warm-400)] hover:text-[var(--warm-800)] transition-colors"
+          <div style={{ display: "flex", justifyContent: "flex-end", gap: 8 }}>
+            {["←", "→"].map((arrow, i) => (
+              <button
+                key={i}
+                style={{
+                  width: 36,
+                  height: 36,
+                  borderRadius: "50%",
+                  background: "rgba(255,255,255,0.15)",
+                  border: "1px solid rgba(255,255,255,0.3)",
+                  color: "#fff",
+                  fontSize: 15,
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  transition: "background 0.2s",
+                }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.background = "rgba(255,255,255,0.28)")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.background = "rgba(255,255,255,0.15)")
+                }
               >
-                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                {arrow}
               </button>
-            </div>
-
-            {/* Sign Up Button (With margin top to distance from password) */}
-            <button className="animate-item w-full py-4 mt-4 bg-[var(--warm-800)] hover:bg-[var(--warm-600)] text-white rounded-full font-medium text-[15px] transition-all transform active:scale-[0.98] shadow-md shadow-neutral-200">
-              Create Account
-            </button>
-
-            {/* Divider */}
-            <div className="animate-item relative py-6">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-[var(--warm-100)]"></div>
-              </div>
-              <div className="relative flex justify-center text-xs">
-                <span className="bg-white px-4 text-[var(--warm-400)]">or register with</span>
-              </div>
-            </div>
-
-            {/* Social Auth */}
-            <button className="animate-item w-full py-4 bg-white border border-[var(--warm-200)] hover:bg-[var(--surface)] text-[var(--warm-800)] rounded-full font-semibold text-[15px] transition-all flex items-center justify-center gap-3">
-              <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
-                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
-                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-              </svg>
-              Sign up with Google
-            </button>
-          </form>
-
-          <p className="animate-item text-center mt-8 text-[14px] text-[var(--warm-600)]">
-            Already have an account?{" "}
-            <Link href="/login" className="font-semibold text-[var(--warm-800)] hover:text-[var(--accent)] transition-colors">
-              Log in here
-            </Link>
-          </p>
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* RIGHT PANEL : Visual */}
-      <div className="hidden lg:flex w-[55%] xl:w-[60%] relative bg-[var(--warm-800)] items-center justify-center p-12">
-        {/* Abstract shapes making up the background */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="bg-shape-1 absolute top-[-5%] left-[-10%] w-[60vw] h-[60vw] rounded-full bg-[var(--danger)] mix-blend-screen opacity-40 blur-[100px]" />
-          <div className="bg-shape-2 absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] rounded-full bg-[var(--accent)] mix-blend-screen opacity-30 blur-[120px]" />
+      {/* ── LEFT FORM PANEL ────────────────────────────────────────────
+          Mobile : z-10 transparent, form shows as white card over bg
+          Desktop: 55% width, solid white background                  */}
+      <div className="relative z-10 w-full min-h-screen flex flex-col lg:w-[55%] lg:order-1 lg:bg-white">
+        <div className="flex-1 flex flex-col items-center justify-center p-6 lg:px-16 lg:py-12">
+          {/* Form card */}
+          <div
+            className="w-full max-w-sm lg:max-w-md"
+            style={{
+              background: "rgba(255,255,255,0.96)",
+              backdropFilter: "blur(20px)",
+              borderRadius: 28,
+              padding: "36px 32px",
+              boxShadow: "0 24px 64px rgba(0,0,0,0.14)",
+            }}
+          >
+            {/* Logo */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 8,
+                marginBottom: 28,
+              }}
+            >
+              <div
+                style={{
+                  width: 28,
+                  height: 28,
+                  borderRadius: 7,
+                  background: "var(--warm-800)",
+                  display: "grid",
+                  placeItems: "center",
+                }}
+              >
+                <Zap size={14} color="#fff" strokeWidth={2.5} />
+              </div>
+              <span
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: 17,
+                  color: "var(--warm-800)",
+                }}
+              >
+                Taskflow
+              </span>
+            </div>
+
+            {/* Heading */}
+            <h1
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(26px, 4vw, 34px)",
+                fontWeight: 400,
+                color: "var(--warm-800)",
+                lineHeight: 1.2,
+                marginBottom: 6,
+              }}
+            >
+              Create account
+            </h1>
+            <p
+              style={{
+                fontSize: 14,
+                color: "var(--warm-400)",
+                marginBottom: 24,
+                lineHeight: 1.5,
+              }}
+            >
+              Start your journey with Taskflow today
+            </p>
+
+            {/* Form */}
+            <form
+              onSubmit={(e: React.FormEvent<HTMLFormElement>) =>
+                e.preventDefault()
+              }
+              style={{ display: "flex", flexDirection: "column", gap: 12 }}
+            >
+              {/* Full Name */}
+              <div style={{ position: "relative" }}>
+                <User
+                  size={15}
+                  style={{
+                    position: "absolute",
+                    left: 16,
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    color: "var(--warm-400)",
+                    pointerEvents: "none",
+                  }}
+                />
+                <input
+                  type="text"
+                  placeholder="Full name"
+                  style={{
+                    width: "100%",
+                    boxSizing: "border-box",
+                    padding: "13px 16px 13px 44px",
+                    borderRadius: 99,
+                    border: "1.5px solid var(--warm-100)",
+                    background: "var(--surface)",
+                    fontSize: 14,
+                    color: "var(--warm-800)",
+                    outline: "none",
+                    fontFamily: "inherit",
+                    transition: "border-color 0.2s, background 0.2s",
+                  }}
+                  onFocus={(e: React.FocusEvent<HTMLInputElement>) => {
+                    e.target.style.borderColor = "var(--accent)";
+                    e.target.style.background = "#fff";
+                  }}
+                  onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
+                    e.target.style.borderColor = "var(--warm-100)";
+                    e.target.style.background = "var(--surface)";
+                  }}
+                />
+              </div>
+
+              {/* Email */}
+              <div style={{ position: "relative" }}>
+                <Mail
+                  size={15}
+                  style={{
+                    position: "absolute",
+                    left: 16,
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    color: "var(--warm-400)",
+                    pointerEvents: "none",
+                  }}
+                />
+                <input
+                  type="email"
+                  placeholder="hello@company.com"
+                  style={{
+                    width: "100%",
+                    boxSizing: "border-box",
+                    padding: "13px 16px 13px 44px",
+                    borderRadius: 99,
+                    border: "1.5px solid var(--warm-100)",
+                    background: "var(--surface)",
+                    fontSize: 14,
+                    color: "var(--warm-800)",
+                    outline: "none",
+                    fontFamily: "inherit",
+                    transition: "border-color 0.2s, background 0.2s",
+                  }}
+                  onFocus={(e: React.FocusEvent<HTMLInputElement>) => {
+                    e.target.style.borderColor = "var(--accent)";
+                    e.target.style.background = "#fff";
+                  }}
+                  onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
+                    e.target.style.borderColor = "var(--warm-100)";
+                    e.target.style.background = "var(--surface)";
+                  }}
+                />
+              </div>
+
+              {/* Password */}
+              <div style={{ position: "relative" }}>
+                <Lock
+                  size={15}
+                  style={{
+                    position: "absolute",
+                    left: 16,
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    color: "var(--warm-400)",
+                    pointerEvents: "none",
+                  }}
+                />
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Create a password"
+                  style={{
+                    width: "100%",
+                    boxSizing: "border-box",
+                    padding: "13px 44px 13px 44px",
+                    borderRadius: 99,
+                    border: "1.5px solid var(--warm-100)",
+                    background: "var(--surface)",
+                    fontSize: 14,
+                    color: "var(--warm-800)",
+                    outline: "none",
+                    fontFamily: "inherit",
+                    transition: "border-color 0.2s, background 0.2s",
+                  }}
+                  onFocus={(e: React.FocusEvent<HTMLInputElement>) => {
+                    e.target.style.borderColor = "var(--accent)";
+                    e.target.style.background = "#fff";
+                  }}
+                  onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
+                    e.target.style.borderColor = "var(--warm-100)";
+                    e.target.style.background = "var(--surface)";
+                  }}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  style={{
+                    position: "absolute",
+                    right: 16,
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    color: "var(--warm-400)",
+                    display: "flex",
+                    alignItems: "center",
+                    padding: 0,
+                  }}
+                >
+                  {showPassword ? <EyeOff size={15} /> : <Eye size={15} />}
+                </button>
+              </div>
+
+              {/* Terms note */}
+              <p
+                style={{
+                  fontSize: 12,
+                  color: "var(--warm-400)",
+                  lineHeight: 1.5,
+                  marginTop: -2,
+                }}
+              >
+                By creating an account you agree to our{" "}
+                <Link
+                  href="#"
+                  style={{ color: "var(--warm-800)", fontWeight: 600, textDecoration: "none" }}
+                >
+                  Terms
+                </Link>{" "}
+                and{" "}
+                <Link
+                  href="#"
+                  style={{ color: "var(--warm-800)", fontWeight: 600, textDecoration: "none" }}
+                >
+                  Privacy Policy
+                </Link>
+                .
+              </p>
+
+              {/* Submit */}
+              <button
+                type="submit"
+                style={{
+                  marginTop: 4,
+                  padding: "14px",
+                  borderRadius: 99,
+                  background: "var(--warm-800)",
+                  color: "#fff",
+                  border: "none",
+                  fontSize: 15,
+                  fontWeight: 600,
+                  cursor: "pointer",
+                  fontFamily: "inherit",
+                  transition: "opacity 0.2s, transform 0.1s",
+                  letterSpacing: "0.01em",
+                }}
+                onMouseEnter={(e: React.MouseEvent<HTMLButtonElement>) =>
+                  (e.currentTarget.style.opacity = "0.88")
+                }
+                onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) =>
+                  (e.currentTarget.style.opacity = "1")
+                }
+                onMouseDown={(e: React.MouseEvent<HTMLButtonElement>) =>
+                  (e.currentTarget.style.transform = "scale(0.98)")
+                }
+                onMouseUp={(e: React.MouseEvent<HTMLButtonElement>) =>
+                  (e.currentTarget.style.transform = "scale(1)")
+                }
+              >
+                Create Account
+              </button>
+            </form>
+
+            {/* Footer link */}
+            <p
+              style={{
+                marginTop: 20,
+                fontSize: 14,
+                color: "var(--warm-400)",
+                textAlign: "center",
+              }}
+            >
+              Already have an account?{" "}
+              <Link
+                href="/login"
+                style={{
+                  color: "var(--warm-800)",
+                  fontWeight: 600,
+                  textDecoration: "none",
+                }}
+              >
+                Sign in
+              </Link>
+            </p>
+          </div>
         </div>
 
-        {/* 3D-like structural element (pure CSS approximation of a clean geometric object) */}
-        <div className="absolute inset-0 flex items-center justify-center p-20 opacity-70 pointer-events-none">
-           <div className="w-[450px] h-[300px] border border-white/10 rounded-[40px] rotate-[-5deg] flex relative overflow-hidden backdrop-blur-sm bg-white/5">
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 border border-[var(--accent)]/50 rounded-full" />
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 border border-white/20 rounded-full" />
-           </div>
-        </div>
-
-        {/* Glassmorphic overlay card */}
-        <div className="glass-panel relative z-10 w-full max-w-lg p-10 bg-[#3A2F2D]/60 backdrop-blur-xl border border-[#6B5F5C]/40 rounded-3xl shadow-2xl">
-           <div className="flex gap-4 items-center mb-8">
-              <div className="text-white/40 font-mono text-[10px] tracking-[0.2em]">01 SYSTEM START</div>
-              <div className="h-px bg-white/20 flex-1" />
-           </div>
-
-           <h3 className="text-4xl font-display text-white leading-tight mb-4">
-             Streamlined logic <br />
-             <span className="text-[var(--accent)] italic font-sans font-normal border-b-2 border-[var(--danger)]">without limits.</span>
-           </h3>
-           <p className="text-[#D5CECC] text-[15px] leading-relaxed mb-10">
-             Taskflow isolates your operations in dedicated backgrounds. Our Python runner executes them and seamlessly syncs results directly to your dashboard.
-           </p>
-
-           <div className="grid grid-cols-2 gap-4">
-              <div className="bg-white/10 rounded-2xl p-4 border border-white/5">
-                 <div className="text-white text-2xl font-display font-medium">99.9%</div>
-                 <div className="text-[#9D918E] text-[12px] uppercase tracking-wider mt-1">Uptime</div>
+        {/* Social proof — bottom of form panel (desktop only) */}
+        <div
+          className="hidden lg:flex"
+          style={{
+            padding: "20px 48px 32px",
+            alignItems: "center",
+            gap: 14,
+          }}
+        >
+          <div style={{ display: "flex" }}>
+            {AVATAR_COLORS.map((av, i) => (
+              <div
+                key={i}
+                style={{
+                  width: 32,
+                  height: 32,
+                  borderRadius: "50%",
+                  background: av.bg,
+                  border: "2.5px solid #fff",
+                  marginLeft: i > 0 ? -10 : 0,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: 11,
+                  fontWeight: 700,
+                  color: av.text,
+                  boxShadow: "0 1px 4px rgba(0,0,0,0.08)",
+                }}
+              >
+                {av.label}
               </div>
-              <div className="bg-white/10 rounded-2xl p-4 border border-white/5">
-                 <div className="text-white text-2xl font-display font-medium">~5ms</div>
-                 <div className="text-[#9D918E] text-[12px] uppercase tracking-wider mt-1">Latency</div>
-              </div>
-           </div>
+            ))}
+          </div>
+          <div>
+            <div
+              style={{
+                fontSize: 13,
+                fontWeight: 600,
+                color: "var(--warm-800)",
+              }}
+            >
+              Join 20k+ users
+            </div>
+            <div style={{ fontSize: 12, color: "var(--warm-400)" }}>
+              Let&apos;s see our happy customers
+            </div>
+          </div>
         </div>
       </div>
-
     </div>
   );
 }
