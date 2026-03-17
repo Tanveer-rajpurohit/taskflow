@@ -97,31 +97,48 @@ export default function LandingPage() {
       {/* Nav */}
       <nav style={{
         position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
-        background: "rgba(255,255,255,0.85)",
-        backdropFilter: "blur(16px)",
-        borderBottom: "1px solid var(--warm-100)",
-        padding: "0 40px",
-        height: 70,
+        background: "rgba(255,255,255,0.75)",
+        backdropFilter: "blur(24px)",
+        borderBottom: "1px solid var(--border)",
+        padding: "0 48px",
+        height: 72,
         display: "flex", alignItems: "center", justifyContent: "space-between",
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <div style={{
-            width: 32, height: 32, borderRadius: 8,
-            background: "var(--warm-800)", display: "grid", placeItems: "center",
+            width: 36, height: 36, borderRadius: 10,
+            background: "var(--primary)", display: "grid", placeItems: "center",
+            boxShadow: "0 4px 12px rgba(31, 27, 24, 0.15)",
           }}>
-            <Zap size={16} color="#fff" strokeWidth={2.5} />
+            <Zap size={18} color="#fff" strokeWidth={2.5} />
           </div>
-          <span className="font-display" style={{ fontSize: 20, color: "var(--warm-800)" }}>Taskflow</span>
+          <span className="font-display" style={{ fontSize: 22, fontWeight: 400, color: "var(--primary)", letterSpacing: "-0.02em" }}>Taskflow</span>
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 24, fontSize: 15, fontWeight: 500, color: "var(--warm-600)" }}>
-          <Link href="#features" style={{ textDecoration: "none", color: "inherit" }}>Features</Link>
-          <Link href="#pricing" style={{ textDecoration: "none", color: "inherit" }}>Pricing</Link>
-          <Link href="/login" style={{ textDecoration: "none", color: "inherit" }}>Book A Demo</Link>
+        <div style={{ display: "flex", alignItems: "center", gap: 32, fontSize: 15, fontWeight: 500, color: "var(--text-secondary)" }}>
+          <Link href="#features" style={{ textDecoration: "none", color: "inherit", transition: "color 0.3s" }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "var(--primary)")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}>Features</Link>
+          <Link href="#pricing" style={{ textDecoration: "none", color: "inherit", transition: "color 0.3s" }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "var(--primary)")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}>Pricing</Link>
+          <Link href="/login" style={{ textDecoration: "none", color: "inherit", transition: "color 0.3s" }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "var(--primary)")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}>Demo</Link>
           <Link href="/login" style={{
-            padding: "10px 24px", borderRadius: 99,
-            background: "var(--warm-800)", color: "#fff",
-            textDecoration: "none", transition: "opacity 0.2s",
-            boxShadow: "0 2px 10px rgba(58,47,45,0.22)",
+            padding: "11px 28px", borderRadius: 99,
+            background: "var(--primary)", color: "#fff",
+            textDecoration: "none", transition: "all 0.3s",
+            boxShadow: "0 8px 24px rgba(31, 27, 24, 0.2)",
+            fontWeight: 600,
+            fontSize: 14,
+          }}
+          onMouseEnter={(e) => {
+            (e.currentTarget as HTMLElement).style.boxShadow = "0 12px 36px rgba(31, 27, 24, 0.3)";
+            (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 24px rgba(31, 27, 24, 0.2)";
+            (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
           }}>Get Started</Link>
         </div>
       </nav>
@@ -129,102 +146,126 @@ export default function LandingPage() {
       {/* Hero */}
       <section style={{
         paddingTop: 180, paddingBottom: 100,
-        maxWidth: 1200, margin: "0 auto", padding: "180px 20px 100px",
+        maxWidth: 1300, margin: "0 auto", padding: "180px 40px 100px",
         display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center",
         position: "relative"
       }}>
         <div className="fade-up" style={{
-            display: "inline-flex", alignItems: "center", gap: 10,
-            background: "var(--surface)", color: "var(--warm-800)",
-            padding: "8px 20px", borderRadius: 99,
-            fontSize: 14, fontWeight: 500,
-            border: "1px solid var(--warm-100)",
-            marginBottom: 32,
+            display: "inline-flex", alignItems: "center", gap: 8,
+            background: "var(--surface-light)", color: "var(--primary)",
+            padding: "9px 22px", borderRadius: 99,
+            fontSize: 13, fontWeight: 600, letterSpacing: "0.02em",
+            border: "1px solid var(--border)",
+            marginBottom: 40,
+            boxShadow: "0 2px 8px rgba(31, 27, 24, 0.04)",
         }}>
-          <span style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--accent)", display: "inline-block", flexShrink: 0 }} />
-          Intelligent execution, fully managed.
+          <span style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--accent)", display: "inline-block", flexShrink: 0 }} />
+          Intelligent Execution, Fully Managed
         </div>
 
         <h1 className="fade-up font-display" style={{
-          fontSize: "clamp(42px, 6vw, 76px)",
-          fontWeight: 400, lineHeight: 1.1,
-          color: "var(--warm-800)", marginBottom: 28,
-          letterSpacing: "-0.01em", maxWidth: 850
+          fontSize: "clamp(48px, 7vw, 84px)",
+          fontWeight: 400, lineHeight: 1.08,
+          color: "var(--primary)", marginBottom: 32,
+          letterSpacing: "-0.02em", maxWidth: 920,
         }}>
           AI-Driven Task Management <br/>
-          <span style={{ fontFamily: "var(--font-sans)", fontWeight: 400, fontStyle: "italic", color: "var(--accent)" }}>Right Away</span>
+          <span style={{ fontFamily: "var(--font-sans)", fontWeight: 600, fontStyle: "normal", color: "var(--accent)", background: "linear-gradient(135deg, #D4A373, #C0925C)", backgroundClip: "text", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>at Scale</span>
         </h1>
 
         <p className="fade-up" style={{
-          fontSize: "clamp(16px, 2vw, 20px)", color: "var(--warm-400)",
-          lineHeight: 1.6, maxWidth: 640, marginBottom: 48,
+          fontSize: "clamp(17px, 2.2vw, 21px)", color: "var(--text-secondary)",
+          lineHeight: 1.7, maxWidth: 700, marginBottom: 56,
+          fontWeight: 400,
         }}>
-          From concept to completion — manage thousands of async background tasks seamlessly with live analytics.
+          From concept to completion—manage thousands of async background tasks seamlessly with real-time analytics and intelligent insights.
         </p>
 
-        <div className="fade-up" style={{ display: "flex", gap: 16, alignItems: "center", marginBottom: 100 }}>
+        <div className="fade-up" style={{ display: "flex", gap: 20, alignItems: "center", marginBottom: 120, justifyContent: "center" }}>
           <Link href="/login" style={{
-            background: "var(--warm-800)", color: "#fff",
-            padding: "18px 40px", borderRadius: 99,
-            fontWeight: 500, fontSize: 16, textDecoration: "none",
-            transition: "opacity 0.2s, transform 0.15s",
-            boxShadow: "0 4px 14px rgba(58,47,45,0.25)",
+            background: "var(--primary)", color: "#fff",
+            padding: "16px 44px", borderRadius: 99,
+            fontWeight: 600, fontSize: 15, textDecoration: "none",
+            transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+            boxShadow: "0 12px 32px rgba(31, 27, 24, 0.25)",
+            letterSpacing: "-0.01em",
+          }}
+          onMouseEnter={(e) => {
+            (e.currentTarget as HTMLElement).style.boxShadow = "0 16px 48px rgba(31, 27, 24, 0.35)";
+            (e.currentTarget as HTMLElement).style.transform = "translateY(-3px)";
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLElement).style.boxShadow = "0 12px 32px rgba(31, 27, 24, 0.25)";
+            (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
           }}>
             Start for Free
           </Link>
           <Link href="/login" style={{
-            background: "var(--white)", color: "var(--warm-800)",
-            border: "1.5px solid var(--warm-200)",
-            padding: "18px 40px", borderRadius: 99,
-            fontWeight: 500, fontSize: 16, textDecoration: "none",
-            transition: "border-color 0.2s, background 0.2s",
+            background: "var(--white)", color: "var(--primary)",
+            border: "1.5px solid var(--border)",
+            padding: "16px 44px", borderRadius: 99,
+            fontWeight: 600, fontSize: 15, textDecoration: "none",
+            transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+            letterSpacing: "-0.01em",
+            boxShadow: "0 4px 12px rgba(31, 27, 24, 0.08)",
+          }}
+          onMouseEnter={(e) => {
+            (e.currentTarget as HTMLElement).style.borderColor = "var(--accent)";
+            (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 24px rgba(212, 163, 115, 0.15)";
+            (e.currentTarget as HTMLElement).style.transform = "translateY(-3px)";
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLElement).style.borderColor = "var(--border)";
+            (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 12px rgba(31, 27, 24, 0.08)";
+            (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
           }}>
             See a Demo
           </Link>
         </div>
 
         {/* Dashboard Visual Area */}
-        <div style={{ position: "relative", width: "100%", maxWidth: 960, margin: "0 auto", paddingBottom: 80 }}>
+        <div style={{ position: "relative", width: "100%", maxWidth: 1000, margin: "0 auto", paddingBottom: 100 }}>
           
-          {/* Main Dashboard Panel */}
+          {/* Main Dashboard Panel with Premium Styling */}
           <div className="hero-dashboard" style={{
-            background: "var(--surface)",
-            borderRadius: "32px",
-            border: "1px solid var(--warm-100)",
-            boxShadow: "0 24px 60px rgba(78,72,69,0.1)",
-            padding: 12,
+            background: "linear-gradient(135deg, #FAFAFA 0%, #F5F3F1 100%)",
+            borderRadius: "40px",
+            border: "1px solid var(--border)",
+            boxShadow: "0 32px 80px rgba(31, 27, 24, 0.12), 0 0 1px rgba(31, 27, 24, 0.05)",
+            padding: 14,
             width: "100%",
-            height: 540,
+            height: 560,
             display: "flex", flexDirection: "column",
+            overflow: "hidden",
           }}>
-            <div style={{ background: "#fff", borderRadius: 24, height: "100%", overflow: "hidden", display: "flex", flexDirection: "column" }}>
-               {/* Browser bar */}
-               <div style={{ padding: "20px 24px", display: "flex", alignItems: "center", gap: 8, borderBottom: "1px solid var(--warm-100)" }}>
-                 <div style={{ width: 12, height: 12, borderRadius: "50%", background: "var(--danger)" }} />
-                 <div style={{ width: 12, height: 12, borderRadius: "50%", background: "var(--accent)" }} />
-                 <div style={{ width: 12, height: 12, borderRadius: "50%", background: "var(--success)" }} />
+            <div style={{ background: "#fff", borderRadius: 32, height: "100%", overflow: "hidden", display: "flex", flexDirection: "column" }}>
+               {/* Browser bar - Premium */}
+               <div style={{ padding: "22px 28px", display: "flex", alignItems: "center", gap: 10, borderBottom: "1px solid var(--border)" }}>
+                 <div style={{ width: 13, height: 13, borderRadius: "50%", background: "#FF5F56" }} />
+                 <div style={{ width: 13, height: 13, borderRadius: "50%", background: "#FFBD2E" }} />
+                 <div style={{ width: 13, height: 13, borderRadius: "50%", background: "#27C93F" }} />
                  <div style={{ flex: 1, display: "flex", justifyContent: "center" }}>
-                    <div style={{ background: "var(--surface)", height: 28, width: 300, borderRadius: 6 }} />
+                    <div style={{ background: "var(--surface-light)", height: 30, width: 320, borderRadius: 8, border: "1px solid var(--border)" }} />
                  </div>
                </div>
                
-               {/* App Content */}
-               <div style={{ display: "flex", flex: 1, padding: 32, gap: 32, background: "var(--surface)", borderTopLeftRadius: 24, borderTopRightRadius: 24, margin: "8px 8px 0" }}>
-                  <div style={{ flex: 1 }}>
-                     <div style={{ width: 140, height: 20, background: "var(--warm-200)", borderRadius: 4, marginBottom: 12 }} />
-                     <div style={{ width: 280, height: 36, background: "var(--warm-800)", borderRadius: 6, marginBottom: 32 }} />
+               {/* App Content - Elevated */}
+               <div style={{ display: "flex", flex: 1, padding: 36, gap: 36, background: "linear-gradient(180deg, #FAFAFA 0%, #F5F3F1 100%)", overflow: "hidden" }}>
+                  <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 20 }}>
+                     <div style={{ width: 160, height: 22, background: "var(--text-muted)", borderRadius: 6, opacity: 0.3 }} />
+                     <div style={{ width: 320, height: 42, background: "var(--primary)", borderRadius: 10, opacity: 0.9 }} />
 
-                     <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                     <div style={{ display: "flex", flexDirection: "column", gap: 18, marginTop: 12 }}>
                         {[1, 2, 3].map(i => (
-                           <div key={i} style={{ height: 64, background: "#fff", borderRadius: 12, border: "1px solid var(--warm-100)", display: "flex", alignItems: "center", padding: "0 24px", justifyContent: "space-between" }}>
-                              <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
-                                 <div style={{ width: 32, height: 32, borderRadius: "50%", background: "var(--accent-light)" }} />
+                           <div key={i} style={{ height: 68, background: "#fff", borderRadius: 16, border: "1px solid var(--border)", display: "flex", alignItems: "center", padding: "0 26px", justifyContent: "space-between", boxShadow: "0 2px 8px rgba(31, 27, 24, 0.04)" }}>
+                              <div style={{ display: "flex", gap: 18, alignItems: "center" }}>
+                                 <div style={{ width: 38, height: 38, borderRadius: 12, background: "linear-gradient(135deg, #D4A373, #C0925C)", opacity: 0.2 }} />
                                  <div>
-                                   <div style={{ width: 120, height: 12, background: "var(--warm-800)", borderRadius: 4, marginBottom: 6 }} />
-                                   <div style={{ width: 80, height: 10, background: "var(--warm-200)", borderRadius: 4 }} />
+                                   <div style={{ width: 140, height: 14, background: "var(--primary)", borderRadius: 5, marginBottom: 7, opacity: 0.8 }} />
+                                   <div style={{ width: 100, height: 11, background: "var(--text-secondary)", borderRadius: 4, opacity: 0.4 }} />
                                  </div>
                               </div>
-                              <div style={{ width: 60, height: 24, background: "var(--accent)", opacity: 0.25, borderRadius: 12 }} />
+                              <div style={{ width: 70, height: 28, background: "var(--accent)", opacity: 0.15, borderRadius: 14 }} />
                            </div>
                         ))}
                      </div>
@@ -233,108 +274,122 @@ export default function LandingPage() {
             </div>
           </div>
 
-          {/* Floating Widget 1 */}
+          {/* Floating Widget 1 - Premium */}
           <div className="hero-widget float-slow" style={{
-            position: "absolute", top: 40, left: -40,
-            background: "#fff", borderRadius: 24, padding: "20px 24px",
-            boxShadow: "0 12px 30px rgba(0,0,0,0.06)", border: "1px solid var(--warm-100)",
-            display: "flex", alignItems: "center", gap: 20, width: 260
+            position: "absolute", top: 50, left: -50,
+            background: "#fff", borderRadius: 28, padding: "24px 28px",
+            boxShadow: "0 16px 48px rgba(31, 27, 24, 0.16), 0 0 1px rgba(31, 27, 24, 0.04)", 
+            border: "1px solid var(--border)",
+            display: "flex", alignItems: "center", gap: 22, width: 280
           }}>
-            <div style={{ width: 56, height: 56, borderRadius: 16, background: "var(--accent-light)", display: "grid", placeItems: "center" }}>
-              <Activity size={28} color="var(--warm-800)" />
+            <div style={{ width: 64, height: 64, borderRadius: 18, background: "linear-gradient(135deg, #D4A373, #C0925C)", opacity: 0.15, display: "grid", placeItems: "center" }}>
+              <Activity size={32} color="var(--primary)" strokeWidth={1.8} />
             </div>
             <div>
-              <div style={{ fontSize: 13, color: "var(--warm-400)", fontWeight: 500, marginBottom: 4 }}>Job Efficiency</div>
-              <div style={{ fontSize: 24, color: "var(--warm-800)", fontWeight: 700, fontFamily: "var(--font-display)" }}>98.9%</div>
+              <div style={{ fontSize: 13, color: "var(--text-secondary)", fontWeight: 600, marginBottom: 6, letterSpacing: "0.02em" }}>EFFICIENCY</div>
+              <div style={{ fontSize: 28, color: "var(--primary)", fontWeight: 700, fontFamily: "var(--font-display)", lineHeight: 1 }}>98.9%</div>
             </div>
           </div>
 
-          {/* Floating Widget 2 */}
+          {/* Floating Widget 2 - Premium */}
           <div className="hero-widget float-fast" style={{
-            position: "absolute", top: 220, right: -60,
-            background: "#fff", borderRadius: 24, padding: "24px",
-            boxShadow: "0 12px 30px rgba(0,0,0,0.06)", border: "1px solid var(--warm-100)",
-            width: 240
+            position: "absolute", top: 240, right: -70,
+            background: "#fff", borderRadius: 28, padding: "28px",
+            boxShadow: "0 16px 48px rgba(31, 27, 24, 0.16), 0 0 1px rgba(31, 27, 24, 0.04)", 
+            border: "1px solid var(--border)",
+            width: 260
           }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 20 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 22 }}>
               <div>
-                <div style={{ fontSize: 16, fontWeight: 600, color: "var(--warm-800)", marginBottom: 2 }}>Tasks Run</div>
-                <div style={{ fontSize: 13, color: "var(--warm-400)" }}>This week</div>
+                <div style={{ fontSize: 17, fontWeight: 700, color: "var(--primary)", marginBottom: 3 }}>Tasks Run</div>
+                <div style={{ fontSize: 13, color: "var(--text-secondary)", fontWeight: 500 }}>This week</div>
               </div>
               <span className="badge badge-success">Live</span>
             </div>
-            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-               <div style={{ fontSize: 42, fontWeight: 400, lineHeight: 1, fontFamily: "var(--font-display)" }}>8k+</div>
+            <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
+               <div style={{ fontSize: 48, fontWeight: 400, lineHeight: 1, fontFamily: "var(--font-display)", color: "var(--primary)" }}>8k</div>
+               <div style={{ fontSize: 16, color: "var(--text-secondary)", fontWeight: 500 }}>+</div>
             </div>
           </div>
 
-          {/* Floating Widget 3 */}
+          {/* Floating Widget 3 - Premium */}
           <div className="hero-widget float-med" style={{
-            position: "absolute", bottom: -20, left: 60,
-            background: "#fff", borderRadius: 99, padding: "12px 24px",
-            boxShadow: "0 12px 30px rgba(0,0,0,0.06)", border: "1px solid var(--warm-100)",
+            position: "absolute", bottom: -28, left: 80,
+            background: "#fff", borderRadius: 99, padding: "14px 28px",
+            boxShadow: "0 16px 48px rgba(31, 27, 24, 0.16), 0 0 1px rgba(31, 27, 24, 0.04)", 
+            border: "1px solid var(--border)",
           }}>
-             <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-               <div style={{ display: "flex", gap: 4 }}>
-                 {[1,2,3,4,5].map(i => <div key={i} style={{ color: "var(--warm-800)", fontSize: 18 }}>★</div>)}
+             <div style={{ display: "flex", gap: 14, alignItems: "center" }}>
+               <div style={{ display: "flex", gap: 5 }}>
+                 {[1,2,3,4,5].map(i => <div key={i} style={{ color: "#FFB800", fontSize: 18, lineHeight: 1 }}>★</div>)}
                </div>
-               <span style={{ fontSize: 15, fontWeight: 600, color: "var(--warm-800)" }}>4.9/5 Rating</span>
+               <span style={{ fontSize: 15, fontWeight: 700, color: "var(--primary)" }}>4.9 Rating</span>
              </div>
           </div>
           
         </div>
       </section>
 
-      {/* Grid Features Section - Theme matching Acme AI image */}
-      <section id="features" style={{ background: "var(--white)", padding: "120px 20px" }}>
-        <div style={{ maxWidth: 1000, margin: "0 auto" }}>
+      {/* Grid Features Section - Premium Design */}
+      <section id="features" style={{ background: "linear-gradient(180deg, #FFFFFF 0%, #F5F3F1 100%)", padding: "140px 40px" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           
-          <div style={{ textAlign: "center", marginBottom: 80 }}>
-             <h2 className="font-display scroll-fade" style={{ fontSize: "clamp(32px, 4vw, 44px)", color: "var(--warm-800)", marginBottom: 16 }}>
-               Ready to assign your task?
+          <div style={{ textAlign: "center", marginBottom: 100 }}>
+             <h2 className="font-display scroll-fade" style={{ fontSize: "clamp(38px, 4.5vw, 52px)", color: "var(--primary)", marginBottom: 20, fontWeight: 400, letterSpacing: "-0.01em" }}>
+               Get started in minutes
              </h2>
-             <p className="scroll-fade" style={{ fontSize: 18, color: "var(--warm-400)" }}>Explore what's possible with our fully automated runner.</p>
+             <p className="scroll-fade" style={{ fontSize: 18, color: "var(--text-secondary)", fontWeight: 400, maxWidth: 600, margin: "0 auto" }}>Explore what's possible with our fully automated, intelligent task runner.</p>
           </div>
 
-           <div className="features-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 24 }}>
+           <div className="features-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 28 }}>
               {[
-                { title: "Create new task", desc: "Start something new.", icon: <Play size={24} /> },
-                { title: "Connect calendar", desc: "Sync your schedule.", icon: <Calendar size={24} /> },
-                { title: "Browse available agents", desc: "See what agents can do.", icon: <Activity size={24} /> },
-                { title: "Upload your first file", desc: "Drop in a doc.", icon: <DownloadCloud size={24} /> },
-                { title: "Explore use cases", desc: "See what's possible.", icon: <Layers size={24} /> },
-                { title: "Customize workspaces", desc: "Find one and make it yours.", icon: <CheckCircle2 size={24} /> },
+                { title: "Create Tasks", desc: "Start new intelligent tasks in seconds.", icon: <Play size={26} /> },
+                { title: "Connect Tools", desc: "Integrate with your favorite apps.", icon: <Calendar size={26} /> },
+                { title: "Smart Agents", desc: "Leverage AI-powered processing agents.", icon: <Activity size={26} /> },
+                { title: "Upload Data", desc: "Batch process files and documents.", icon: <DownloadCloud size={26} /> },
+                { title: "Scale Operations", desc: "Handle thousands of tasks concurrently.", icon: <Layers size={26} /> },
+                { title: "Custom Workflows", desc: "Build tailored automation workflows.", icon: <CheckCircle2 size={26} /> },
               ].map((f, i) => (
                  <div key={i} className="feature-card" style={{
-                   background: "var(--surface)",
-                   borderRadius: "24px",
-                   padding: 24,
-                   border: "1px dashed var(--warm-200)",
-                   transition: "border-color 0.2s, background 0.2s",
+                   background: "#fff",
+                   borderRadius: "28px",
+                   padding: 32,
+                   border: "1px solid var(--border)",
+                   transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                    cursor: "pointer",
                    display: "flex", flexDirection: "column",
+                   boxShadow: "0 4px 12px rgba(31, 27, 24, 0.05)",
                  }}
-                 onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "var(--warm-400)"; (e.currentTarget as HTMLElement).style.background = "#fff"; }}
-                 onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "var(--warm-200)"; (e.currentTarget as HTMLElement).style.background = "var(--surface)"; }}
+                 onMouseEnter={e => { 
+                   const el = e.currentTarget as HTMLElement;
+                   el.style.borderColor = "var(--accent)"; 
+                   el.style.boxShadow = "0 16px 40px rgba(212, 163, 115, 0.12), 0 0 1px rgba(212, 163, 115, 0.1)";
+                   el.style.transform = "translateY(-8px)";
+                 }}
+                 onMouseLeave={e => { 
+                   const el = e.currentTarget as HTMLElement;
+                   el.style.borderColor = "var(--border)"; 
+                   el.style.boxShadow = "0 4px 12px rgba(31, 27, 24, 0.05)";
+                   el.style.transform = "translateY(0)";
+                 }}
                  >
                     <div style={{
-                      height: 160, background: "#fff", borderRadius: 16, marginBottom: 24,
+                      height: 100, background: "linear-gradient(135deg, #D4A373, #C0925C)", borderRadius: 18, marginBottom: 28,
                       display: "flex", alignItems: "center", justifyContent: "center",
-                      border: "1px solid var(--warm-100)",
-                      boxShadow: "var(--shadow-xs)"
+                      border: "none",
+                      boxShadow: "none",
+                      opacity: 0.12,
                     }}>
                        <div style={{
-                         width: 56, height: 56, borderRadius: "50%",
-                         background: "var(--warm-800)", color: "#fff",
-                         display: "grid", placeItems: "center",
-                         boxShadow: "0 8px 20px rgba(58,47,45,0.2)"
+                         color: "var(--primary)",
+                         display: "flex", alignItems: "center", justifyContent: "center",
                        }}>
                           {f.icon}
                        </div>
                     </div>
-                    <div style={{ padding: "0 8px" }}>
-                      <div style={{ fontSize: 17, fontWeight: 600, color: "var(--warm-800)", marginBottom: 6 }}>{f.title}</div>
-                      <div style={{ fontSize: 15, color: "var(--warm-400)" }}>{f.desc}</div>
+                    <div style={{ padding: "0" }}>
+                      <div style={{ fontSize: 18, fontWeight: 700, color: "var(--primary)", marginBottom: 8, letterSpacing: "-0.01em" }}>{f.title}</div>
+                      <div style={{ fontSize: 15, color: "var(--text-secondary)", fontWeight: 400, lineHeight: 1.6 }}>{f.desc}</div>
                     </div>
                  </div>
               ))}
@@ -344,18 +399,18 @@ export default function LandingPage() {
 
       {/* Footer */}
       <footer style={{
-        borderTop: "1px solid var(--warm-100)",
-        padding: "48px 40px",
-        background: "var(--white)"
+        borderTop: "1px solid var(--border)",
+        padding: "64px 40px",
+        background: "linear-gradient(180deg, #FFFFFF 0%, #F5F3F1 100%)"
       }}>
         <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <div style={{ width: 28, height: 28, borderRadius: 6, background: "var(--warm-800)", display: "grid", placeItems: "center" }}>
-              <Zap size={14} color="#fff" strokeWidth={2.5} />
+            <div style={{ width: 32, height: 32, borderRadius: 9, background: "var(--primary)", display: "grid", placeItems: "center", boxShadow: "0 4px 12px rgba(31, 27, 24, 0.15)" }}>
+              <Zap size={16} color="#fff" strokeWidth={2.5} />
             </div>
-            <span className="font-display" style={{ fontSize: 18, color: "var(--warm-800)" }}>Taskflow</span>
+            <span className="font-display" style={{ fontSize: 20, color: "var(--primary)", fontWeight: 400, letterSpacing: "-0.02em" }}>Taskflow</span>
           </div>
-          <p style={{ fontSize: 14, color: "var(--warm-400)" }}>© 2026 Taskflow Inc. All rights reserved.</p>
+          <p style={{ fontSize: 14, color: "var(--text-secondary)", fontWeight: 500 }}>© 2026 Taskflow Inc. All rights reserved.</p>
         </div>
       </footer>
     </div>

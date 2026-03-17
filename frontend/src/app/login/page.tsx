@@ -72,15 +72,16 @@ export default function LoginPage() {
           <h2
             style={{
               fontFamily: "var(--font-display)",
-              fontSize: "clamp(26px, 2.8vw, 34px)",
+              fontSize: "clamp(28px, 3vw, 38px)",
               fontWeight: 400,
               color: "#fff",
               lineHeight: 1.35,
-              maxWidth: 340,
-              opacity: 0.95,
+              maxWidth: 360,
+              opacity: 0.98,
+              letterSpacing: "-0.01em",
             }}
           >
-            AI-driven task management for modern teams.
+            Intelligent task automation for modern teams.
           </h2>
         </div>
 
@@ -247,27 +248,30 @@ export default function LoginPage() {
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: 8,
-                marginBottom: 28,
+                gap: 10,
+                marginBottom: 32,
               }}
             >
               <div
                 style={{
-                  width: 28,
-                  height: 28,
-                  borderRadius: 7,
-                  background: "var(--warm-800)",
+                  width: 32,
+                  height: 32,
+                  borderRadius: 8,
+                  background: "var(--primary)",
                   display: "grid",
                   placeItems: "center",
+                  boxShadow: "0 4px 12px rgba(31, 27, 24, 0.15)",
                 }}
               >
-                <Zap size={14} color="#fff" strokeWidth={2.5} />
+                <Zap size={16} color="#fff" strokeWidth={2.5} />
               </div>
               <span
                 style={{
                   fontFamily: "var(--font-display)",
-                  fontSize: 17,
-                  color: "var(--warm-800)",
+                  fontSize: 19,
+                  color: "var(--primary)",
+                  fontWeight: 400,
+                  letterSpacing: "-0.01em",
                 }}
               >
                 Taskflow
@@ -278,21 +282,23 @@ export default function LoginPage() {
             <h1
               style={{
                 fontFamily: "var(--font-display)",
-                fontSize: "clamp(26px, 4vw, 34px)",
+                fontSize: "clamp(28px, 4.5vw, 38px)",
                 fontWeight: 400,
-                color: "var(--warm-800)",
+                color: "var(--primary)",
                 lineHeight: 1.2,
-                marginBottom: 6,
+                marginBottom: 8,
+                letterSpacing: "-0.01em",
               }}
             >
               Welcome back
             </h1>
             <p
               style={{
-                fontSize: 14,
-                color: "var(--warm-400)",
-                marginBottom: 24,
-                lineHeight: 1.5,
+                fontSize: 15,
+                color: "var(--text-secondary)",
+                marginBottom: 28,
+                lineHeight: 1.6,
+                fontWeight: 400,
               }}
             >
               Sign in to your Taskflow workspace

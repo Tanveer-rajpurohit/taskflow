@@ -80,17 +80,18 @@ export default function DashboardPage(): React.JSX.Element {
       {/* ── TOP BAR ───────────────────────────────────────────── */}
       <header
         style={{
-          borderBottom: "1px solid var(--warm-100)",
-          padding: "0 36px",
-          height: 64,
+          borderBottom: "1px solid var(--border)",
+          padding: "0 40px",
+          height: 68,
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
           flexShrink: 0,
+          background: "linear-gradient(180deg, #FFFFFF 0%, #FAFAFA 100%)",
         }}
       >
         <div>
-          <span style={{ fontSize: 13, fontWeight: 500, color: "var(--warm-400)" }}>
+          <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "0.05em" }}>
             Dashboard
           </span>
         </div>
@@ -99,48 +100,52 @@ export default function DashboardPage(): React.JSX.Element {
           style={{
             display: "inline-flex",
             alignItems: "center",
-            gap: 6,
-            padding: "9px 18px",
+            gap: 8,
+            padding: "10px 20px",
             borderRadius: 99,
-            background: "var(--warm-800)",
+            background: "var(--primary)",
             color: "#fff",
             textDecoration: "none",
             fontSize: 13,
-            fontWeight: 600,
-            transition: "opacity 0.2s",
-            boxShadow: "0 2px 8px rgba(58,47,45,0.18)",
+            fontWeight: 700,
+            transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+            boxShadow: "0 8px 20px rgba(31, 27, 24, 0.15)",
+            letterSpacing: "-0.01em",
           }}
-          onMouseEnter={(e) =>
-            ((e.currentTarget as HTMLElement).style.opacity = "0.88")
-          }
-          onMouseLeave={(e) =>
-            ((e.currentTarget as HTMLElement).style.opacity = "1")
-          }
+          onMouseEnter={(e) => {
+            (e.currentTarget as HTMLElement).style.boxShadow = "0 12px 32px rgba(31, 27, 24, 0.25)";
+            (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 20px rgba(31, 27, 24, 0.15)";
+            (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
+          }}
         >
-          <Plus size={14} strokeWidth={2.5} />
+          <Plus size={15} strokeWidth={2.5} />
           New Task
         </Link>
       </header>
 
       {/* ── CONTENT ───────────────────────────────────────────── */}
-      <main style={{ flex: 1, padding: "48px 36px 36px" }}>
+      <main style={{ flex: 1, padding: "56px 40px 40px", background: "linear-gradient(180deg, #FFFFFF 0%, #F5F3F1 100%)" }}>
 
         {/* ── Greeting ──────────────────────────────────────────── */}
-        <div style={{ marginBottom: 40 }}>
+        <div style={{ marginBottom: 48 }}>
           <h1
             style={{
               fontFamily: "var(--font-display)",
-              fontSize: "clamp(28px, 3vw, 36px)",
+              fontSize: "clamp(32px, 3.5vw, 42px)",
               fontWeight: 400,
-              color: "var(--warm-800)",
-              lineHeight: 1.15,
-              marginBottom: 6,
+              color: "var(--primary)",
+              lineHeight: 1.1,
+              marginBottom: 8,
+              letterSpacing: "-0.01em",
             }}
           >
             Good afternoon!
           </h1>
-          <p style={{ fontSize: 15, color: "var(--warm-400)", fontWeight: 400 }}>
-            Ready to assign your task?
+          <p style={{ fontSize: 16, color: "var(--text-secondary)", fontWeight: 400 }}>
+            Ready to process your tasks?
           </p>
         </div>
 
@@ -149,29 +154,29 @@ export default function DashboardPage(): React.JSX.Element {
           style={{
             display: "flex",
             gap: 0,
-            marginBottom: 44,
+            marginBottom: 52,
           }}
         >
           {STATS.map(({ label, value, color }, idx) => (
             <div
               key={label}
               style={{
-                paddingRight: 36,
-                marginRight: 36,
+                paddingRight: 44,
+                marginRight: 44,
                 borderRight:
                   idx < STATS.length - 1
-                    ? "1px solid var(--warm-100)"
+                    ? "1px solid var(--border)"
                     : "none",
               }}
             >
               <div
                 style={{
-                  fontSize: 38,
+                  fontSize: 44,
                   fontWeight: 700,
                   color,
                   fontFamily: "var(--font-display)",
                   lineHeight: 1,
-                  marginBottom: 5,
+                  marginBottom: 6,
                 }}
               >
                 {value}
@@ -179,10 +184,10 @@ export default function DashboardPage(): React.JSX.Element {
               <div
                 style={{
                   fontSize: 12,
-                  fontWeight: 600,
-                  color: "var(--warm-400)",
+                  fontWeight: 700,
+                  color: "var(--text-secondary)",
                   textTransform: "uppercase",
-                  letterSpacing: "0.07em",
+                  letterSpacing: "0.08em",
                 }}
               >
                 {label}
@@ -199,16 +204,16 @@ export default function DashboardPage(): React.JSX.Element {
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              marginBottom: 16,
+              marginBottom: 20,
             }}
           >
             <span
               style={{
                 fontSize: 13,
-                fontWeight: 700,
-                color: "var(--warm-600)",
+                fontWeight: 800,
+                color: "var(--primary)",
                 textTransform: "uppercase",
-                letterSpacing: "0.07em",
+                letterSpacing: "0.08em",
               }}
             >
               Recent Tasks
@@ -219,9 +224,11 @@ export default function DashboardPage(): React.JSX.Element {
               style={{
                 display: "flex",
                 gap: 2,
-                background: "#F6F6F6",
-                borderRadius: 9,
+                background: "#FFFFFF",
+                borderRadius: 10,
                 padding: 3,
+                border: "1px solid var(--border)",
+                boxShadow: "0 2px 8px rgba(31, 27, 24, 0.04)",
               }}
             >
               {(["list", "grid"] as ViewMode[]).map((mode) => {
@@ -236,18 +243,28 @@ export default function DashboardPage(): React.JSX.Element {
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      width: 30,
-                      height: 30,
-                      borderRadius: 7,
+                      width: 32,
+                      height: 32,
+                      borderRadius: 8,
                       border: "none",
-                      background: isActive ? "#fff" : "transparent",
-                      color: isActive ? "var(--warm-800)" : "var(--warm-400)",
+                      background: isActive ? "var(--primary)" : "transparent",
+                      color: isActive ? "#fff" : "var(--text-secondary)",
                       cursor: "pointer",
-                      boxShadow: isActive ? "0 1px 3px rgba(58,47,45,0.10)" : "none",
-                      transition: "all 0.15s",
+                      boxShadow: isActive ? "0 2px 8px rgba(31, 27, 24, 0.12)" : "none",
+                      transition: "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)",
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!isActive) {
+                        (e.currentTarget as HTMLElement).style.background = "rgba(31, 27, 24, 0.05)";
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!isActive) {
+                        (e.currentTarget as HTMLElement).style.background = "transparent";
+                      }
                     }}
                   >
-                    <Icon size={14} strokeWidth={2} />
+                    <Icon size={15} strokeWidth={2} />
                   </button>
                 );
               })}
