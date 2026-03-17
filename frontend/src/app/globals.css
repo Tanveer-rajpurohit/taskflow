@@ -2,43 +2,42 @@
 @import "tailwindcss";
 
 :root {
-  /* Outstanding Modern Palette */
+  /* Sophisticated Warm Palette */
   --white:     #FFFFFF;
-  --black:     #000000;
+  --black:     #1A1A1A;
   
-  /* Primary: Deep Electric Blue */
-  --primary:   #0A4A8E;
-  --primary-light: #0F5FA8;
-  --primary-dark: #052E5C;
+  /* Primary: Soft Blue */
+  --primary:   #81A6C6;
+  --primary-light: #AACDDC;
+  --primary-dark: #5A7A94;
   
-  /* Accent: Vibrant Cyan/Turquoise */
-  --accent:    #00D9FF;
-  --accent-light: #40E8FF;
-  --accent-dark: #00A8CC;
+  /* Accent: Warm Cream */
+  --accent:    #F3E3D0;
+  --accent-dark: #E8D5BC;
   
-  /* Secondary: Rich Purple */
-  --secondary: #6B5BED;
-  --secondary-light: #8B7BFF;
+  /* Secondary: Warm Taupe */
+  --secondary: #D2C4B4;
+  --secondary-light: #DED3C5;
   
   /* Status colors */
-  --success:   #10B981;
-  --warning:   #F59E0B;
-  --danger:    #EF4444;
-  --info:      #3B82F6;
+  --success:   #6BA587;
+  --warning:   #C9A86B;
+  --danger:    #B85C5C;
+  --info:      #81A6C6;
   
   /* Surface tones */
-  --surface-light: #F9FAFB;
-  --surface-border: #E5E7EB;
+  --surface-light: #FDFBF9;
+  --surface-border: #E8E3DE;
   
   /* Semantic tokens */
   --bg:            var(--white);
   --bg-subtle:     var(--surface-light);
   --bg-dark:       var(--primary);
   --border:        var(--surface-border);
-  --border-dark:   #D1D5DB;
-  --text-primary:   #111827;
-  --text-secondary: #4B5563;
-  --text-muted:     #9CA3AF;
+  --border-dark:   #D2C4B4;
+  --text-primary:   #2D2D2D;
+  --text-secondary: #5F5A57;
+  --text-muted:     #9B9591;
   --text-invert:    var(--white);
 
   /* Typography */
@@ -113,10 +112,10 @@ body {
   text-transform: uppercase;
   transition: all 0.2s ease;
 }
-.badge-pending  { background: #FEF3C7; color: #92400E; }
-.badge-running  { background: #DBEAFE; color: #0C4A6E; }
-.badge-success  { background: #DCFCE7; color: #166534; }
-.badge-failed   { background: #FEE2E2; color: #991B1B; }
+.badge-pending  { background: #F3E3D0; color: #5A7A94; }
+.badge-running  { background: #AACDDC; color: #2D2D2D; }
+.badge-success  { background: #E8F0E6; color: #4A6D59; }
+.badge-failed   { background: #F5E0E0; color: #8B4040; }
 
 /* Smooth page fade-in */
 @keyframes pageFade {

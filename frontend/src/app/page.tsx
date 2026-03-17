@@ -106,7 +106,7 @@ export default function LandingPage() {
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <div style={{
             width: 40, height: 40, borderRadius: 12,
-            background: "linear-gradient(135deg, #0A4A8E 0%, #00D9FF 100%)", 
+            background: "linear-gradient(135deg, #81A6C6 0%, #AACDDC 100%)", 
             display: "grid", placeItems: "center",
           }}>
             <Zap size={20} color="#fff" strokeWidth={2.5} />
@@ -119,19 +119,19 @@ export default function LandingPage() {
           <Link href="/login" style={{ textDecoration: "none", color: "inherit" }}>Demo</Link>
           <Link href="/login" style={{
             padding: "12px 32px", borderRadius: 8,
-            background: "linear-gradient(135deg, #0A4A8E 0%, #0F5FA8 100%)", 
+            background: "linear-gradient(135deg, #81A6C6 0%, #AACDDC 100%)", 
             color: "#fff",
             textDecoration: "none", transition: "all 0.3s",
             fontWeight: 700,
             fontSize: 14,
-            boxShadow: "0 4px 16px rgba(10, 74, 142, 0.3)",
+            boxShadow: "0 4px 16px rgba(129, 166, 198, 0.3)",
           }}
           onMouseEnter={(e) => {
-            (e.currentTarget as HTMLElement).boxShadow = "0 8px 32px rgba(10, 74, 142, 0.4)";
+            (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 32px rgba(129, 166, 198, 0.4)";
             (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
           }}
           onMouseLeave={(e) => {
-            (e.currentTarget as HTMLElement).boxShadow = "0 4px 16px rgba(10, 74, 142, 0.3)";
+            (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 16px rgba(129, 166, 198, 0.3)";
             (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
           }}>Get Started</Link>
         </div>
@@ -146,12 +146,12 @@ export default function LandingPage() {
       }}>
         <div className="fade-up" style={{
             display: "inline-flex", alignItems: "center", gap: 8,
-            background: "#E0F2FE", color: "#0369A1",
+            background: "#AACDDC", color: "#fff",
             padding: "10px 24px", borderRadius: 8,
             fontSize: 13, fontWeight: 700, letterSpacing: "0.02em",
             marginBottom: 48,
         }}>
-          <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#00D9FF", display: "inline-block", flexShrink: 0 }} />
+          <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#F3E3D0", display: "inline-block", flexShrink: 0 }} />
           Intelligent Automation at Scale
         </div>
 
@@ -162,7 +162,7 @@ export default function LandingPage() {
           letterSpacing: "-0.03em", maxWidth: 1000,
         }}>
           Process Tasks with <br/>
-          <span style={{ fontFamily: "var(--font-sans)", fontWeight: 800, background: "linear-gradient(135deg, #0A4A8E 0%, #00D9FF 100%)", backgroundClip: "text", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>AI-Powered Intelligence</span>
+          <span style={{ fontFamily: "var(--font-sans)", fontWeight: 800, background: "linear-gradient(135deg, #81A6C6 0%, #D2C4B4 100%)", backgroundClip: "text", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>AI-Powered Intelligence</span>
         </h1>
 
         <p className="fade-up" style={{
@@ -175,38 +175,41 @@ export default function LandingPage() {
 
         <div className="fade-up" style={{ display: "flex", gap: 16, alignItems: "center", marginBottom: 140, justifyContent: "center" }}>
           <Link href="/login" style={{
-            background: "linear-gradient(135deg, #0A4A8E 0%, #0F5FA8 100%)", 
+            background: "linear-gradient(135deg, #81A6C6 0%, #AACDDC 100%)", 
             color: "#fff",
             padding: "16px 48px", borderRadius: 8,
             fontWeight: 700, fontSize: 16, textDecoration: "none",
             transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-            boxShadow: "0 8px 24px rgba(10, 74, 142, 0.3)",
+            boxShadow: "0 8px 24px rgba(129, 166, 198, 0.25)",
             letterSpacing: "-0.01em",
           }}
           onMouseEnter={(e) => {
-            (e.currentTarget as HTMLElement).style.boxShadow = "0 12px 40px rgba(10, 74, 142, 0.4)";
+            (e.currentTarget as HTMLElement).style.boxShadow = "0 12px 40px rgba(129, 166, 198, 0.35)";
             (e.currentTarget as HTMLElement).style.transform = "translateY(-3px)";
           }}
           onMouseLeave={(e) => {
-            (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 24px rgba(10, 74, 142, 0.3)";
+            (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 24px rgba(129, 166, 198, 0.25)";
             (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
           }}>
             Start Free
           </Link>
           <Link href="/login" style={{
-            background: "transparent", color: "var(--primary)",
-            border: "2px solid var(--primary)",
+            background: "#F3E3D0", color: "var(--primary)",
+            border: "2px solid #F3E3D0",
             padding: "14px 44px", borderRadius: 8,
             fontWeight: 700, fontSize: 16, textDecoration: "none",
             transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+            boxShadow: "0 4px 12px rgba(243, 227, 208, 0.2)",
           }}
           onMouseEnter={(e) => {
             (e.currentTarget as HTMLElement).style.background = "var(--primary)";
             (e.currentTarget as HTMLElement).style.color = "#fff";
+            (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 24px rgba(129, 166, 198, 0.25)";
           }}
           onMouseLeave={(e) => {
-            (e.currentTarget as HTMLElement).style.background = "transparent";
+            (e.currentTarget as HTMLElement).style.background = "#F3E3D0";
             (e.currentTarget as HTMLElement).style.color = "var(--primary)";
+            (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 12px rgba(243, 227, 208, 0.2)";
           }}>
             View Demo
           </Link>
@@ -215,22 +218,22 @@ export default function LandingPage() {
         {/* Dashboard Visual - Minimal approach */}
         <div style={{ position: "relative", width: "100%", maxWidth: 1100, margin: "0 auto", paddingBottom: 80 }}>
           <div className="hero-dashboard" style={{
-            background: "linear-gradient(135deg, #0A4A8E 0%, #052E5C 100%)",
+            background: "linear-gradient(135deg, #81A6C6 0%, #AACDDC 100%)",
             borderRadius: 20,
-            border: "1px solid rgba(0, 217, 255, 0.2)",
+            border: "1px solid rgba(243, 227, 208, 0.4)",
             padding: "40px",
             width: "100%",
             minHeight: 480,
             display: "flex", flexDirection: "column", gap: 32,
-            boxShadow: "0 20px 60px rgba(10, 74, 142, 0.2)",
+            boxShadow: "0 20px 60px rgba(129, 166, 198, 0.15)",
           }}>
             {/* Header Section */}
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <div>
-                <div style={{ fontSize: 13, fontWeight: 700, color: "#00D9FF", marginBottom: 8, letterSpacing: "0.05em" }}>DASHBOARD</div>
+                <div style={{ fontSize: 13, fontWeight: 700, color: "#F3E3D0", marginBottom: 8, letterSpacing: "0.05em" }}>DASHBOARD</div>
                 <h3 style={{ fontSize: 28, fontWeight: 700, color: "#fff", marginBottom: 0 }}>Active Tasks</h3>
               </div>
-              <div style={{ padding: "8px 16px", background: "#10B981", borderRadius: 6, color: "#fff", fontWeight: 700, fontSize: 12 }}>LIVE</div>
+              <div style={{ padding: "8px 16px", background: "#6BA587", borderRadius: 6, color: "#fff", fontWeight: 700, fontSize: 12 }}>LIVE</div>
             </div>
 
             {/* Stats Row */}
@@ -240,8 +243,8 @@ export default function LandingPage() {
                 { label: "Success Rate", value: "98.9%" },
                 { label: "Avg Speed", value: "2.3s" }
               ].map((stat, i) => (
-                <div key={i} style={{ borderLeft: "2px solid #00D9FF", paddingLeft: 16 }}>
-                  <div style={{ fontSize: 12, color: "#7DD3FC", fontWeight: 700, marginBottom: 4 }}>{stat.label}</div>
+                <div key={i} style={{ borderLeft: "2px solid #F3E3D0", paddingLeft: 16 }}>
+                  <div style={{ fontSize: 12, color: "#F3E3D0", fontWeight: 700, marginBottom: 4 }}>{stat.label}</div>
                   <div style={{ fontSize: 32, fontWeight: 800, color: "#fff" }}>{stat.value}</div>
                 </div>
               ))}
@@ -252,17 +255,17 @@ export default function LandingPage() {
               {[1, 2, 3].map(i => (
                 <div key={i} style={{ 
                   display: "flex", alignItems: "center", justifyContent: "space-between",
-                  padding: "16px 20px", background: "rgba(0, 217, 255, 0.1)", borderRadius: 10,
-                  border: "1px solid rgba(0, 217, 255, 0.2)"
+                  padding: "16px 20px", background: "rgba(243, 227, 208, 0.15)", borderRadius: 10,
+                  border: "1px solid rgba(243, 227, 208, 0.3)"
                 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 14, flex: 1 }}>
-                    <div style={{ width: 12, height: 12, borderRadius: "50%", background: "#10B981" }} />
+                    <div style={{ width: 12, height: 12, borderRadius: "50%", background: "#6BA587" }} />
                     <div>
                       <div style={{ fontSize: 14, fontWeight: 700, color: "#fff", marginBottom: 2 }}>Task {i}</div>
-                      <div style={{ fontSize: 12, color: "#7DD3FC" }}>Processing data batch</div>
+                      <div style={{ fontSize: 12, color: "#F3E3D0" }}>Processing data batch</div>
                     </div>
                   </div>
-                  <div style={{ fontSize: 12, fontWeight: 700, color: "#10B981" }}>Complete</div>
+                  <div style={{ fontSize: 12, fontWeight: 700, color: "#6BA587" }}>Complete</div>
                 </div>
               ))}
             </div>
@@ -299,7 +302,7 @@ export default function LandingPage() {
                 cursor: "pointer",
               }}
               onMouseEnter={e => { 
-                (e.currentTarget as HTMLElement).style.background = "#F9FAFB";
+                (e.currentTarget as HTMLElement).style.background = "#FDFBF9";
                 (e.currentTarget as HTMLElement).style.paddingLeft = "40px";
               }}
               onMouseLeave={e => { 
@@ -308,7 +311,7 @@ export default function LandingPage() {
               }}>
                 <div style={{
                   width: 60, height: 60, borderRadius: 12,
-                  background: "linear-gradient(135deg, #0A4A8E 0%, #00D9FF 100%)",
+                  background: "linear-gradient(135deg, #81A6C6 0%, #D2C4B4 100%)",
                   display: "flex", alignItems: "center", justifyContent: "center",
                   color: "#fff", flexShrink: 0,
                 }}>
@@ -318,7 +321,7 @@ export default function LandingPage() {
                   <div style={{ fontSize: 18, fontWeight: 800, color: "var(--primary)", marginBottom: 6 }}>{f.title}</div>
                   <div style={{ fontSize: 15, color: "var(--text-secondary)", fontWeight: 500 }}>{f.desc}</div>
                 </div>
-                <div style={{ fontSize: 20, color: "var(--accent)", fontWeight: 700 }}>→</div>
+                <div style={{ fontSize: 20, color: "#D2C4B4", fontWeight: 700 }}>→</div>
               </div>
             ))}
           </div>
@@ -333,7 +336,7 @@ export default function LandingPage() {
       }}>
         <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <div style={{ width: 36, height: 36, borderRadius: 10, background: "linear-gradient(135deg, #0A4A8E 0%, #00D9FF 100%)", display: "grid", placeItems: "center" }}>
+            <div style={{ width: 36, height: 36, borderRadius: 10, background: "linear-gradient(135deg, #81A6C6 0%, #AACDDC 100%)", display: "grid", placeItems: "center" }}>
               <Zap size={18} color="#fff" strokeWidth={2.5} />
             </div>
             <span className="font-display" style={{ fontSize: 22, color: "var(--primary)", fontWeight: 600, letterSpacing: "-0.02em" }}>Taskflow</span>

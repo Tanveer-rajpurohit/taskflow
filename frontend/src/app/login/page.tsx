@@ -24,7 +24,7 @@ export default function LoginPage() {
         className="absolute inset-0 z-0 lg:relative lg:inset-auto lg:z-auto lg:w-[45%] lg:order-2 flex flex-col justify-between"
         style={{
           background:
-            "linear-gradient(135deg, #0A4A8E 0%, #052E5C 100%)",
+            "linear-gradient(135deg, #81A6C6 0%, #5A7A94 100%)",
           padding: "56px 48px",
           overflow: "hidden",
         }}
@@ -71,7 +71,7 @@ export default function LoginPage() {
         <div style={{ position: "relative", zIndex: 1 }}>
           <p
             style={{
-              color: "#7DD3FC",
+              color: "#F3E3D0",
               fontSize: "clamp(15px, 1.6vw, 18px)",
               lineHeight: 1.6,
               maxWidth: 360,
@@ -149,10 +149,10 @@ export default function LoginPage() {
           style={{
             position: "relative",
             zIndex: 1,
-            background: "rgba(0, 217, 255, 0.1)",
+            background: "rgba(243, 227, 208, 0.15)",
             backdropFilter: "blur(16px)",
             borderRadius: 16,
-            border: "1px solid rgba(0, 217, 255, 0.3)",
+            border: "1px solid rgba(243, 227, 208, 0.3)",
             padding: "24px 28px",
           }}
         >
@@ -161,7 +161,7 @@ export default function LoginPage() {
               display: "inline-flex",
               alignItems: "center",
               gap: 8,
-              background: "rgba(0, 217, 255, 0.15)",
+              background: "rgba(243, 227, 208, 0.2)",
               borderRadius: 99,
               padding: "6px 16px",
               marginBottom: 14,
@@ -172,17 +172,17 @@ export default function LoginPage() {
                 width: 8,
                 height: 8,
                 borderRadius: "50%",
-                background: "#00D9FF",
+                background: "#F3E3D0",
               }}
             />
-            <span style={{ fontSize: 12, color: "#00D9FF", fontWeight: 700 }}>
+            <span style={{ fontSize: 12, color: "#F3E3D0", fontWeight: 700 }}>
               ACTIVE
             </span>
           </div>
           <p
             style={{
               fontSize: 15,
-              color: "#E0F2FE",
+              color: "#F3E3D0",
               lineHeight: 1.6,
               marginBottom: 18,
               fontWeight: 500,
@@ -254,7 +254,7 @@ export default function LoginPage() {
                   width: 40,
                   height: 40,
                   borderRadius: 10,
-                  background: "linear-gradient(135deg, #0A4A8E 0%, #00D9FF 100%)",
+                  background: "linear-gradient(135deg, #81A6C6 0%, #AACDDC 100%)",
                   display: "grid",
                   placeItems: "center",
                 }}
@@ -414,7 +414,7 @@ export default function LoginPage() {
                   href="#"
                   style={{
                     fontSize: 14,
-                    color: "#0A4A8E",
+                    color: "#81A6C6",
                     textDecoration: "none",
                     transition: "color 0.2s",
                     fontWeight: 600,
@@ -431,7 +431,7 @@ export default function LoginPage() {
                   marginTop: 8,
                   padding: "15px",
                   borderRadius: 10,
-                  background: "linear-gradient(135deg, #0A4A8E 0%, #0F5FA8 100%)",
+                  background: "linear-gradient(135deg, #81A6C6 0%, #AACDDC 100%)",
                   color: "#fff",
                   border: "none",
                   fontSize: 16,
@@ -440,15 +440,15 @@ export default function LoginPage() {
                   fontFamily: "inherit",
                   transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                   letterSpacing: "-0.01em",
-                  boxShadow: "0 4px 16px rgba(10, 74, 142, 0.3)",
+                  boxShadow: "0 4px 16px rgba(129, 166, 198, 0.3)",
                 }}
                 onMouseEnter={(e: React.MouseEvent<HTMLButtonElement>) => {
-                  e.currentTarget.style.boxShadow = "0 8px 32px rgba(10, 74, 142, 0.4)";
+                  e.currentTarget.style.boxShadow = "0 8px 32px rgba(129, 166, 198, 0.4)";
                   e.currentTarget.style.transform = "translateY(-2px)";
                 }
                 }
                 onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) => {
-                  e.currentTarget.style.boxShadow = "0 4px 16px rgba(10, 74, 142, 0.3)";
+                  e.currentTarget.style.boxShadow = "0 4px 16px rgba(129, 166, 198, 0.3)";
                   e.currentTarget.style.transform = "translateY(0)";
                 }
                 }
@@ -471,7 +471,7 @@ export default function LoginPage() {
               <Link
                 href="/register"
                 style={{
-                  color: "#0A4A8E",
+                  color: "#81A6C6",
                   fontWeight: 700,
                   textDecoration: "none",
                 }}

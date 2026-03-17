@@ -41,19 +41,19 @@ type StatItem = {
 };
 
 const STATS: StatItem[] = [
-  { label: "Total", value: MOCK_TASKS.length, color: "#0A4A8E" },
-  { label: "Running", value: MOCK_TASKS.filter((t) => t.status === "running").length, color: "#00D9FF" },
-  { label: "Completed", value: MOCK_TASKS.filter((t) => t.status === "completed").length, color: "#10B981" },
-  { label: "Failed", value: MOCK_TASKS.filter((t) => t.status === "failed").length, color: "#EF4444" },
+  { label: "Total", value: MOCK_TASKS.length, color: "#81A6C6" },
+  { label: "Running", value: MOCK_TASKS.filter((t) => t.status === "running").length, color: "#AACDDC" },
+  { label: "Completed", value: MOCK_TASKS.filter((t) => t.status === "completed").length, color: "#6BA587" },
+  { label: "Failed", value: MOCK_TASKS.filter((t) => t.status === "failed").length, color: "#B85C5C" },
 ];
 
 type OperationStyle = { bg: string; text: string };
 
 const OPERATION_STYLE: Record<OperationType, OperationStyle> = {
-  Uppercase: { bg: "linear-gradient(135deg, #0A4A8E, #0F5FA8)", text: "#fff" },
-  Lowercase: { bg: "#E0F2FE", text: "#0A4A8E" },
-  Reverse: { bg: "#F0FDF4", text: "#10B981" },
-  "Word Count": { bg: "#FEF2F2", text: "#EF4444" },
+  Uppercase: { bg: "linear-gradient(135deg, #81A6C6, #AACDDC)", text: "#fff" },
+  Lowercase: { bg: "#AACDDC", text: "#fff" },
+  Reverse: { bg: "#E8F0E6", text: "#4A6D59" },
+  "Word Count": { bg: "#F5E0E0", text: "#8B4040" },
 };
 
 type StatusMeta = { cls: string; label: string; icon: React.ElementType };
@@ -103,21 +103,21 @@ export default function DashboardPage(): React.JSX.Element {
             gap: 8,
             padding: "11px 22px",
             borderRadius: 8,
-            background: "linear-gradient(135deg, #0A4A8E 0%, #0F5FA8 100%)",
+            background: "linear-gradient(135deg, #81A6C6 0%, #AACDDC 100%)",
             color: "#fff",
             textDecoration: "none",
             fontSize: 14,
             fontWeight: 700,
             transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-            boxShadow: "0 4px 16px rgba(10, 74, 142, 0.3)",
+            boxShadow: "0 4px 16px rgba(129, 166, 198, 0.3)",
             letterSpacing: "-0.01em",
           }}
           onMouseEnter={(e) => {
-            (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 32px rgba(10, 74, 142, 0.4)";
+            (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 32px rgba(129, 166, 198, 0.4)";
             (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
           }}
           onMouseLeave={(e) => {
-            (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 16px rgba(10, 74, 142, 0.3)";
+            (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 16px rgba(129, 166, 198, 0.3)";
             (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
           }}
         >
@@ -462,8 +462,8 @@ export default function DashboardPage(): React.JSX.Element {
                       }}
                       onMouseEnter={(e) => {
                         const el = e.currentTarget as HTMLElement;
-                        el.style.borderColor = "#00D9FF";
-                        el.style.boxShadow = "0 4px 20px rgba(0, 217, 255, 0.15)";
+                        el.style.borderColor = "#81A6C6";
+                        el.style.boxShadow = "0 4px 20px rgba(129, 166, 198, 0.15)";
                       }}
                       onMouseLeave={(e) => {
                         const el = e.currentTarget as HTMLElement;
