@@ -26,3 +26,18 @@ const createRedisClient = (): Redis => {
 }
 
 export const redis = createRedisClient();
+
+export const rateLimiterRedis = createRedisClient();
+
+
+export const pushJob = async (payload: {
+  taskId: string;
+  userId: string;
+  operation: string;
+  inputText: string;
+}): Promise<void> => {
+  await redis.rpush(QUEUE_KEY, JSON.stringify(payload));
+};
+
+export { QUEUE_KEY };
+export default redis;
