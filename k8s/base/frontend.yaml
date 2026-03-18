@@ -18,7 +18,10 @@ spec:
         image: tanveersingg/taskflow-frontend:latest
         imagePullPolicy: Always
         ports:
-        - containerPort: 5000
+        - containerPort: 3000
+        env:
+        - name: PORT
+          value: "3000"
         envFrom:
         - configMapRef:
             name: taskflow-config
@@ -32,13 +35,13 @@ spec:
         livenessProbe:
           httpGet:
             path: /
-            port: 5000
+            port: 3000
           initialDelaySeconds: 15
           periodSeconds: 15
         readinessProbe:
           httpGet:
             path: /
-            port: 5000
+            port: 3000
           initialDelaySeconds: 5
           periodSeconds: 10
 ---
@@ -49,7 +52,7 @@ metadata:
   namespace: taskflow
 spec:
   ports:
-  - port: 5000
-    targetPort: 5000
+  - port: 3000
+    targetPort: 3000
   selector:
     app: frontend
