@@ -1,6 +1,23 @@
+#  Taskflow — Local Development docker-compose
+#  Runs all 5 services: frontend · backend · worker · mongo · redis
+#
+#  Usage:
+#    docker compose up --build          # first run
+#    docker compose up                  # subsequent runs
+#    docker compose down -v             # stop + delete volumes
+
 version: "3.9"
 
+networks:
+  taskflow-net:
+    driver: bridge
+
+volumes:
+  mongo_data:
+  redis_data:
+
 services:
+
   mongo:
     image: mongo:7
     container_name: taskflow-mongo
@@ -11,7 +28,17 @@ services:
       - mongo_data:/data/db
     environment:
       MONGO_INITDB_DATABASE: taskflow
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - taskflow-net
 
+
+  # Redis 7
   redis:
     image: redis:alpine
     container_name: taskflow-redis
@@ -20,7 +47,86 @@ services:
     command: redis-server --save 20 1 --loglevel warning --maxmemory 256mb --maxmemory-policy allkeys-lru
     volumes:
       - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - taskflow-net
 
-volumes:
-  mongo_data:
-  redis_data:
+
+  # Backend — Node.js + Express API
+  backend:
+    build:
+      context: ./backend          
+      dockerfile: Dockerfile
+    image: taskflow-backend:local  
+    container_name: taskflow-backend
+    restart: unless-stopped
+    networks:
+      - taskflow-net
+    ports:
+      - "5000:5000"
+    environment:
+      NODE_ENV: development
+      PORT: 5000
+      MONGO_URI: mongodb://mongo:27017/taskflow
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      JWT_SECRET: ${JWT_SECRET:-dev_jwt_secret_change_in_prod}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-7d}
+      FRONTEND_URL: http://localhost:3000
+      RATE_LIMIT_POINTS: 500
+      RATE_LIMIT_DURATION: 60
+    env_file:
+      - ./backend/.env
+    depends_on:
+      mongo:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+
+  # Python Worker
+  worker:
+    build:
+      context: ./worker 
+      dockerfile: Dockerfile
+    image: taskflow-worker:local
+    container_name: taskflow-worker
+    restart: unless-stopped
+    networks:
+      - taskflow-net
+    environment:
+      MONGO_URI: mongodb://mongo:27017/taskflow
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    env_file:
+      - ./worker/.env
+    depends_on:
+      mongo:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  # Frontend — Next.js
+  frontend:
+    build:
+      context: ./frontend     
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: http://localhost:5000/api
+    image: taskflow-frontend:local
+    container_name: taskflow-frontend
+    restart: unless-stopped
+    networks:
+      - taskflow-net
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+    depends_on:
+      backend:
+        condition: service_healthy

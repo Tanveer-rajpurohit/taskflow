@@ -16,7 +16,7 @@ export default function LandingPage() {
 
   useEffect(() => {
     let ctx: { revert: () => void } | null = null;
-    let lenis: { raf: (t: number) => void; destroy: () => void; on: (e: string, cb: unknown) => void } | undefined;
+    let lenis: any;
 
     const init = async () => {
       const LenisModule = await import("lenis");
