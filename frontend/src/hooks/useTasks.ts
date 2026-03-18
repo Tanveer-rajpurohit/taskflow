@@ -22,7 +22,8 @@ export const useTasks = () => {
         setTasks(res.tasks);
       }
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : 'Failed to fetch tasks';
+      let message = err instanceof Error ? err.message : 'Failed to fetch tasks';
+      if (message.startsWith('RATE_LIMIT:')) message = message.replace('RATE_LIMIT:', '');
       setError(message);
     } finally {
       setLoading(false);
@@ -39,7 +40,8 @@ export const useTasks = () => {
         }
         return null;
       } catch (err: unknown) {
-        const message = err instanceof Error ? err.message : 'Failed to fetch task';
+        let message = err instanceof Error ? err.message : 'Failed to fetch task';
+        if (message.startsWith('RATE_LIMIT:')) message = message.replace('RATE_LIMIT:', '');
         setError(message);
         return null;
       }
@@ -59,7 +61,8 @@ export const useTasks = () => {
         }
         return null;
       } catch (err: unknown) {
-        const message = err instanceof Error ? err.message : 'Failed to create task';
+        let message = err instanceof Error ? err.message : 'Failed to create task';
+        if (message.startsWith('RATE_LIMIT:')) message = message.replace('RATE_LIMIT:', '');
         setError(message);
         return null;
       } finally {
@@ -81,7 +84,8 @@ export const useTasks = () => {
         }
         return false;
       } catch (err: unknown) {
-        const message = err instanceof Error ? err.message : 'Failed to delete task';
+        let message = err instanceof Error ? err.message : 'Failed to delete task';
+        if (message.startsWith('RATE_LIMIT:')) message = message.replace('RATE_LIMIT:', '');
         setError(message);
         return false;
       } finally {

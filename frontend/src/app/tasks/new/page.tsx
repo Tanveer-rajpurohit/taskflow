@@ -22,11 +22,13 @@ const MAX_TITLE_CHARS = 120;
 
 export default function NewTaskPage(): React.JSX.Element {
   const router = useRouter();
-  const { createTask, isLoading } = useTasks();
+  const { createTask, isLoading, error: taskError } = useTasks();
   const [title, setTitle] = useState("");
   const [inputText, setInputText] = useState("");
   const [operation, setOperation] = useState<TaskOperation>("uppercase");
-  const [error, setError] = useState<string | null>(null);
+  const [localError, setLocalError] = useState<string | null>(null);
+
+  const displayError = localError || taskError;
   const containerRef = useRef<HTMLDivElement>(null);
 
   // GSAP entrance
@@ -47,14 +49,12 @@ export default function NewTaskPage(): React.JSX.Element {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
-    setError(null);
+    setLocalError(null);
     if (!isFormValid) return;
 
     const task = await createTask({ title: title.trim(), inputText, operation });
     if (task) {
       router.push(`/tasks/${task._id}`);
-    } else {
-      setError("Failed to create task. Please try again.");
     }
   };
 
@@ -113,10 +113,10 @@ export default function NewTaskPage(): React.JSX.Element {
           <div ref={containerRef} style={{ width: "100%", maxWidth: 620 }}>
 
             {/* Error */}
-            {error && (
+            {displayError && (
               <div className="toast-error" style={{ marginBottom: 20 }}>
                 <AlertCircle size={15} />
-                {error}
+                {displayError}
               </div>
             )}
 
@@ -131,7 +131,10 @@ export default function NewTaskPage(): React.JSX.Element {
                   type="text"
                   placeholder="e.g. Process customer feedback"
                   value={title}
-                  onChange={(e) => setTitle(e.target.value)}
+                  onChange={(e) => {
+                    setTitle(e.target.value);
+                    if (localError) setLocalError(null);
+                  }}
                   onFocus={onFocus}
                   onBlur={onBlur}
                   style={inputStyle}

@@ -39,6 +39,17 @@ app.get("/health", (_req, res) => {
   res.json({ status: "ok", uptime: process.uptime() });
 });
 
+// 404 Not Found Handler
+app.use((_req, res) => {
+  res.status(404).json({ success: false, message: "API endpoint not found" });
+});
+
+// Global Error Handler
+app.use((err: any, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
+  console.error("Unhandled Global Error:", err);
+  res.status(500).json({ success: false, message: "Internal server error" });
+});
+
 
 connectDB().then(() => {
   app.listen(PORT, () =>

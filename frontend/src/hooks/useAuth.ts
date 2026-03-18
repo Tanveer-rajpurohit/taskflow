@@ -21,7 +21,8 @@ export const useAuth = () => {
       }
       return data.message ?? 'Login failed';
     } catch (err: unknown) {
-      return err instanceof Error ? err.message : 'Login failed';
+      const msg = err instanceof Error ? err.message : "Login failed";
+      return msg.startsWith("RATE_LIMIT:") ? msg.replace("RATE_LIMIT:", "") : msg;
     }
   };
 
@@ -36,7 +37,8 @@ export const useAuth = () => {
       }
       return data.message ?? 'Registration failed';
     } catch (err: unknown) {
-      return err instanceof Error ? err.message : 'Registration failed';
+      const msg = err instanceof Error ? err.message : "Registration failed";
+      return msg.startsWith("RATE_LIMIT:") ? msg.replace("RATE_LIMIT:", "") : msg;
     }
   };
 
@@ -59,7 +61,7 @@ export const useAuth = () => {
         clearStore();
       }
     } catch (err: unknown) {
-      if (err instanceof Error && err.message === '429_TOO_MANY_REQUESTS') {
+      if (err instanceof Error && err.message.startsWith("RATE_LIMIT:")) {
         // Just ignore it and keep the current session state.
         return;
       }

@@ -12,13 +12,13 @@ const apiLimiter = new RateLimiterRedis({
   blockDuration: 30,
 });
 
-// Auth limiter — 5 attempts per 15 minutes per IP
+// Auth limiter — 5 attempts per 1 minute per IP
 const authLimiter = new RateLimiterRedis({
   storeClient: rateLimiterRedis,
   keyPrefix: "rl_auth",
   points: 5,
-  duration: 60 * 15,
-  blockDuration: 60 * 15,
+  duration: 60,
+  blockDuration: 60,
 });
 
 const makeMiddleware =
