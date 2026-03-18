@@ -83,8 +83,7 @@ export default function LandingPage() {
         <div style={{ display: "flex", alignItems: "center", gap: 28, fontSize: 14, fontWeight: 500, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>
           <Link href="#features" style={{ textDecoration: "none", color: "inherit", transition: "color 0.2s" }} onMouseEnter={(e) => (e.currentTarget.style.color = "var(--heading)")} onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}>Features</Link>
           <Link href="#how-it-works" style={{ textDecoration: "none", color: "inherit", transition: "color 0.2s" }} onMouseEnter={(e) => (e.currentTarget.style.color = "var(--heading)")} onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}>How it works</Link>
-          <Link href="/login" style={{ textDecoration: "none", color: "var(--text-muted)", transition: "color 0.2s" }} onMouseEnter={(e) => (e.currentTarget.style.color = "var(--heading)")} onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}>Sign in</Link>
-          <Link href="/register" style={{ padding: "10px 24px", borderRadius: 99, background: "var(--heading)", color: "#fff", textDecoration: "none", transition: "all 0.2s", boxShadow: "0 2px 10px rgba(30,97,87,0.28)", fontWeight: 600 }} onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "var(--accent-hover)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 16px rgba(30,97,87,0.38)"; }} onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "var(--heading)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 2px 10px rgba(30,97,87,0.28)"; }}>
+          <Link href="/login" style={{ padding: "10px 24px", borderRadius: 99, background: "var(--heading)", color: "#fff", textDecoration: "none", transition: "all 0.2s", boxShadow: "0 2px 10px rgba(30,97,87,0.28)", fontWeight: 600 }} onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "var(--accent-hover)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 16px rgba(30,97,87,0.38)"; }} onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "var(--heading)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 2px 10px rgba(30,97,87,0.28)"; }}>
             Get Started
           </Link>
         </div>
@@ -107,11 +106,8 @@ export default function LandingPage() {
         </p>
 
         <div className="hero-cta" style={{ display: "flex", gap: 14, alignItems: "center", marginBottom: 100, flexWrap: "wrap", justifyContent: "center" }}>
-          <Link href="/register" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "var(--heading)", color: "#fff", padding: "16px 36px", borderRadius: 99, fontWeight: 600, fontSize: 15, textDecoration: "none", transition: "all 0.2s", boxShadow: "0 4px 16px rgba(30,97,87,0.3)", fontFamily: "var(--font-sans)" }} onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "var(--accent-hover)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 6px 22px rgba(30,97,87,0.4)"; }} onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "var(--heading)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 16px rgba(30,97,87,0.3)"; }}>
+          <Link href="/login" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "var(--heading)", color: "#fff", padding: "16px 36px", borderRadius: 99, fontWeight: 600, fontSize: 15, textDecoration: "none", transition: "all 0.2s", boxShadow: "0 4px 16px rgba(30,97,87,0.3)", fontFamily: "var(--font-sans)" }} onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "var(--accent-hover)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 6px 22px rgba(30,97,87,0.4)"; }} onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "var(--heading)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 16px rgba(30,97,87,0.3)"; }}>
             Start for Free <ArrowRight size={15} />
-          </Link>
-          <Link href="/login" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "transparent", color: "var(--heading)", border: "1.5px solid var(--border-strong)", padding: "16px 36px", borderRadius: 99, fontWeight: 600, fontSize: 15, textDecoration: "none", transition: "all 0.2s", fontFamily: "var(--font-sans)" }} onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "var(--accent-light)"; (e.currentTarget as HTMLElement).style.borderColor = "var(--heading)"; }} onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "transparent"; (e.currentTarget as HTMLElement).style.borderColor = "var(--border-strong)"; }}>
-            Sign In
           </Link>
         </div>
 
@@ -280,7 +276,7 @@ export default function LandingPage() {
           </div>
 
           <div style={{ textAlign: "center", marginTop: 64 }}>
-            <Link href="/register" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "var(--heading)", color: "#fff", padding: "16px 40px", borderRadius: 99, fontWeight: 600, fontSize: 15, textDecoration: "none", transition: "all 0.2s", boxShadow: "0 4px 16px rgba(30,97,87,0.3)", fontFamily: "var(--font-sans)" }} onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "var(--accent-hover)"; }} onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "var(--heading)"; }}>
+            <Link href="/login" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "var(--heading)", color: "#fff", padding: "16px 40px", borderRadius: 99, fontWeight: 600, fontSize: 15, textDecoration: "none", transition: "all 0.2s", boxShadow: "0 4px 16px rgba(30,97,87,0.3)", fontFamily: "var(--font-sans)" }} onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "var(--accent-hover)"; }} onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "var(--heading)"; }}>
               Get Started Now <ArrowRight size={15} />
             </Link>
           </div>

@@ -14,6 +14,7 @@ import {
   Trash2,
   ListTodo,
   Zap,
+  RefreshCw,
 } from "lucide-react";
 import { DashboardShell } from "@/components/DashboardShell";
 import AuthGuard from "@/components/AuthGuard";
@@ -58,7 +59,7 @@ export default function DashboardPage(): React.JSX.Element {
   const [view, setView] = useState<ViewMode>("list");
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [deleteModalId, setDeleteModalId] = useState<string | null>(null);
-  const { tasks, isLoading, fetchTasks, deleteTask } = useTasks();
+  const { tasks, isLoading, fetchTasks, deleteTask, error: taskError } = useTasks();
   const { user } = useAuthStore();
   const headerRef = useRef<HTMLElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
@@ -242,7 +243,7 @@ export default function DashboardPage(): React.JSX.Element {
           className="dash-header"
           style={{ borderBottom: "1px solid var(--border)", padding: "0 36px", height: 80, display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0, background: "var(--bg)" }}
         >
-          <div>
+          <div className="desktop-only">
             <span style={{ fontSize: 13, fontWeight: 500, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>Dashboard</span>
           </div>
           <Link
@@ -319,6 +320,25 @@ export default function DashboardPage(): React.JSX.Element {
               </div>
             )}
 
+            {/* Error state */}
+            {!isLoading && taskError && safeTasks.length === 0 && (
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "80px 24px", background: "var(--danger-light)", borderRadius: 20, border: "1px solid rgba(192,69,58,0.2)", gap: 16 }}>
+                <div style={{ width: 64, height: 64, borderRadius: "50%", background: "#fff", display: "grid", placeItems: "center", boxShadow: "0 4px 12px rgba(192,69,58,0.15)" }}>
+                  <XCircle size={28} color="var(--danger)" />
+                </div>
+                <div style={{ textAlign: "center" }}>
+                  <div style={{ fontSize: 17, fontWeight: 700, color: "var(--danger)", marginBottom: 6, fontFamily: "var(--font-display)" }}>Failed to load tasks</div>
+                  <div style={{ fontSize: 14, color: "var(--text-muted)", maxWidth: 300, margin: "0 auto" }}>{taskError}</div>
+                </div>
+                <button
+                  onClick={() => fetchTasks()}
+                  style={{ display: "inline-flex", alignItems: "center", gap: 7, padding: "10px 24px", borderRadius: 99, background: "var(--danger)", color: "#fff", border: "none", fontSize: 13, fontWeight: 600, cursor: "pointer", transition: "all 0.2s" }}
+                >
+                  <RefreshCw size={14} /> Retry
+                </button>
+              </div>
+            )}
+
             {/* Empty state */}
             {!isLoading && safeTasks.length === 0 && (
               <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "80px 24px", background: "#fff", borderRadius: 20, border: "1.5px dashed var(--border-strong)", gap: 16 }}>
@@ -349,7 +369,7 @@ export default function DashboardPage(): React.JSX.Element {
 
             {/* Grid view */}
             {!isLoading && safeTasks.length > 0 && view === "grid" && (
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 14 }}>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(240px, 100%), 1fr))", gap: 14 }}>
                 {safeTasks.map((task) => renderTaskCard(task))}
               </div>
             )}

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAuth } from "../hooks/useAuth";
@@ -36,6 +36,24 @@ export const DashboardShell = ({ children }: DashboardShellProps): React.JSX.Ele
   const { logout } = useAuth();
   const { user } = useAuthStore();
   const [collapsed, setCollapsed] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      const mobile = width < 768;
+      setIsMobile(mobile);
+      if (width < 1024) setCollapsed(true);
+      else setCollapsed(false);
+      
+      if (!mobile) setMobileMenuOpen(false);
+    };
+
+    handleResize(); // Initial check
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const sidebarW = collapsed ? SIDEBAR_COLLAPSED : SIDEBAR_EXPANDED;
 
@@ -60,6 +78,7 @@ export const DashboardShell = ({ children }: DashboardShellProps): React.JSX.Ele
       <Link
         key={href}
         href={href}
+        onClick={() => isMobile && setMobileMenuOpen(false)}
         title={collapsed ? label : undefined}
         style={{
           display: "flex",
@@ -117,21 +136,35 @@ export const DashboardShell = ({ children }: DashboardShellProps): React.JSX.Ele
     <div style={{ display: "flex", minHeight: "100vh", fontFamily: "var(--font-sans)", background: "var(--bg)" }}>
 
       {/* Sidebar */}
+      {isMobile && mobileMenuOpen && (
+        <div
+          onClick={() => setMobileMenuOpen(false)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            background: "rgba(0,0,0,0.4)",
+            backdropFilter: "blur(4px)",
+            zIndex: 45,
+            transition: "opacity 0.2s",
+          }}
+        />
+      )}
       <aside
         style={{
-          width: sidebarW,
+          width: isMobile ? SIDEBAR_EXPANDED : sidebarW,
           flexShrink: 0,
           background: "var(--bg-subtle)",
           borderRight: "1px solid var(--border)",
           display: "flex",
           flexDirection: "column",
           position: "fixed",
-          left: 0,
+          left: isMobile ? (mobileMenuOpen ? 0 : -SIDEBAR_EXPANDED) : 0,
           top: 0,
           bottom: 0,
           zIndex: 50,
           overflow: "hidden",
-          transition: "width 0.22s cubic-bezier(0.4,0,0.2,1)",
+          transition: "all 0.3s cubic-bezier(0.4,0,0.2,1)",
+          boxShadow: isMobile && mobileMenuOpen ? "10px 0 30px rgba(0,0,0,0.1)" : "none",
         }}
       >
         {/* Logo row */}
@@ -189,7 +222,10 @@ export const DashboardShell = ({ children }: DashboardShellProps): React.JSX.Ele
           </Link>
 
           <button
-            onClick={() => setCollapsed((c) => !c)}
+            onClick={() => {
+              if (isMobile) setMobileMenuOpen(false);
+              else setCollapsed((c) => !c);
+            }}
             title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
             style={{
               display: "flex",
@@ -382,14 +418,53 @@ export const DashboardShell = ({ children }: DashboardShellProps): React.JSX.Ele
       <div
         style={{
           flex: 1,
-          marginLeft: sidebarW,
+          marginLeft: isMobile ? 0 : sidebarW,
           background: "var(--bg)",
           minHeight: "100vh",
           display: "flex",
           flexDirection: "column",
-          transition: "margin-left 0.22s cubic-bezier(0.4,0,0.2,1)",
+          transition: "margin-left 0.3s cubic-bezier(0.4,0,0.2,1)",
         }}
       >
+        {isMobile && (
+          <header
+            style={{
+              height: 64,
+              background: "var(--bg)",
+              borderBottom: "1px solid var(--border)",
+              display: "flex",
+              alignItems: "center",
+              padding: "0 20px",
+              position: "sticky",
+              top: 0,
+              zIndex: 40,
+              gap: 12,
+            }}
+          >
+            <button
+              onClick={() => setMobileMenuOpen(true)}
+              style={{
+                width: 38,
+                height: 38,
+                borderRadius: 10,
+                border: "1.5px solid var(--border)",
+                background: "transparent",
+                display: "grid",
+                placeItems: "center",
+                color: "var(--heading)",
+                cursor: "pointer",
+              }}
+            >
+              <Menu size={20} />
+            </button>
+            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <div style={{ width: 26, height: 26, borderRadius: 6, background: "var(--heading)", display: "grid", placeItems: "center" }}>
+                <Zap size={12} color="#fff" strokeWidth={2.5} />
+              </div>
+              <span style={{ fontFamily: "var(--font-display)", fontSize: 16, color: "var(--heading)", fontWeight: 600 }}>Taskflow</span>
+            </div>
+          </header>
+        )}
         {children}
       </div>
     </div>

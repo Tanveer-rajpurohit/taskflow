@@ -89,7 +89,7 @@ export default function NewTaskPage(): React.JSX.Element {
     <AuthGuard>
       <DashboardShell>
         {/* Header */}
-        <header style={{ background: "var(--bg)", borderBottom: "1px solid var(--border)", padding: "0 32px", height: 64, display: "flex", alignItems: "center", gap: 16, flexShrink: 0 }}>
+        <header className="dash-header" style={{ background: "var(--bg)", borderBottom: "1px solid var(--border)", padding: "0 32px", height: 64, display: "flex", alignItems: "center", gap: 16, flexShrink: 0 }}>
           <Link
             href="/dashboard"
             style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 34, height: 34, borderRadius: 9, border: "1.5px solid var(--border)", color: "var(--text-muted)", textDecoration: "none", transition: "all 0.15s" }}

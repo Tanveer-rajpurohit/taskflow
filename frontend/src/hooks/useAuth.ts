@@ -3,12 +3,14 @@ import { authService } from '../services/auth.service';
 import { useAuthStore } from '../store/useAuthStore';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
+import { useToastStore } from '../store/useToastStore';
 import type { LoginCredentials, RegisterData, IUser } from '../types';
 
 export const useAuth = () => {
   const { setUser, logout: clearStore, setLoading, isAuthenticated, user, isLoading } =
     useAuthStore();
   const router = useRouter();
+  const { showToast } = useToastStore();
 
   const login = async (credentials: LoginCredentials): Promise<string | null> => {
     try {
@@ -22,7 +24,12 @@ export const useAuth = () => {
       return data.message ?? 'Login failed';
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : "Login failed";
-      return msg.startsWith("RATE_LIMIT:") ? msg.replace("RATE_LIMIT:", "") : msg;
+      if (msg.startsWith("RATE_LIMIT:")) {
+        const cleanMsg = msg.replace("RATE_LIMIT:", "");
+        showToast(cleanMsg, 'error');
+        return cleanMsg;
+      }
+      return msg;
     }
   };
 
@@ -38,7 +45,12 @@ export const useAuth = () => {
       return data.message ?? 'Registration failed';
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : "Registration failed";
-      return msg.startsWith("RATE_LIMIT:") ? msg.replace("RATE_LIMIT:", "") : msg;
+      if (msg.startsWith("RATE_LIMIT:")) {
+        const cleanMsg = msg.replace("RATE_LIMIT:", "");
+        showToast(cleanMsg, 'error');
+        return cleanMsg;
+      }
+      return msg;
     }
   };
 
@@ -62,7 +74,7 @@ export const useAuth = () => {
       }
     } catch (err: unknown) {
       if (err instanceof Error && err.message.startsWith("RATE_LIMIT:")) {
-        // Just ignore it and keep the current session state.
+        showToast(err.message.replace("RATE_LIMIT:", ""), 'error');
         return;
       }
       clearStore();

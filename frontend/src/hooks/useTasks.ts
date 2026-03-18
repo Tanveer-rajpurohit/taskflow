@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { taskService } from '../services/task.service';
 import { useTaskStore } from '../store/useTaskStore';
+import { useToastStore } from '../store/useToastStore';
 import type { ITask, TaskOperation } from '../types';
 
 export interface CreateTaskData {
@@ -12,6 +13,7 @@ export interface CreateTaskData {
 export const useTasks = () => {
   const { tasks, isLoading, error, setTasks, upsertTask, removeTask, setLoading, setError } =
     useTaskStore();
+  const { showToast } = useToastStore();
 
   const fetchTasks = useCallback(async (): Promise<void> => {
     try {
@@ -23,7 +25,10 @@ export const useTasks = () => {
       }
     } catch (err: unknown) {
       let message = err instanceof Error ? err.message : 'Failed to fetch tasks';
-      if (message.startsWith('RATE_LIMIT:')) message = message.replace('RATE_LIMIT:', '');
+      if (message.startsWith('RATE_LIMIT:')) {
+        message = message.replace('RATE_LIMIT:', '');
+        showToast(message, 'error');
+      }
       setError(message);
     } finally {
       setLoading(false);
@@ -41,12 +46,16 @@ export const useTasks = () => {
         return null;
       } catch (err: unknown) {
         let message = err instanceof Error ? err.message : 'Failed to fetch task';
-        if (message.startsWith('RATE_LIMIT:')) message = message.replace('RATE_LIMIT:', '');
+        const isRateLimit = message.startsWith('RATE_LIMIT:');
+        if (isRateLimit) {
+          message = message.replace('RATE_LIMIT:', '');
+          showToast(message, 'error');
+        }
         setError(message);
         return null;
       }
     },
-    [upsertTask, setError]
+    [upsertTask, setError, showToast]
   );
 
   const createTask = useCallback(
@@ -95,5 +104,13 @@ export const useTasks = () => {
     [removeTask, setLoading, setError]
   );
 
-  return { tasks, isLoading, error, fetchTasks, getTaskById, createTask, deleteTask };
+  return {
+    tasks,
+    isLoading,
+    error,
+    fetchTasks,
+    createTask,
+    deleteTask,
+    getTaskById,
+  };
 };

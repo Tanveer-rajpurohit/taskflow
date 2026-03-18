@@ -3,20 +3,20 @@ import { RateLimiterRedis } from "rate-limiter-flexible";
 import { rateLimiterRedis } from "../config/redis";
 import { AuthRequest } from "../types";
 
-// Global API limiter — 500 requests per 60s per IP
+// Global API limiter — 2000 requests per 60s per IP
 const apiLimiter = new RateLimiterRedis({
   storeClient: rateLimiterRedis,
   keyPrefix: "rl_api",
-  points: Number(process.env.RATE_LIMIT_POINTS) || 500,
+  points: Number(process.env.RATE_LIMIT_POINTS) || 2000,
   duration: Number(process.env.RATE_LIMIT_DURATION) || 60,
-  blockDuration: 30,
+  blockDuration: 1,
 });
 
-// Auth limiter — 5 attempts per 1 minute per IP
+// Auth limiter — 10 attempts per 1 minute per IP 
 const authLimiter = new RateLimiterRedis({
   storeClient: rateLimiterRedis,
   keyPrefix: "rl_auth",
-  points: 5,
+  points: 10,
   duration: 60,
   blockDuration: 60,
 });

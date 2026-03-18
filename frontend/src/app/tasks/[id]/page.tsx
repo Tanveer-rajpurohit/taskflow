@@ -65,11 +65,12 @@ export default function TaskDetailPage(): React.JSX.Element {
   const params = useParams<{ id: string }>();
   const taskId = params?.id ?? "";
   const router = useRouter();
-  const { getTaskById, deleteTask } = useTasks();
+  const { getTaskById, deleteTask, error: taskError } = useTasks();
   const { tasks } = useTaskStore();
   const [pageLoading, setPageLoading] = useState(true);
   const [pageError, setPageError] = useState<string | null>(null);
   const [deleting, setDeleting] = useState(false);
+  const displayError = pageError || taskError;
   const [copied, setCopied] = useState(false);
   const logsEndRef = useRef<HTMLDivElement>(null);
 
@@ -82,7 +83,8 @@ export default function TaskDetailPage(): React.JSX.Element {
     (async () => {
       setPageLoading(true);
       const result = await getTaskById(taskId);
-      if (!result) setPageError("Task not found or access denied.");
+      // Wait for store to potentially update or just use the result
+      if (!result && !taskError) setPageError("Task not found or access denied.");
       setPageLoading(false);
     })();
   }, [taskId, getTaskById]);
@@ -148,7 +150,9 @@ export default function TaskDetailPage(): React.JSX.Element {
         <DashboardShell>
           <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 16, padding: 48 }}>
             <AlertCircle size={40} color="var(--danger)" strokeWidth={1.5} />
-            <div style={{ fontSize: 16, fontWeight: 600, color: "var(--heading)", fontFamily: "var(--font-display)" }}>{pageError ?? "Task not found"}</div>
+            <div style={{ fontSize: 16, fontWeight: 600, color: "var(--heading)", fontFamily: "var(--font-display)", textAlign: "center", maxWidth: 400 }}>
+              {displayError}
+            </div>
             <Link href="/dashboard" style={{ padding: "10px 24px", borderRadius: 99, background: "var(--heading)", color: "#fff", textDecoration: "none", fontSize: 13, fontWeight: 600 }}>
               Back to Dashboard
             </Link>
@@ -168,7 +172,7 @@ export default function TaskDetailPage(): React.JSX.Element {
     <AuthGuard>
       <DashboardShell>
         {/* Header */}
-        <header style={{ background: "var(--bg)", borderBottom: "1px solid var(--border)", padding: "0 32px", height: 80, display: "flex", alignItems: "center", gap: 16, flexShrink: 0 }}>
+        <header className="dash-header" style={{ background: "var(--bg)", borderBottom: "1px solid var(--border)", padding: "0 32px", height: 80, display: "flex", alignItems: "center", gap: 16, flexShrink: 0 }}>
           <button
             onClick={() => router.back()}
             style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 34, height: 34, borderRadius: 9, border: "1.5px solid var(--border)", background: "transparent", cursor: "pointer", color: "var(--text-muted)", transition: "all 0.15s", flexShrink: 0 }}
