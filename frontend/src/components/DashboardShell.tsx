@@ -12,6 +12,7 @@ import {
   ChevronLeft,
   ChevronRight,
   User,
+  Menu,
 } from "lucide-react";
 
 type DashboardShellProps = { children: React.ReactNode };
@@ -28,7 +29,7 @@ const MAIN_NAV: NavItem[] = [
 ];
 
 const SIDEBAR_EXPANDED = 228;
-const SIDEBAR_COLLAPSED = 62;
+const SIDEBAR_COLLAPSED = 76;
 
 export const DashboardShell = ({ children }: DashboardShellProps): React.JSX.Element => {
   const pathname = usePathname();
@@ -136,14 +137,15 @@ export const DashboardShell = ({ children }: DashboardShellProps): React.JSX.Ele
         {/* Logo row */}
         <div
           style={{
-            height: 80,
+            minHeight: 80,
             borderBottom: "1px solid var(--border)",
             display: "flex",
+            flexDirection: "row",
             alignItems: "center",
             justifyContent: collapsed ? "center" : "space-between",
-            padding: collapsed ? "0 16px" : "0 12px 0 18px",
+            padding: collapsed ? "16px 0" : "0 14px 0 18px",
             flexShrink: 0,
-            gap: 8,
+            gap: collapsed ? 12 : 8,
           }}
         >
           <Link
@@ -215,7 +217,7 @@ export const DashboardShell = ({ children }: DashboardShellProps): React.JSX.Ele
               e.currentTarget.style.borderColor = "var(--border)";
             }}
           >
-            {collapsed ? <ChevronRight size={12} /> : <ChevronLeft size={12} />}
+            <Menu size={14} />
           </button>
         </div>
 

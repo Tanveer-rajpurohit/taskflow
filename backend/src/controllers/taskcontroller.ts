@@ -1,6 +1,6 @@
 import { Response } from "express";
 import Task from "../models/Task";
-import { pushJob } from "../config/redis";
+import { pushJob, removeJob } from "../config/redis";
 import { AuthRequest, TaskOperation } from "../types";
 
 const VALID_OPERATIONS: TaskOperation[] = [
@@ -127,6 +127,19 @@ export const deleteTask = async (
     if (!task) {
       res.status(404).json({ success: false, message: "Task not found" });
       return;
+    }
+
+    if (task.status === "pending") {
+      try {
+        await removeJob({
+          taskId: task._id.toString(),
+          userId,
+          operation: task.operation,
+          inputText: task.inputText,
+        });
+      } catch (err) {
+        console.error("Failed to remove job from Redis queue:", err);
+      }
     }
 
     res.status(200).json({ success: true, message: "Task deleted" });

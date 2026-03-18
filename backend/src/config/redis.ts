@@ -39,5 +39,14 @@ export const pushJob = async (payload: {
   await redis.rpush(QUEUE_KEY, JSON.stringify(payload));
 };
 
+export const removeJob = async (payload: {
+  taskId: string;
+  userId: string;
+  operation: string;
+  inputText: string;
+}): Promise<void> => {
+  await redis.lrem(QUEUE_KEY, 0, JSON.stringify(payload));
+};
+
 export { QUEUE_KEY };
 export default redis;
