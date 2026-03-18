@@ -29,7 +29,7 @@ const MAIN_NAV: NavItem[] = [
 ];
 
 const SIDEBAR_EXPANDED = 228;
-const SIDEBAR_COLLAPSED = 76;
+const SIDEBAR_COLLAPSED = 66;
 
 export const DashboardShell = ({ children }: DashboardShellProps): React.JSX.Element => {
   const pathname = usePathname();
@@ -66,7 +66,7 @@ export const DashboardShell = ({ children }: DashboardShellProps): React.JSX.Ele
           alignItems: "center",
           justifyContent: collapsed ? "center" : "flex-start",
           gap: collapsed ? 0 : 10,
-          padding: collapsed ? "10px" : "10px 12px",
+          padding: collapsed ? "12px" : "10px 12px",
           borderRadius: 10,
           background: active ? "rgba(30,97,87,0.1)" : "transparent",
           color: active ? "var(--heading)" : "var(--text-muted)",
@@ -151,7 +151,7 @@ export const DashboardShell = ({ children }: DashboardShellProps): React.JSX.Ele
           <Link
             href="/dashboard"
             style={{
-              display: "flex",
+              display: collapsed ? "none" : "flex",
               alignItems: "center",
               gap: 9,
               textDecoration: "none",
@@ -195,8 +195,8 @@ export const DashboardShell = ({ children }: DashboardShellProps): React.JSX.Ele
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              width: 26,
-              height: 26,
+              width: collapsed ? 30 : 26,
+              height: collapsed ? 30 : 26,
               borderRadius: 7,
               border: "1.5px solid var(--border)",
               background: "var(--bg)",
@@ -217,7 +217,7 @@ export const DashboardShell = ({ children }: DashboardShellProps): React.JSX.Ele
               e.currentTarget.style.borderColor = "var(--border)";
             }}
           >
-            <Menu size={14} />
+            <Menu size={collapsed ? 16 : 14} />
           </button>
         </div>
 
@@ -249,7 +249,7 @@ export const DashboardShell = ({ children }: DashboardShellProps): React.JSX.Ele
               Workspace
             </span>
           )}
-          {MAIN_NAV.map((item) => navLink(item))}
+          {MAIN_NAV.map((item) => navLink(item, collapsed ? 20 : 16))}
         </nav>
 
         {/* User + Logout */}
@@ -323,14 +323,14 @@ export const DashboardShell = ({ children }: DashboardShellProps): React.JSX.Ele
             <div
               title={user?.name ?? "User"}
               style={{
-                width: 34,
-                height: 34,
+                width: 36,
+                height: 36,
                 borderRadius: "50%",
                 background: "var(--heading)",
                 color: "#fff",
                 display: "grid",
                 placeItems: "center",
-                fontSize: 11,
+                fontSize: 12,
                 fontWeight: 700,
                 margin: "0 auto 4px",
                 cursor: "default",
@@ -349,7 +349,7 @@ export const DashboardShell = ({ children }: DashboardShellProps): React.JSX.Ele
               alignItems: "center",
               justifyContent: collapsed ? "center" : "flex-start",
               gap: collapsed ? 0 : 10,
-              padding: collapsed ? "9px" : "9px 12px",
+              padding: collapsed ? "12px" : "9px 12px",
               borderRadius: 10,
               color: "var(--danger)",
               background: "transparent",
@@ -372,7 +372,7 @@ export const DashboardShell = ({ children }: DashboardShellProps): React.JSX.Ele
               e.currentTarget.style.borderColor = "transparent";
             }}
           >
-            <LogOut size={14} style={{ flexShrink: 0 }} />
+            <LogOut size={collapsed ? 20 : 14} style={{ flexShrink: 0 }} />
             {!collapsed && "Logout"}
           </button>
         </div>
