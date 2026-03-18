@@ -1,529 +1,188 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { Mail, Lock, Eye, EyeOff, Zap } from "lucide-react";
-
-const AVATAR_COLORS = [
-  { bg: "#EAD5C0", text: "#7A5A40", label: "A" },
-  { bg: "#C4D4E8", text: "#3A5A80", label: "B" },
-  { bg: "#C8E8C4", text: "#2E6A2E", label: "C" },
-];
+import { useRouter } from "next/navigation";
+import { Mail, Lock, Eye, EyeOff, Zap, AlertCircle, ArrowRight } from "lucide-react";
+import { useAuth } from "../../hooks/useAuth";
+import type { LoginCredentials } from "@/types";
 
 export default function LoginPage() {
+  const { login, isAuthenticated } = useAuth();
+  const [creds, setCreds] = useState<LoginCredentials>({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isAuthenticated) router.push("/dashboard");
+  }, [isAuthenticated, router]);
+
+  // GSAP entrance
+  useEffect(() => {
+    let ctx: { revert: () => void } | null = null;
+    (async () => {
+      const { gsap } = await import("gsap");
+      ctx = gsap.context(() => {
+        gsap.fromTo(".login-form-el", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.55, stagger: 0.08, ease: "power2.out", delay: 0.1 });
+      }, containerRef);
+    })();
+    return () => { ctx?.revert(); };
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    setSubmitting(true);
+    const err = await login(creds);
+    if (err) { setError(err); setSubmitting(false); }
+  };
+
+  const inputStyle: React.CSSProperties = {
+    width: "100%",
+    boxSizing: "border-box",
+    padding: "13px 16px 13px 44px",
+    borderRadius: 12,
+    border: "1.5px solid var(--border)",
+    background: "var(--bg)",
+    fontSize: 14,
+    color: "var(--text)",
+    outline: "none",
+    fontFamily: "var(--font-sans)",
+    transition: "border-color 0.2s, box-shadow 0.2s, background 0.2s",
+  };
+  const onFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    e.target.style.borderColor = "var(--heading)";
+    e.target.style.boxShadow = "0 0 0 3px rgba(30,97,87,0.12)";
+    e.target.style.background = "#fff";
+  };
+  const onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    e.target.style.borderColor = "var(--border)";
+    e.target.style.boxShadow = "none";
+    e.target.style.background = "var(--bg)";
+  };
 
   return (
-    <div
-      className="flex min-h-screen relative"
-      style={{ fontFamily: "var(--font-sans)" }}
-    >
-      {/* ── RIGHT VISUAL PANEL ─────────────────────────────────────────
-          Mobile : absolute full-screen background (z-0)
-          Desktop: flex item, 45% width                                */}
-      <div
-        className="absolute inset-0 z-0 lg:relative lg:inset-auto lg:z-auto lg:w-[45%] lg:order-2 flex flex-col justify-between"
-        style={{
-          background:
-            "linear-gradient(145deg, #C8A882 0%, #7d5a45 50%, #3A2F2D 100%)",
-          padding: "56px 48px",
-          overflow: "hidden",
-        }}
-      >
-        {/* BG decoration circles */}
-        <div
-          style={{
-            position: "absolute",
-            top: -100,
-            right: -100,
-            width: 400,
-            height: 400,
-            borderRadius: "50%",
-            background: "rgba(255,255,255,0.06)",
-            pointerEvents: "none",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            bottom: -120,
-            left: -80,
-            width: 500,
-            height: 500,
-            borderRadius: "50%",
-            background: "rgba(255,255,255,0.04)",
-            pointerEvents: "none",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            top: "35%",
-            right: "8%",
-            width: 180,
-            height: 180,
-            borderRadius: "50%",
-            background: "rgba(200,168,130,0.18)",
-            pointerEvents: "none",
-          }}
-        />
+    <div style={{ display: "flex", minHeight: "100vh", fontFamily: "var(--font-sans)", background: "var(--bg)" }}>
 
-        {/* Top headline */}
-        <div style={{ position: "relative", zIndex: 1 }}>
-          <h2
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(26px, 2.8vw, 34px)",
-              fontWeight: 400,
-              color: "#fff",
-              lineHeight: 1.35,
-              maxWidth: 340,
-              opacity: 0.95,
-            }}
-          >
-            AI-driven task management for modern teams.
-          </h2>
+      {/* Left: Visual Panel */}
+      <div style={{ width: "42%", position: "sticky", top: 0, height: "100vh", background: "linear-gradient(145deg, #1E6157 0%, #0e3f38 45%, #0a2e2a 100%)", padding: "48px 40px", display: "flex", flexDirection: "column", justifyContent: "space-between", overflow: "hidden" }}>
+        {/* Decorative circles */}
+        <div style={{ position: "absolute", top: -60, right: -60, width: 300, height: 300, borderRadius: "50%", background: "rgba(255,255,255,0.05)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", bottom: -80, left: -50, width: 400, height: 400, borderRadius: "50%", background: "rgba(30,97,87,0.4)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", top: "40%", right: "10%", width: 140, height: 140, borderRadius: "50%", background: "rgba(200,215,210,0.08)", pointerEvents: "none" }} />
+
+        {/* Logo */}
+        <div style={{ position: "relative", zIndex: 1, display: "flex", alignItems: "center", gap: 10 }}>
+          <div style={{ width: 34, height: 34, borderRadius: 9, background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.25)", display: "grid", placeItems: "center", backdropFilter: "blur(10px)" }}>
+            <Zap size={16} color="#fff" strokeWidth={2.5} />
+          </div>
+          <span style={{ fontFamily: "var(--font-display)", fontSize: 18, color: "#fff", fontWeight: 600 }}>Taskflow</span>
         </div>
 
-        {/* Mid: geometric art */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            pointerEvents: "none",
-            zIndex: 0,
-          }}
-        >
-          <div style={{ position: "relative", width: 280, height: 280 }}>
-            <div
-              style={{
-                position: "absolute",
-                top: "10%",
-                left: "5%",
-                width: 155,
-                height: 155,
-                background: "rgba(255,255,255,0.1)",
-                borderRadius: 28,
-                border: "1.5px solid rgba(255,255,255,0.25)",
-                backdropFilter: "blur(8px)",
-                transform: "rotate(-12deg)",
-              }}
-            >
-              <div
-                style={{
-                  position: "absolute",
-                  inset: 18,
-                  border: "1.5px solid rgba(255,255,255,0.35)",
-                  borderRadius: 12,
-                }}
-              />
-            </div>
-            <div
-              style={{
-                position: "absolute",
-                top: "40%",
-                left: "38%",
-                width: 120,
-                height: 120,
-                background: "rgba(255,255,255,0.07)",
-                borderRadius: 20,
-                border: "1.5px solid rgba(255,255,255,0.2)",
-                backdropFilter: "blur(6px)",
-                transform: "rotate(14deg)",
-              }}
-            >
-              <div
-                style={{
-                  position: "absolute",
-                  inset: 15,
-                  border: "1.5px solid rgba(255,255,255,0.25)",
-                  borderRadius: 8,
-                }}
-              />
-            </div>
-          </div>
+        {/* Mid content */}
+        <div style={{ position: "relative", zIndex: 1 }}>
+          <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(28px,2.8vw,38px)", fontWeight: 600, color: "#fff", lineHeight: 1.3, maxWidth: 340, marginBottom: 20, opacity: 0.95 }}>
+            Process text tasks at scale, instantly.
+          </h2>
+          <p style={{ fontSize: 15, color: "rgba(255,255,255,0.65)", lineHeight: 1.7, maxWidth: 300 }}>
+            Queue thousands of async jobs and watch them complete with real-time logs.
+          </p>
         </div>
 
         {/* Bottom glass card */}
-        <div
-          style={{
-            position: "relative",
-            zIndex: 1,
-            background: "rgba(255,255,255,0.12)",
-            backdropFilter: "blur(16px)",
-            borderRadius: 20,
-            border: "1px solid rgba(255,255,255,0.22)",
-            padding: "20px 24px",
-          }}
-        >
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 8,
-              background: "rgba(255,255,255,0.15)",
-              borderRadius: 99,
-              padding: "5px 14px",
-              marginBottom: 12,
-            }}
-          >
-            <div
-              style={{
-                width: 8,
-                height: 8,
-                borderRadius: "50%",
-                background: "#C8A882",
-              }}
-            />
-            <span style={{ fontSize: 12, color: "#fff", fontWeight: 600 }}>
-              Active
-            </span>
-          </div>
-          <p
-            style={{
-              fontSize: 14,
-              color: "rgba(255,255,255,0.88)",
-              lineHeight: 1.65,
-              marginBottom: 16,
-            }}
-          >
-            Manage thousands of async background tasks seamlessly with live
-            analytics and AI-powered insights.
-          </p>
-          <div style={{ display: "flex", justifyContent: "flex-end", gap: 8 }}>
-            {["←", "→"].map((arrow, i) => (
-              <button
-                key={i}
-                style={{
-                  width: 36,
-                  height: 36,
-                  borderRadius: "50%",
-                  background: "rgba(255,255,255,0.15)",
-                  border: "1px solid rgba(255,255,255,0.3)",
-                  color: "#fff",
-                  fontSize: 15,
-                  cursor: "pointer",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  transition: "background 0.2s",
-                }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.background = "rgba(255,255,255,0.28)")
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.background = "rgba(255,255,255,0.15)")
-                }
-              >
-                {arrow}
-              </button>
+        <div style={{ position: "relative", zIndex: 1, background: "rgba(255,255,255,0.08)", backdropFilter: "blur(16px)", borderRadius: 18, border: "1px solid rgba(255,255,255,0.15)", padding: "20px 22px" }}>
+          <div style={{ display: "flex", gap: 10, marginBottom: 12 }}>
+            {["uppercase", "word_count", "reverse"].map((op) => (
+              <span key={op} style={{ fontSize: 11, fontWeight: 600, color: "rgba(255,255,255,0.8)", background: "rgba(255,255,255,0.1)", padding: "4px 10px", borderRadius: 99, fontFamily: "var(--font-sans)", textTransform: "uppercase" }}>
+                {op.replace("_", " ")}
+              </span>
             ))}
           </div>
+          <p style={{ fontSize: 13, color: "rgba(255,255,255,0.65)", lineHeight: 1.6 }}>
+            4 powerful text operations, Redis-backed queue, live log streaming.
+          </p>
         </div>
       </div>
 
-      {/* ── LEFT FORM PANEL ────────────────────────────────────────────
-          Mobile : z-10 transparent, form shows as white card over bg
-          Desktop: 55% width, solid white background                  */}
-      <div
-        className="relative z-10 w-full min-h-screen flex flex-col lg:w-[55%] lg:order-1 lg:bg-white"
-      >
-        <div className="flex-1 flex flex-col items-center justify-center p-6 lg:px-16 lg:py-12">
-          {/* Form card — card on mobile, transparent on desktop */}
-          <div
-            className="w-full max-w-sm lg:max-w-md"
-            style={{
-              background: "rgba(255,255,255,0.96)",
-              backdropFilter: "blur(20px)",
-              borderRadius: 28,
-              padding: "36px 32px",
-              boxShadow: "0 24px 64px rgba(0,0,0,0.14)",
-            }}
-          >
-            {/* Logo */}
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 8,
-                marginBottom: 28,
-              }}
-            >
-              <div
-                style={{
-                  width: 28,
-                  height: 28,
-                  borderRadius: 7,
-                  background: "var(--warm-800)",
-                  display: "grid",
-                  placeItems: "center",
-                }}
-              >
-                <Zap size={14} color="#fff" strokeWidth={2.5} />
-              </div>
-              <span
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: 17,
-                  color: "var(--warm-800)",
-                }}
-              >
-                Taskflow
-              </span>
+      {/* Right: Form Panel */}
+      <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", padding: "48px 40px" }}>
+        <div ref={containerRef} style={{ width: "100%", maxWidth: 420 }}>
+
+          {/* Logo (mobile) */}
+          <div className="login-form-el" style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 36 }}>
+            <div style={{ width: 28, height: 28, borderRadius: 7, background: "var(--heading)", display: "grid", placeItems: "center" }}>
+              <Zap size={13} color="#fff" strokeWidth={2.5} />
+            </div>
+            <span style={{ fontFamily: "var(--font-display)", fontSize: 16, color: "var(--heading)", fontWeight: 600 }}>Taskflow</span>
+          </div>
+
+          <h1 className="login-form-el" style={{ fontFamily: "var(--font-display)", fontSize: "clamp(26px,3vw,34px)", fontWeight: 600, color: "var(--heading)", lineHeight: 1.2, marginBottom: 8 }}>
+            Welcome back
+          </h1>
+          <p className="login-form-el" style={{ fontSize: 14, color: "var(--text-muted)", marginBottom: 32, lineHeight: 1.5 }}>
+            Sign in to your workspace
+          </p>
+
+          {error && (
+            <div className="toast-error login-form-el" style={{ marginBottom: 20 }}>
+              <AlertCircle size={14} />
+              {error}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+            {/* Email */}
+            <div className="login-form-el" style={{ position: "relative" }}>
+              <Mail size={14} style={{ position: "absolute", left: 16, top: "50%", transform: "translateY(-50%)", color: "var(--text-light)", pointerEvents: "none" }} />
+              <input
+                type="email"
+                value={creds.email}
+                onChange={(e) => setCreds((p) => ({ ...p, email: e.target.value }))}
+                required
+                placeholder="hello@company.com"
+                style={inputStyle}
+                onFocus={onFocus}
+                onBlur={onBlur}
+              />
             </div>
 
-            {/* Heading */}
-            <h1
-              style={{
-                fontFamily: "var(--font-display)",
-                fontSize: "clamp(26px, 4vw, 34px)",
-                fontWeight: 400,
-                color: "var(--warm-800)",
-                lineHeight: 1.2,
-                marginBottom: 6,
-              }}
-            >
-              Welcome back
-            </h1>
-            <p
-              style={{
-                fontSize: 14,
-                color: "var(--warm-400)",
-                marginBottom: 24,
-                lineHeight: 1.5,
-              }}
-            >
-              Sign in to your Taskflow workspace
-            </p>
-
-            {/* Form */}
-            <form
-              onSubmit={(e: React.FormEvent<HTMLFormElement>) =>
-                e.preventDefault()
-              }
-              style={{ display: "flex", flexDirection: "column", gap: 12 }}
-            >
-              {/* Email */}
-              <div style={{ position: "relative" }}>
-                <Mail
-                  size={15}
-                  style={{
-                    position: "absolute",
-                    left: 16,
-                    top: "50%",
-                    transform: "translateY(-50%)",
-                    color: "var(--warm-400)",
-                    pointerEvents: "none",
-                  }}
-                />
-                <input
-                  type="email"
-                  placeholder="hello@company.com"
-                  style={{
-                    width: "100%",
-                    boxSizing: "border-box",
-                    padding: "13px 16px 13px 44px",
-                    borderRadius: 99,
-                    border: "1.5px solid var(--warm-100)",
-                    background: "var(--surface)",
-                    fontSize: 14,
-                    color: "var(--warm-800)",
-                    outline: "none",
-                    fontFamily: "inherit",
-                    transition: "border-color 0.2s, background 0.2s",
-                  }}
-                  onFocus={(e: React.FocusEvent<HTMLInputElement>) => {
-                    e.target.style.borderColor = "var(--accent)";
-                    e.target.style.background = "#fff";
-                  }}
-                  onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
-                    e.target.style.borderColor = "var(--warm-100)";
-                    e.target.style.background = "var(--surface)";
-                  }}
-                />
-              </div>
-
-              {/* Password */}
-              <div style={{ position: "relative" }}>
-                <Lock
-                  size={15}
-                  style={{
-                    position: "absolute",
-                    left: 16,
-                    top: "50%",
-                    transform: "translateY(-50%)",
-                    color: "var(--warm-400)",
-                    pointerEvents: "none",
-                  }}
-                />
-                <input
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Password"
-                  style={{
-                    width: "100%",
-                    boxSizing: "border-box",
-                    padding: "13px 44px 13px 44px",
-                    borderRadius: 99,
-                    border: "1.5px solid var(--warm-100)",
-                    background: "var(--surface)",
-                    fontSize: 14,
-                    color: "var(--warm-800)",
-                    outline: "none",
-                    fontFamily: "inherit",
-                    transition: "border-color 0.2s, background 0.2s",
-                  }}
-                  onFocus={(e: React.FocusEvent<HTMLInputElement>) => {
-                    e.target.style.borderColor = "var(--accent)";
-                    e.target.style.background = "#fff";
-                  }}
-                  onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
-                    e.target.style.borderColor = "var(--warm-100)";
-                    e.target.style.background = "var(--surface)";
-                  }}
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  style={{
-                    position: "absolute",
-                    right: 16,
-                    top: "50%",
-                    transform: "translateY(-50%)",
-                    background: "none",
-                    border: "none",
-                    cursor: "pointer",
-                    color: "var(--warm-400)",
-                    display: "flex",
-                    alignItems: "center",
-                    padding: 0,
-                  }}
-                >
-                  {showPassword ? <EyeOff size={15} /> : <Eye size={15} />}
-                </button>
-              </div>
-
-              {/* Forgot password */}
-              <div style={{ textAlign: "right", marginTop: -4 }}>
-                <Link
-                  href="#"
-                  style={{
-                    fontSize: 13,
-                    color: "var(--warm-400)",
-                    textDecoration: "none",
-                    transition: "color 0.2s",
-                  }}
-                >
-                  Forgot password?
-                </Link>
-              </div>
-
-              {/* Submit */}
-              <button
-                type="submit"
-                style={{
-                  marginTop: 4,
-                  padding: "14px",
-                  borderRadius: 99,
-                  background: "var(--warm-800)",
-                  color: "#fff",
-                  border: "none",
-                  fontSize: 15,
-                  fontWeight: 600,
-                  cursor: "pointer",
-                  fontFamily: "inherit",
-                  transition: "opacity 0.2s, transform 0.1s",
-                  letterSpacing: "0.01em",
-                }}
-                onMouseEnter={(e: React.MouseEvent<HTMLButtonElement>) =>
-                  (e.currentTarget.style.opacity = "0.88")
-                }
-                onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) =>
-                  (e.currentTarget.style.opacity = "1")
-                }
-                onMouseDown={(e: React.MouseEvent<HTMLButtonElement>) =>
-                  (e.currentTarget.style.transform = "scale(0.98)")
-                }
-                onMouseUp={(e: React.MouseEvent<HTMLButtonElement>) =>
-                  (e.currentTarget.style.transform = "scale(1)")
-                }
-              >
-                Sign In
+            {/* Password */}
+            <div className="login-form-el" style={{ position: "relative" }}>
+              <Lock size={14} style={{ position: "absolute", left: 16, top: "50%", transform: "translateY(-50%)", color: "var(--text-light)", pointerEvents: "none" }} />
+              <input
+                type={showPassword ? "text" : "password"}
+                value={creds.password}
+                onChange={(e) => setCreds((p) => ({ ...p, password: e.target.value }))}
+                required
+                placeholder="Password"
+                style={{ ...inputStyle, paddingRight: 44 }}
+                onFocus={onFocus}
+                onBlur={onBlur}
+              />
+              <button type="button" onClick={() => setShowPassword(!showPassword)} style={{ position: "absolute", right: 14, top: "50%", transform: "translateY(-50%)", background: "none", border: "none", cursor: "pointer", color: "var(--text-light)", display: "flex", alignItems: "center" }}>
+                {showPassword ? <EyeOff size={14} /> : <Eye size={14} />}
               </button>
-            </form>
-
-            {/* Footer link */}
-            <p
-              style={{
-                marginTop: 20,
-                fontSize: 14,
-                color: "var(--warm-400)",
-                textAlign: "center",
-              }}
-            >
-              Don&apos;t have an account?{" "}
-              <Link
-                href="/register"
-                style={{
-                  color: "var(--warm-800)",
-                  fontWeight: 600,
-                  textDecoration: "none",
-                }}
-              >
-                Create one
-              </Link>
-            </p>
-          </div>
-        </div>
-
-        {/* Social proof — bottom of form panel (desktop only) */}
-        <div
-          className="hidden lg:flex"
-          style={{
-            padding: "20px 48px 32px",
-            alignItems: "center",
-            gap: 14,
-          }}
-        >
-          <div style={{ display: "flex" }}>
-            {AVATAR_COLORS.map((av, i) => (
-              <div
-                key={i}
-                style={{
-                  width: 32,
-                  height: 32,
-                  borderRadius: "50%",
-                  background: av.bg,
-                  border: "2.5px solid #fff",
-                  marginLeft: i > 0 ? -10 : 0,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontSize: 11,
-                  fontWeight: 700,
-                  color: av.text,
-                  boxShadow: "0 1px 4px rgba(0,0,0,0.08)",
-                }}
-              >
-                {av.label}
-              </div>
-            ))}
-          </div>
-          <div>
-            <div
-              style={{
-                fontSize: 13,
-                fontWeight: 600,
-                color: "var(--warm-800)",
-              }}
-            >
-              Join 20k+ users
             </div>
-            <div style={{ fontSize: 12, color: "var(--warm-400)" }}>
-              Let&apos;s see our happy customers
-            </div>
-          </div>
+
+            {/* Submit */}
+            <button
+              className="login-form-el"
+              type="submit"
+              disabled={submitting}
+              style={{ marginTop: 6, padding: "14px", borderRadius: 12, background: submitting ? "var(--surface)" : "var(--heading)", color: submitting ? "var(--text-light)" : "#fff", border: "none", fontSize: 15, fontWeight: 600, cursor: submitting ? "not-allowed" : "pointer", fontFamily: "var(--font-sans)", transition: "all 0.2s", boxShadow: submitting ? "none" : "0 4px 16px rgba(30,97,87,0.28)", display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}
+              onMouseEnter={(e) => { if (!submitting) e.currentTarget.style.background = "var(--accent-hover)"; }}
+              onMouseLeave={(e) => { if (!submitting) e.currentTarget.style.background = "var(--heading)"; }}
+            >
+              {submitting ? "Signing in…" : (<>Sign In <ArrowRight size={15} /></>)}
+            </button>
+          </form>
+
+          <p className="login-form-el" style={{ marginTop: 24, fontSize: 14, color: "var(--text-muted)", textAlign: "center" }}>
+            Don&apos;t have an account?{" "}
+            <Link href="/register" style={{ color: "var(--heading)", fontWeight: 600, textDecoration: "none" }}>Create one</Link>
+          </p>
         </div>
       </div>
     </div>
