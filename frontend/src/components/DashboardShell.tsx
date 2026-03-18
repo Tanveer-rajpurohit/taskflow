@@ -136,7 +136,7 @@ export const DashboardShell = ({ children }: DashboardShellProps): React.JSX.Ele
         {/* Logo row */}
         <div
           style={{
-            height: 64,
+            height: 80,
             borderBottom: "1px solid var(--border)",
             display: "flex",
             alignItems: "center",

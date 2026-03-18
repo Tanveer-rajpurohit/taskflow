@@ -32,7 +32,13 @@ export default function RegisterPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!form.name.trim()) { setError("Name is required."); return; }
+    if (!form.email.trim()) { setError("Email is required."); return; }
     if (form.password.length < 8) { setError("Password must be at least 8 characters."); return; }
+    if (!/[A-Za-z]/.test(form.password) || !/[0-9]/.test(form.password)) {
+      setError("Password must contain both letters and numbers.");
+      return;
+    }
     setError(null);
     setSubmitting(true);
     const err = await register(form);

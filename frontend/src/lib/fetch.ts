@@ -22,6 +22,9 @@ export const fetchApi = async <T>(
   const data = await response.json();
 
   if (!response.ok) {
+    if (response.status === 429) {
+      throw new Error('429_TOO_MANY_REQUESTS');
+    }
     throw new Error(data.message || 'Something went wrong');
   }
 

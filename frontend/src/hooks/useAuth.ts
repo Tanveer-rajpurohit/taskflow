@@ -58,7 +58,11 @@ export const useAuth = () => {
       } else {
         clearStore();
       }
-    } catch {
+    } catch (err: unknown) {
+      if (err instanceof Error && err.message === '429_TOO_MANY_REQUESTS') {
+        // Just ignore it and keep the current session state.
+        return;
+      }
       clearStore();
     } finally {
       setLoading(false);

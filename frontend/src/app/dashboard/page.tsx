@@ -5,7 +5,6 @@ import { useAuthStore } from "@/store/useAuthStore";
 import Link from "next/link";
 import {
   Plus,
-  ArrowRight,
   CheckCircle2,
   Clock,
   Loader2,
@@ -58,6 +57,7 @@ function SkeletonRow() {
 export default function DashboardPage(): React.JSX.Element {
   const [view, setView] = useState<ViewMode>("list");
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [deleteModalId, setDeleteModalId] = useState<string | null>(null);
   const { tasks, isLoading, fetchTasks, deleteTask } = useTasks();
   const { user } = useAuthStore();
   const headerRef = useRef<HTMLElement>(null);
@@ -102,12 +102,18 @@ export default function DashboardPage(): React.JSX.Element {
     { label: "Failed",    value: safeTasks.filter((t) => t.status === "failed").length,                     color: "var(--danger)" },
   ], [safeTasks]);
 
-  const handleDelete = async (e: React.MouseEvent, taskId: string) => {
+  const handleDeleteClick = (e: React.MouseEvent, taskId: string) => {
     e.preventDefault();
     e.stopPropagation();
-    if (!confirm("Delete this task? This cannot be undone.")) return;
-    setDeletingId(taskId);
-    await deleteTask(taskId);
+    setDeleteModalId(taskId);
+  };
+
+  const confirmDelete = async () => {
+    if (!deleteModalId) return;
+    setDeletingId(deleteModalId);
+    const id = deleteModalId;
+    setDeleteModalId(null);
+    await deleteTask(id);
     setDeletingId(null);
   };
 
@@ -157,7 +163,7 @@ export default function DashboardPage(): React.JSX.Element {
                 {new Date(task.createdAt).toLocaleDateString()}
               </span>
               <button
-                onClick={(e) => handleDelete(e, task._id)}
+                onClick={(e) => handleDeleteClick(e, task._id)}
                 title="Delete task"
                 style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 26, height: 26, borderRadius: 7, border: "1px solid var(--border)", background: "transparent", cursor: "pointer", color: "var(--text-light)", transition: "all 0.15s" }}
                 onMouseEnter={(e) => { e.currentTarget.style.background = "var(--danger-light)"; e.currentTarget.style.color = "var(--danger)"; e.currentTarget.style.borderColor = "rgba(192,69,58,0.3)"; }}
@@ -193,7 +199,7 @@ export default function DashboardPage(): React.JSX.Element {
       >
         <Link
           href={`/tasks/${task._id}`}
-          style={{ display: "flex", alignItems: "center", padding: "14px 20px", textDecoration: "none", gap: 14, transition: "background 0.12s" }}
+          style={{ display: "flex", alignItems: "center", padding: "14px 64px 14px 20px", textDecoration: "none", gap: 14, transition: "background 0.12s" }}
           onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "var(--surface)"; }}
           onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "transparent"; }}
         >
@@ -213,12 +219,11 @@ export default function DashboardPage(): React.JSX.Element {
           <span style={{ fontSize: 12, color: "var(--text-light)", flexShrink: 0, minWidth: 76, textAlign: "right" }}>
             {new Date(task.createdAt).toLocaleDateString()}
           </span>
-          <ArrowRight size={13} color="var(--border-strong)" style={{ flexShrink: 0 }} />
         </Link>
         <button
-          onClick={(e) => handleDelete(e, task._id)}
+          onClick={(e) => handleDeleteClick(e, task._id)}
           title="Delete task"
-          style={{ position: "absolute", right: 52, top: "50%", transform: "translateY(-50%)", display: "flex", alignItems: "center", justifyContent: "center", width: 28, height: 28, borderRadius: 7, border: "1px solid transparent", background: "transparent", cursor: "pointer", color: "var(--text-light)", transition: "all 0.15s" }}
+          style={{ position: "absolute", right: 20, top: "50%", transform: "translateY(-50%)", display: "flex", alignItems: "center", justifyContent: "center", width: 28, height: 28, borderRadius: 7, border: "1px solid transparent", background: "transparent", cursor: "pointer", color: "var(--text-light)", transition: "all 0.15s" }}
           onMouseEnter={(e) => { e.currentTarget.style.background = "var(--danger-light)"; e.currentTarget.style.color = "var(--danger)"; e.currentTarget.style.borderColor = "rgba(192,69,58,0.25)"; }}
           onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "var(--text-light)"; e.currentTarget.style.borderColor = "transparent"; }}
         >
@@ -235,7 +240,7 @@ export default function DashboardPage(): React.JSX.Element {
         <header
           ref={headerRef}
           className="dash-header"
-          style={{ borderBottom: "1px solid var(--border)", padding: "0 36px", height: 64, display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0, background: "var(--bg)" }}
+          style={{ borderBottom: "1px solid var(--border)", padding: "0 36px", height: 80, display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0, background: "var(--bg)" }}
         >
           <div>
             <span style={{ fontSize: 13, fontWeight: 500, color: "var(--text-muted)", fontFamily: "var(--font-sans)" }}>Dashboard</span>
@@ -351,6 +356,23 @@ export default function DashboardPage(): React.JSX.Element {
           </div>
         </main>
       </DashboardShell>
+
+      {/* Delete Confirmation Modal */}
+      {deleteModalId && (
+        <div style={{ position: "fixed", inset: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(0,0,0,0.4)", backdropFilter: "blur(4px)" }}>
+          <div style={{ background: "#fff", padding: "32px 24px", borderRadius: 20, maxWidth: 360, width: "90%", boxShadow: "var(--shadow-xl)", textAlign: "center", border: "1px solid var(--border)" }}>
+            <div style={{ width: 48, height: 48, borderRadius: "50%", background: "var(--danger-light)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 16px" }}>
+              <Trash2 size={24} color="var(--danger)" />
+            </div>
+            <h3 style={{ fontSize: 18, fontWeight: 700, color: "var(--heading)", marginBottom: 8, fontFamily: "var(--font-display)" }}>Delete Task</h3>
+            <p style={{ fontSize: 14, color: "var(--text-muted)", marginBottom: 24, lineHeight: 1.5, fontFamily: "var(--font-sans)" }}>Are you sure you want to delete this task? This action cannot be undone.</p>
+            <div style={{ display: "flex", gap: 12, justifyContent: "center" }}>
+              <button onClick={() => setDeleteModalId(null)} style={{ padding: "11px 24px", borderRadius: 99, border: "1.5px solid var(--border)", background: "#fff", cursor: "pointer", fontWeight: 600, color: "var(--text)", fontFamily: "var(--font-sans)", transition: "background 0.2s" }} onMouseEnter={(e) => e.currentTarget.style.background = "var(--surface)"} onMouseLeave={(e) => e.currentTarget.style.background = "#fff"}>Cancel</button>
+              <button onClick={confirmDelete} style={{ padding: "11px 24px", borderRadius: 99, background: "var(--danger)", color: "#fff", cursor: "pointer", fontWeight: 600, border: "none", fontFamily: "var(--font-sans)", transition: "background 0.2s", boxShadow: "0 4px 12px rgba(192,69,58,0.25)" }} onMouseEnter={(e) => e.currentTarget.style.background = "#A93A30"} onMouseLeave={(e) => e.currentTarget.style.background = "var(--danger)"}>Yes, Delete</button>
+            </div>
+          </div>
+        </div>
+      )}
     </AuthGuard>
   );
 }

@@ -109,9 +109,13 @@ export default function TaskDetailPage(): React.JSX.Element {
   // Polling — uses the hook
   useTaskPolling(taskId || null, task?.status);
 
-  const handleDelete = async (): Promise<void> => {
-    if (!confirm("Delete this task? This cannot be undone.")) return;
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+
+  const handleDeleteClick = () => setDeleteModalOpen(true);
+
+  const confirmDelete = async () => {
     setDeleting(true);
+    setDeleteModalOpen(false);
     const ok = await deleteTask(taskId);
     if (ok) router.push("/dashboard");
     else setDeleting(false);
@@ -164,15 +168,15 @@ export default function TaskDetailPage(): React.JSX.Element {
     <AuthGuard>
       <DashboardShell>
         {/* Header */}
-        <header style={{ background: "var(--bg)", borderBottom: "1px solid var(--border)", padding: "0 32px", height: 64, display: "flex", alignItems: "center", gap: 16, flexShrink: 0 }}>
-          <Link
-            href="/dashboard"
-            style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 34, height: 34, borderRadius: 9, border: "1.5px solid var(--border)", color: "var(--text-muted)", textDecoration: "none", transition: "all 0.15s", flexShrink: 0 }}
-            onMouseEnter={(e) => { const el = e.currentTarget as HTMLElement; el.style.background = "var(--accent-light)"; el.style.borderColor = "var(--heading)"; el.style.color = "var(--heading)"; }}
+        <header style={{ background: "var(--bg)", borderBottom: "1px solid var(--border)", padding: "0 32px", height: 80, display: "flex", alignItems: "center", gap: 16, flexShrink: 0 }}>
+          <button
+            onClick={() => router.back()}
+            style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 34, height: 34, borderRadius: 9, border: "1.5px solid var(--border)", background: "transparent", cursor: "pointer", color: "var(--text-muted)", transition: "all 0.15s", flexShrink: 0 }}
+            onMouseEnter={(e) => { const el = e.currentTarget as HTMLElement; el.style.background = "var(--surface)"; el.style.borderColor = "var(--heading)"; el.style.color = "var(--heading)"; }}
             onMouseLeave={(e) => { const el = e.currentTarget as HTMLElement; el.style.background = "transparent"; el.style.borderColor = "var(--border)"; el.style.color = "var(--text-muted)"; }}
           >
             <ArrowLeft size={15} />
-          </Link>
+          </button>
 
           <div style={{ flex: 1, minWidth: 0 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
@@ -199,14 +203,16 @@ export default function TaskDetailPage(): React.JSX.Element {
 
           {/* Delete */}
           <button
-            onClick={handleDelete}
+            onClick={handleDeleteClick}
             disabled={deleting}
             style={{ display: "flex", alignItems: "center", gap: 6, padding: "8px 16px", borderRadius: 99, border: "1.5px solid rgba(192,69,58,0.3)", background: "var(--danger-light)", color: "var(--danger)", cursor: deleting ? "not-allowed" : "pointer", fontSize: 13, fontWeight: 600, fontFamily: "var(--font-sans)", transition: "all 0.15s", opacity: deleting ? 0.6 : 1, flexShrink: 0 }}
             onMouseEnter={(e) => { if (!deleting) { e.currentTarget.style.background = "var(--danger)"; e.currentTarget.style.color = "#fff"; } }}
             onMouseLeave={(e) => { e.currentTarget.style.background = "var(--danger-light)"; e.currentTarget.style.color = "var(--danger)"; }}
           >
             <Trash2 size={13} strokeWidth={2.5} />
-            {deleting ? "Deleting…" : "Delete"}
+            <span style={{ display: "none", "@media (min-width: 600px)": { display: "inline" } } as any}>
+              {deleting ? "Deleting…" : "Delete"}
+            </span>
           </button>
         </header>
 
@@ -362,6 +368,23 @@ export default function TaskDetailPage(): React.JSX.Element {
           </div>
         </main>
       </DashboardShell>
+
+      {/* Delete Confirmation Modal */}
+      {deleteModalOpen && (
+        <div style={{ position: "fixed", inset: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(0,0,0,0.4)", backdropFilter: "blur(4px)" }}>
+          <div style={{ background: "#fff", padding: "32px 24px", borderRadius: 20, maxWidth: 360, width: "90%", boxShadow: "var(--shadow-xl)", textAlign: "center", border: "1px solid var(--border)" }}>
+            <div style={{ width: 48, height: 48, borderRadius: "50%", background: "var(--danger-light)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 16px" }}>
+              <Trash2 size={24} color="var(--danger)" />
+            </div>
+            <h3 style={{ fontSize: 18, fontWeight: 700, color: "var(--heading)", marginBottom: 8, fontFamily: "var(--font-display)" }}>Delete Task</h3>
+            <p style={{ fontSize: 14, color: "var(--text-muted)", marginBottom: 24, lineHeight: 1.5, fontFamily: "var(--font-sans)" }}>Are you sure you want to delete this task? This action cannot be undone.</p>
+            <div style={{ display: "flex", gap: 12, justifyContent: "center" }}>
+              <button onClick={() => setDeleteModalOpen(false)} style={{ padding: "11px 24px", borderRadius: 99, border: "1.5px solid var(--border)", background: "#fff", cursor: "pointer", fontWeight: 600, color: "var(--text)", fontFamily: "var(--font-sans)", transition: "background 0.2s" }} onMouseEnter={(e) => e.currentTarget.style.background = "var(--surface)"} onMouseLeave={(e) => e.currentTarget.style.background = "#fff"}>Cancel</button>
+              <button onClick={confirmDelete} style={{ padding: "11px 24px", borderRadius: 99, background: "var(--danger)", color: "#fff", cursor: "pointer", fontWeight: 600, border: "none", fontFamily: "var(--font-sans)", transition: "background 0.2s", boxShadow: "0 4px 12px rgba(192,69,58,0.25)" }} onMouseEnter={(e) => e.currentTarget.style.background = "#A93A30"} onMouseLeave={(e) => e.currentTarget.style.background = "var(--danger)"}>Yes, Delete</button>
+            </div>
+          </div>
+        </div>
+      )}
     </AuthGuard>
   );
 }
